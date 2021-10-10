@@ -1,0 +1,2 @@
+// import './functionComponent'
+import './classComponents'
