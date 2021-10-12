@@ -1,9 +1,15 @@
-// import React from 'react'
-// import ReactDOM from 'react-dom'
-// class Counter extends 
 
-
-
+/* 
+初始化 setup props and state
+渲染 componentWillMount => render => componentDidMount
+更新
+    props
+        componentWillReceiveProps => shouldComponentUpdate ?true => componentWillUpdate => render => componentDidUpdate
+    state
+        shouldComponentUpdate ?true => componentWillUpdate => render => componentDidUpdate
+卸载
+    componentWillUnmounting
+*/
 import React from 'react'
 import ReactDOM from 'react-dom'
 
