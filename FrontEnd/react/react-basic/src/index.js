@@ -2,4 +2,5 @@
 // import './2.组件'
 // import './3.类组件更新'
 // import './4.合成事件和批量更新'
-import './5.ref'
+// import './5.ref'
+import './6.基本生命周期'
