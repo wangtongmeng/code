@@ -27,3 +27,16 @@ fn = 'var_fn';
 console.log(fn);  // var_fn
 */
 
+
+{
+    let obj = { a: 1 }
+    function set(obj) {
+        obj.a = 2
+        obj = {
+            a: 3
+        }
+        obj.a = 4
+    }
+    set(obj)
+    console.log(obj) // { a: 2 }
+}
