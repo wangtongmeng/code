@@ -61,9 +61,9 @@ ReactDOM.render(<Counter />, document.getElementById('root'))
 Counter 1.constructor
 Counter 3.render
 Counter 4.componentDidMount
-第一次点击button
+第一次点击button number变为1但未渲染
 Counter 5.shouldComponentUpdate
-第二次点击button
+第二次点击button number变为2并渲染
 Counter 5.shouldComponentUpdate
 Counter 6.componentWillUpdate
 Counter 3.render
