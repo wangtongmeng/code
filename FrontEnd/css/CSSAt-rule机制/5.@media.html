@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS机制At-rule</title>
+    <style>
+        /* 手机 1个模块   pad  2个模块   pc  4个模块
+        @media 媒体查询 - 带条件的样式覆盖  -   去哪儿 +  bootstrap  
+       
+        pC + pad  + 手机  
+        */
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .item{
+            width: 25%;
+            float:left;
+            height: 400px;
+        }
+        /* shift + alt +  下箭头 */
+        .item:nth-child(1){background-color: red;}
+        .item:nth-child(2){background-color: gold;}
+        .item:nth-child(3){background-color: pink;}
+        .item:nth-child(4){background-color: green;}
+
+      
+        /* pad <=1080 */
+        @media screen and  (max-width: 1080px){
+            .item{width: 50%;}
+        }
+          /* 手机  <= 640 */
+          @media  screen  and  (max-width: 640px){
+            .item{width:100%}
+        }
+    </style>
+</head>
+
+<body>
+<!-- 专题7 -->
+<div class="wrap">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+</div>
+</body>
+
+</html>
