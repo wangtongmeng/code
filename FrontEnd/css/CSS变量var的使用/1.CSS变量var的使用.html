@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS变量var的使用</title>
+    <style> 
+    /* :root  =  html  */
+    :root{
+       /* --颜色:green  */
+       --yanse:red
+    }
+    
+
+    p{
+        --yanse1:yellow;
+        background-color: var(--yanse1);
+        color:var(--yanse)
+    } 
+    div{
+        width: 30px;
+        height: 30px;
+        color:var(--yanse)
+    }
+    </style>
+</head>
+
+<body>
+
+
+    <p>lisi</p>
+    <div>lisi</div>
+
+</body>
+
+</html>

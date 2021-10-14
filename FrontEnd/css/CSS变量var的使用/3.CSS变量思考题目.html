@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            color: var(--color);
+        }
+        /* id  100  class  10   标签1   继承属性   
+        
+        !important  css变量中没有这个东西
+        */
+        :root {
+            --color: blue;
+        }
+
+        div {
+            --color: green;
+        }
+
+        #alert {
+            --color: red;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <!--  p     blue   
+          div   green
+          # div red
+    -->
+    <p>蓝色</p>
+    <div>绿色</div>
+    <div id="alert">红色</div>
+
+
+
+</body>
+
+</html>

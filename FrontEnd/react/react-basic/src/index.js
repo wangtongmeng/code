@@ -5,4 +5,5 @@
 // import './5.ref'
 // import './6.基本生命周期'
 // import './7.子组件生命周期'
-import './8.dom-diff算法'
+// import './8.dom-diff算法'
+import './9.新生命周期'
