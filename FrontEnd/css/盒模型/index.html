@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1 {
+            box-sizing: content-box;
+            width: 200px;
+            height: 100px;
+            padding: 10px;
+            border: 5px solid red;
+            margin: 15px;
+        }
+        .box2 {
+            box-sizing: border-box;
+            width: 200px;
+            height: 100px;
+            padding: 10px;
+            border: 5px solid blue;
+            margin: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box1" class="box1">标准盒模型</div>
+    <br/>
+    <div id="box2" class="box2">IE盒模型</div>
+    <script>
+        /* 
+        参考： https://segmentfault.com/a/1190000013069516
+        盒模型：盒模型又称框模型（Box Model）,包含了元素内容（content）、内边距（padding）、边框（border）、外边距（margin）几个要素。
+
+        IE模型元素宽度width=content+padding，高度计算相同
+
+        标准模型元素宽度width=content，高度计算相同
+
+        css如何设置获取这两种模型的宽和高
+        标准模型，宽度 width=content
+        IE模型，它的元素宽度width=content + 2 padding + 2 border
+
+
+        javascript如何设置获取盒模型对应的宽和高
+
+
+        dom.style.width/height 只能取到行内样式的宽和高，style标签中和link外链的样式取不到。
+        dom.currentStyle.width/height 取到的是最终渲染后的宽和高，只有IE支持此属性。
+        window.getComputedStyle(dom).width/height 同（2）但是多浏览器支持，IE9以上支持。
+        dom.getBoundingClientRect().width/height 也是得到渲染后的宽和高，大多浏览器支持。IE9以上支持，除此外还可以取到相对于视窗的上下左右的距离
+         */
+         window.addEventListener('load', () => {
+             console.log('loaded');
+            let box1 = document.getElementById('box1')
+            let box2 = document.getElementById('box2')
+            console.log('标准盒模型 取行内样式', box1.style.width, box1.style.height); // 取不到
+            console.log('IE 盒模型 取行内样式', box2.style.width, box2.style.height); // 取不到
+
+
+            // console.log('标准盒模型 ie', box1.currentStyle.width, box1.currentStyle.height); // 报错 没有currentStyle
+            // console.log('IE盒模型 ie', box2.currentStyle.width, box2.currentStyle.height);
+
+
+            console.log('标准盒模型 getComputedStyle', window.getComputedStyle(box1).width, window.getComputedStyle(box1).height); // 200px 100px
+            console.log('IE 盒模型 getComputedStyle', window.getComputedStyle(box2).width, window.getComputedStyle(box2).height); // 200px 100px
+
+
+            console.log('标准盒模型 getBoundingClientRect',box1.getBoundingClientRect().width, box1.getBoundingClientRect().height); // 230 130
+            console.log('IE 盒模型 getBoundingClientRect', box2.getBoundingClientRect().width, box2.getBoundingClientRect().height); // 200 100
+
+         })
+    </script>
+</body>
+</html>
