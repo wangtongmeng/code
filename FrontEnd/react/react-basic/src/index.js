@@ -7,4 +7,5 @@
 // import './7.子组件生命周期'
 // import './8.dom-diff算法'
 // import './9.新生命周期'
-import './10.Context(上下文)'
+// import './10.Context(上下文)'
+import './11.高阶组件'
