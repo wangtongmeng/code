@@ -9,7 +9,8 @@ import Login from './components/Login'
 import Protected from './components/Protected'
 import NavHeader from './components/NavHeader'
 ReactDOM.render(<Router>
-    <NavHeader title="欢迎光临" />
+    {/* <NavHeader getUserConfirmation={()=>window.confirm} /> */}
+    <NavHeader />
     <ul>
         <li><NavLink className="strong" style={{textDecoration: 'line-through'}} activeStyle={{color:'red'}} to="/" exact>首页</NavLink></li>
         <li><NavLink activeStyle={{color:'red'}} to="/user">用户管理</NavLink></li>
