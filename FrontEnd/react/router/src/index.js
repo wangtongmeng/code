@@ -8,7 +8,8 @@
 // import './7.NavLink'
 // import './8.withRouter'
 // import './9.Prompt'
-import './10.hooks'
+// import './10.hooks'
+import './11.lazy'
 
 
 
