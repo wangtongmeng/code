@@ -24,3 +24,10 @@ ReactDOM.render(<Router>
         <Redirect to="/" />
     </Switch>
 </Router>, document.getElementById('root'))
+
+
+
+/* 
+添加用户时，输入框如果有值，切换路由时做提示是否切换
+
+*/
