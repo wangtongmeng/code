@@ -1,7 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-ReactDOM.render(
-  <div>hello</div>,
-  document.getElementById('root')
-);
+// import './1.原生js计数器'
+// import './2.react计数器'
+// import './3.bindActionCreators'
+// import './4.combineReducers'
+// import './5.react-redux'
+// import './6.react-redux hooks'
+import './7.react-redux中间件'
