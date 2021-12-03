@@ -7,7 +7,7 @@ func main() {
 	var num2 int = 20
 	isResult := num1 > num2
 	fmt.Println(isResult) // false
-	fmt.Println((!isResult)) // true
+	fmt.Println((!isResult)) // trueb
 	//fmt.Println(!num1 > num2) // 逻辑非后面的变量是布尔类型；逻辑非的运算优先级高于关系运算符
 	fmt.Println(!(num1 > num2)) // true 括号的优先级高于逻辑非
 	// 逻辑与
