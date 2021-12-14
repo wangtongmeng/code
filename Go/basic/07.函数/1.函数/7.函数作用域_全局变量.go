@@ -3,14 +3,14 @@ package main
 import "fmt"
 
 var b int
+
 func main() {
- b = 20
- TestB()
-	fmt.Println("main:",b)
+	b = 20 // 这里用的是=
+	TestB()
+	fmt.Println("main", b) // 20
 }
-func TestB()  {
+func TestB() {
 	var b int
 	b = 30
-	fmt.Println("TestB:",b)
-
+	fmt.Println("TestB:", b) // 30
 }
