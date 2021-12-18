@@ -3,27 +3,37 @@ package main
 import "fmt"
 
 func main() {
-	// 全部初始化
-	var Numbers1 [5]int = [5]int{1, 2, 3, 4, 5}
-	fmt.Println(Numbers1, Numbers1[3]) // [1 2 3 4 5] 4
-	// 部分初始化
-	Numbers2 := [5]int{1, 2}
-	fmt.Println(Numbers2, Numbers2[4]) // [1 2 0 0 0] 0
-	// 指定某个元素初始化
-	Numbers3 := [5]int{2: 5, 3: 6}
-	fmt.Println(Numbers3, Numbers3[3]) // [0 0 5 6 0] 6
-	// 通过初始化确定数组长度
-	Numbers4 := [...]int{1, 2, 3}
-	fmt.Println(Numbers4, len(Numbers4)) // [1 2 3] 3
+	// 完成两个数组中元素的比较，判断其相同下标对应的元素是否完全一致。
+	// 1: 判断两个数组的长度是否一致。
+	// 2: 判断值是否一致。
+	var num1 [5]int = [5]int{1, 2, 3, 4, 5}
+	var num2 [5]int = [5]int{1, 2, 3, 4, 5}
 
-	// 通过下标单个赋值
-	var Numbers5 [5]int
-	Numbers5[0] = 1
-	Numbers5[1] = 2
-	fmt.Println(Numbers5) // [1 2 0 0 0]
-	// 通过循环方式赋值
-	for i := 0; i < len(Numbers5); i++ {
-		Numbers5[i] = i + 1
+	// 通过比较函数
+	b := compareValue(num1, num2)
+	if b {
+		fmt.Println("数组一致") // 数组一致
+	} else {
+		fmt.Println("数组不一致")
 	}
-	fmt.Println(Numbers5) // [1 2 3 4 5]
+	// 通过 != ==
+	fmt.Println(num1 == num2) // true
+}
+func compareValue(n1 [5]int, n2 [5]int) bool {
+	var b bool = true
+	// 1: 判断两个数组的长度是否一致
+	if len(n1) == len(n2) {
+		// 2: 判断值是否一致
+		for i := 0; i < len(n1); i++ {
+			if n1[i] == n2[i] {
+				continue
+			} else {
+				b = false
+				break
+			}
+		}
+	} else {
+		b = false
+	}
+	return b
 }
