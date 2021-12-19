@@ -3,37 +3,36 @@ package main
 import "fmt"
 
 func main() {
-	// 完成两个数组中元素的比较，判断其相同下标对应的元素是否完全一致。
-	// 1: 判断两个数组的长度是否一致。
-	// 2: 判断值是否一致。
-	var num1 [5]int = [5]int{1, 2, 3, 4, 5}
-	var num2 [5]int = [5]int{1, 2, 3, 4, 5}
-
-	// 通过比较函数
-	b := compareValue(num1, num2)
-	if b {
-		fmt.Println("数组一致") // 数组一致
-	} else {
-		fmt.Println("数组不一致")
-	}
-	// 通过 != ==
-	fmt.Println(num1 == num2) // true
-}
-func compareValue(n1 [5]int, n2 [5]int) bool {
-	var b bool = true
-	// 1: 判断两个数组的长度是否一致
-	if len(n1) == len(n2) {
-		// 2: 判断值是否一致
-		for i := 0; i < len(n1); i++ {
-			if n1[i] == n2[i] {
-				continue
-			} else {
-				b = false
-				break
-			}
+	// 全部初始化
+	var arr [2][3]int = [2][3]int{{1, 2, 3}, {5, 6, 7}}
+	fmt.Println(arr) // [[1 2 3] [5 6 7]]
+	// 部分初始化
+	var arr2 [2][3]int = [2][3]int{{1, 2}, {6}}
+	fmt.Println(arr2) // [[1 2 0] [6 0 0]]
+	// 指定元素初始化
+	var arr3 [2][3]int = [2][3]int{0: {1: 6}}
+	fmt.Println(arr3) // [[0 6 0] [0 0 0]]
+	// 通过初始化确定二维数组行数
+	// 行的下标可以用"..."来代替，但是列的下标不能用"..."来代替。
+	arr4 := [...][3]int{{1, 2, 3}, {5, 6}}
+	fmt.Println(arr4) // [[1 2 3] [5 6 0]]
+	// 通过循环遍历的方式输出打印二维数组中的值
+	var arr5 [2][3]int = [2][3]int{{1, 2, 3}, {5, 6, 7}}
+	fmt.Println(len(arr5))          // 2 行数
+	fmt.Println(len(arr5[0]))       // 3 列数
+	for i := 0; i < len(arr); i++ { // 遍历行
+		for j := 0; j < len(arr[0]); j++ { // 遍历列
+			fmt.Println((arr[i][j])) // 123567
 		}
-	} else {
-		b = false
 	}
-	return b
+	for _, v := range arr5 {
+		for j, data := range v {
+			fmt.Println(j)    // 012012
+			fmt.Println(data) // 123567
+		}
+	}
+	// 赋值
+	arr[0][1] = 123
+	fmt.Println(arr[0][1]) // 132
+
 }
