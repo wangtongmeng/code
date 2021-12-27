@@ -1,0 +1,3 @@
+C:/Users/wtm/Desktop/github-project/code/c++/basic/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/wtm/Desktop/github-project/code/c++/basic/cmake-build-debug/CMakeFiles/basic.dir
+C:/Users/wtm/Desktop/github-project/code/c++/basic/cmake-build-debug/CMakeFiles/edit_cache.dir
