@@ -1,0 +1,10 @@
+.wrapper {
+    /* width: 500px; */
+    /* height: 300px; */
+    margin: 0 auto;
+}
+.slider-item {
+    display: inline-block;
+    width: 300px;
+    border: 1px solid #ccc;
+}
