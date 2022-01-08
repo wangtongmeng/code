@@ -1,6 +1,6 @@
 import React from "react";
 import { Router } from "../react-router";
-import { createBrowserHistory, createHashHistory } from "history";
+import { createBrowserHistory, createHashHistory } from "../history";
 export * from "../react-router";
 function BrowserRouter({ children }) {
   let historyRef = React.useRef();
@@ -22,9 +22,9 @@ function BrowserRouter({ children }) {
     />
   );
 }
-function HashRouter({children}) {
-    let historyRef = React.useRef();
-  if (historyRef.current === null) {
+function HashRouter({ children }) {
+  let historyRef = React.useRef();
+  if (historyRef.current == null) {
     historyRef.current = createHashHistory();
   }
   let history = historyRef.current;
@@ -32,7 +32,10 @@ function HashRouter({children}) {
     action: history.action,
     location: history.location,
   });
-  React.useLayoutEffect(() => history.listen(setState), [history]);
+  // React.useLayoutEffect(() => history.listen(setState), [history]);
+  React.useLayoutEffect(() => history.listen(({ location, action }) => {
+    setState({ location, action })
+  }), [history]);
   return (
     <Router
       children={children}

@@ -6,12 +6,12 @@ import User from './components/User'
 import Profile from './components/Profile'
 
 ReactDOM.render(
-  <BrowserRouter>
+  <HashRouter>
     <Routes>
       <Route path="/" element={<Home  name="lisi"/>}></Route>
       <Route path="/user" element={<User />}></Route>
       <Route path="/profile" element={<Profile />}></Route>
     </Routes>
-  </BrowserRouter>,
+  </HashRouter>,
   document.getElementById('root')
 );
