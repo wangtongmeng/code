@@ -93,3 +93,11 @@ export function useNavigate() {
   );
   return navigate;
 }
+
+export function Navigate({ to }) {
+  let navigate = useNavigate();
+  React.useEffect(() => {
+    navigate(to);
+  });
+  return null;
+}
