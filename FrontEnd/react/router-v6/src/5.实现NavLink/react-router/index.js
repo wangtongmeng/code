@@ -19,7 +19,7 @@ function Router({ children, navigator, location }) {
     </NavigationContext.Provider>
   );
 }
-function useLocation() {
+export function useLocation() {
   return React.useContext(LocationContext).location;
 }
 function Routes({ children }) {
@@ -45,12 +45,12 @@ function matchPath(path, pathname) {
   let match = pathname.match(matcher);
   if (!match) return null;
   // match ['/post/100/200', 100, 200]
-  let matchedPathname = match[0] // 匹配到的路径
-  let values = match.slice(1) // 分组的值，也就是路径参数的数组
+  let matchedPathname = match[0]; // 匹配到的路径
+  let values = match.slice(1); // 分组的值，也就是路径参数的数组
   let params = paramNames.reduce((memo, paramName, index) => {
-    memo[paramName] = values[index]
-    return memo
-  }, {})
+    memo[paramName] = values[index];
+    return memo;
+  }, {});
   return { params, pathname: matchedPathname, path };
 }
 /**
@@ -58,12 +58,14 @@ function matchPath(path, pathname) {
  * @param {*} path 路径
  */
 function compilePath(path) {
-  let paramNames = []
-  let regexpSource = "^" + path.replace(/:(\w+)/g, (_, key) => {
-    paramNames.push(key)
-    return "([^\\/]+)" // 一个匹配非/的分组
-  })
-  regexpSource += "$"
+  let paramNames = [];
+  let regexpSource =
+    "^" +
+    path.replace(/:(\w+)/g, (_, key) => {
+      paramNames.push(key);
+      return "([^\\/]+)"; // 一个匹配非/的分组
+    });
+  regexpSource += "$";
   let matcher = new RegExp(regexpSource);
   return [matcher, paramNames];
 }
@@ -78,13 +80,16 @@ function createRoutesFromChildren(children) {
   });
   return routes;
 }
-function Route(props) { }
+function Route(props) {}
 export { Router, Routes, Route };
 
 export function useNavigate() {
-  let { navigator } = React.useContext(NavigationContext)
-  let navigate = React.useCallback((to) => {
-    navigator.push(to)
-  }, [navigator])
-  return navigate
+  let { navigator } = React.useContext(NavigationContext);
+  let navigate = React.useCallback(
+    (to) => {
+      navigator.push(to);
+    },
+    [navigator]
+  );
+  return navigate;
 }

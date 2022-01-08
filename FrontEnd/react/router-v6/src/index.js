@@ -1,4 +1,5 @@
 // import './1.路由基本版'
 // import './2.实现history'
 // import './3.实现路径参数'
-import './4.实现Link导航'
+// import './4.实现Link导航'
+import './5.实现NavLink'
