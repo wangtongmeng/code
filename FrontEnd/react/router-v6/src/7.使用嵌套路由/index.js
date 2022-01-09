@@ -8,9 +8,13 @@ import {
   Link,
   NavLink,
   Navigate,
-} from "./react-router-dom";
+  // } from "./react-router-dom";
+} from "./origin/react-router-dom";
 import Home from "./components/Home";
 import User from "./components/User";
+import UserList from "./components/UserList";
+import UserAdd from "./components/UserAdd";
+import UserDetail from "./components/UserDetail";
 import Profile from "./components/Profile";
 import Post from "./components/Post";
 import Protected from "./components/Protected";
@@ -37,7 +41,12 @@ ReactDOM.render(
     </ul>
     <Routes>
       <Route path="/" element={<Home name="lisi" />} />
-      <Route path="/user" element={<User />} />
+      <Route path="/user/*" element={<User />}>
+        {/* 相对路径 */}
+        <Route path="add" element={<UserAdd />} />
+        <Route path="list" element={<UserList />} />
+        <Route path="detail/:id" element={<UserDetail />} />
+      </Route>
       <Route path="/login" element={<Login />} />
       <Route
         path="/profile"
