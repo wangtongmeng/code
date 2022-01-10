@@ -1,6 +1,6 @@
 import React from "react";
 import { UserAPI } from "../utils";
-import { useNavigate } from "../origin/react-router-dom";
+import { useNavigate } from "../react-router-dom";
 function UserAdd(props) {
   const usernameRef = React.useRef();
   const navigate = useNavigate();

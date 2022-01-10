@@ -1,4 +1,4 @@
-import { Link, Outlet } from "../origin/react-router-dom";
+import { Link } from "../react-router-dom";
 function User(props) {
   return (
     <div>
@@ -12,7 +12,7 @@ function User(props) {
       </ul>
       <div>
         {/* 相当于vue中的 router-view */}
-        <Outlet />
+        {/* <Outlet /> */}
       </div>
     </div>
   );

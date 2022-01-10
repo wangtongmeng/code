@@ -1,4 +1,4 @@
-import { Navigate } from "../origin/react-router";
+import { Navigate } from "../react-router";
 function Protected(props) {
   let { component: RouteComponent, path } = props;
   return localStorage.getItem("login") ? (

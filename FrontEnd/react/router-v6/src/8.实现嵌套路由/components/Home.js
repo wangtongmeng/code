@@ -1,4 +1,4 @@
-import { useNavigate } from "../origin/react-router";
+import { useNavigate } from "../react-router";
 function Home(props) {
   let navigate = useNavigate();
   // 跳转路径可以通过组件，可以通过函数跳转
