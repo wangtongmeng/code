@@ -33,7 +33,7 @@ ReactDOM.render(
       </li>
     </ul>
     <Routes>
-      <Route path="/" element={<Home name="lisi" />} />
+      {/* <Route path="/" element={<Home name="lisi" />} /> */}
       <Route path="/user/*" element={<User />}>
         {/* 相对路径 */}
         <Route path="add" element={<UserAdd />} />
