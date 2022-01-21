@@ -1,4 +1,4 @@
-import { makeObservable, autorun, observable, computed, action } from "mobx";
+import { makeObservable, autorun, observable, computed, action, runInAction } from "mobx";
 import { observer } from "mobx-react";
 import React from "react";
 import ReactDOM from "react-dom";
@@ -43,7 +43,8 @@ class ObservableTodoStore {
 
 const observableTodoStore = new ObservableTodoStore();
 
-const TodoList = observer(({ store }) => { // observer包裹react组件   observer 高阶组件包装器通过（简而言之）把 React 组件用 autorun 包装起来
+const TodoList = observer(({ store }) => {
+  // observer包裹react组件   observer 高阶组件包装器通过（简而言之）把 React 组件用 autorun 包装起来
   const onNewTodo = () => {
     store.addTodo(prompt("输入新的待办：", "请来杯咖啡"));
   };
@@ -56,7 +57,7 @@ const TodoList = observer(({ store }) => { // observer包裹react组件   observ
           <TodoView todo={todo} key={idx} />
         ))}
       </ul>
-      {store.pendingRequests > 0 ? <marquee>正在加载……</marquee> : null}
+      {store.pendingRequests > 0 ? '正在加载……': null}
       <button onClick={onNewTodo}>新待办</button>
       <small>（双击待办进行编辑）</small>
       {/* <RenderCounter /> */}
@@ -91,3 +92,15 @@ ReactDOM.render(
   <TodoList store={observableTodoStore} />,
   document.getElementById("root")
 );
+
+observableTodoStore.addTodo("task1");
+observableTodoStore.addTodo("task2");
+const peopleStore = observable([{ name: "Michel" }, { name: "我" }]);
+
+setTimeout(() => {
+  runInAction(() => {
+    observableTodoStore.todos[0].assignee = peopleStore[0];
+    observableTodoStore.todos[1].assignee = peopleStore[1];
+    peopleStore[0].name = "Michel Weststrate";
+  })
+}, 1000);
