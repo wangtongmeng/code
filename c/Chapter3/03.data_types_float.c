@@ -2,9 +2,10 @@
 #include <limits.h>
 
 int main() {
-  float a_float = 3.14f; // 6, 7~8 +-10^-37 ~ 10^37
+  // 浮点型 单精度（+-10^-37 ~ 10^37），双精度
+  float a_float = 3.14f; // 精度6, 7~8 +-10^-37 ~ 10^37
   printf("size of float: %d\n", sizeof(float));
-  double a_double = 3.14; // 15~16
+  double a_double = 3.14; // 精度15~16
   printf("size of double: %d\n", sizeof(double));
 
   float lat = 39.90815f;

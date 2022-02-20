@@ -5,6 +5,7 @@
 #define COLOR_BLUE 0x0000FF
 
 int main() {
+  // 常量
   // const <type> readonly variable
   const int kRed = 0xFF0000;
   const int kGreen = 0x00FF00;
@@ -13,9 +14,9 @@ int main() {
 
   int *p_k_red = &kRed;
   *p_k_red = 0;
-  printf("kRed: %d\n", kRed);
+  printf("kRed: %d\n", kRed); // 还是可以改内存地址 防君子不防小人
 
-  // macro
+  // macro 宏 真正的常量
   printf("COLOR_RED: %d\n", COLOR_RED);
 
 #undef COLOR_RED

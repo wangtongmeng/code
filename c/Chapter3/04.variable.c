@@ -17,12 +17,12 @@ int main() {
 
   printf("size of value: %d\n", sizeof(value));
 
-  printf("address of value: %#x\n", &value);
+  printf("address of value: %#x\n", &value); // #显示十六进制的标识0x
 
   // key words 标识符 identifier
   // 1. a-zA-Z0-9_
   // 2. 数不能在第一个
-  // 3*. Google code style, a-z_a-z，person_name
+  // 3*. Google code style, a-z_a-z，person_name （非必须）
   float a_float3 = 3.14f;
   float a_float = 3.14f;
   return 0;

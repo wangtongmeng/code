@@ -16,8 +16,8 @@ int main() {
   // \t : table
   // \' : ' 字符字面量
   // \" : " 字符串字面量
-  char char_1_escape_oct = '\61';
-  char char_1_escape_hex = '\x31';
+  char char_1_escape_oct = '\61'; // \后面是八进制数（49的八进制数）标识一个字符， 和char_1是完全一样的
+  char char_1_escape_hex = '\x31'; // \后面是十六制数（49的八进制数）标识一个字符， 和char_1是完全一样的
   char newline = '\n';
 
   printf("char a: %d\n", a);
@@ -28,9 +28,10 @@ int main() {
   printf("char 1: %c\n", char_1_escape_oct);
   printf("char 1: %c\n", char_1_escape_hex);
 
-  // Unicode  CJK Code point.
-  // C95
-  wchar_t zhong = L'中';
+  // Unicode  CJK
+  // Code point 码点
+  // C95 引进来的
+  wchar_t zhong = L'中'; // 宽字符
   wchar_t zhong_hex = L'\u4E2D';
   printf("中：%d\n", zhong);
   printf("中：%d\n", zhong_hex);
