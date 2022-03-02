@@ -19,9 +19,9 @@ int main() {
   // macro 宏 真正的常量
   printf("COLOR_RED: %d\n", COLOR_RED);
 
-#undef COLOR_RED
+//#undef COLOR_RED // 这样 COLOR_RED这个宏就不存在了
 
-  // 字面量 literal
+  // 字面量 literal 真正的常量
   3;
   3u;
   3l;
@@ -32,7 +32,8 @@ int main() {
   L'中';
   L"中国";
 
-  // 硬编码 hard code
+  // 硬编码 hard code 在编程中不要硬编码
+//  int background_color = 0x00FF00; bad
   int background_color = COLOR_GREEN;
   return 0;
 }

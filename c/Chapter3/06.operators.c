@@ -28,7 +28,7 @@ int main() {
   printf("product: %d\n", product);
   printf("quotient: %d\n", quotient);
   printf("quotient_1: %d\n", quotient_1);
-  printf("quotient_float: %f\n", quotient_float);
+  printf("quotient_float: %f\n",  );
   printf("quotient_float_correct: %f\n", quotient_float_correct);
   printf("remainder: %d\n", remainder);
 
@@ -54,7 +54,7 @@ int main() {
   printf("j: %d\n", j);
   printf("k: %d\n", k);
 
-  // bit operators & | ^ ~
+  // 位运算 bit operators & | ^ ~
 #define FLAG_VISIBLE 0x1 // 2^0, 0001
 #define FLAG_TRANSPARENT 0x2 // 2^1, 0010
 #define FLAG_RESIZABLE 0x4 // 2^2, 0100
@@ -63,14 +63,14 @@ int main() {
   int resizable = window_flags & FLAG_RESIZABLE; // 0100
   int visible = window_flags & FLAG_VISIBLE; // 0000
 
-  // << >>
+  // << >> 位移动 左移 右移
 #define FLAG_VISIBLE 1 << 0 // 2^0, 0001
 #define FLAG_TRANSPARENT 1 << 1// 2^1, 0010
 #define FLAG_RESIZABLE 1 << 2 // 2^2, 0100
 
   int x = 1000;
   x * 2;
-  x << 1;
+  x << 1; // 左移就是乘以2， 执行效率高
 
   x / 2;
   x >> 1;
@@ -85,7 +85,7 @@ int main() {
   x >>= 1;
   x <<= 1;
 
-  // ,
+  // , 不建议写
   int y;
   y = x = x * 2, x = x + 3; // warning
 

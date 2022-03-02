@@ -10,7 +10,7 @@ int main() {
   // 2. loop
   while (1) {
     int user_input;
-    puts("Please input a number: ");
+    puts("Please input a number: "); // puts 不用写换行符，但是不能格式化字符串
     scanf("%d", &user_input);
     if (user_input > magic_number) {
       puts("Your number is bigger!");

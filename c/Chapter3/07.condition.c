@@ -7,7 +7,7 @@ int main() {
   // _Bool, bool
   _Bool is_enabled = true;
   is_enabled = 10;
-  printf("is_enabled: %d\n", is_enabled);
+  printf("is_enabled: %d\n", is_enabled); // 1
   is_enabled = false;
 
   bool is_visible = false;
@@ -40,13 +40,13 @@ int main() {
     printf("Yes! You got it!");
   }
 
-  // use bracket!
+  // use bracket! 使用大括号
   if (is_enabled){
     if (is_visible) printf("is_visible");
     else printf("is_invisible");
   }
 
-  // ?: -> <expr> ? <expr1> : <expr2>
+  // ?: -> <expr> ? <expr1> : <expr2> 三元运算符
   // expr == true, expr1
   // expr == false, expr2
   int is_open = is_enabled && is_visible ? 1 : 0;
