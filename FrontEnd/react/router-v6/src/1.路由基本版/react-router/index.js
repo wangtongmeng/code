@@ -10,7 +10,7 @@ const RouteContext = React.createContext();
  * @param {*} location 地址对象，{pathname: "当前路径"}
  * @returns
  */
-function Router({ children, navigator, location }) {
+function Router({ children, navigator, location }) { // 存储路由信息 navigator=history location=history.location
   return (
     <NavigationContext.Provider value={{ navigator }}>
       <LocationContext.Provider value={{ location }}>
@@ -22,7 +22,7 @@ function Router({ children, navigator, location }) {
 function useLocation() {
   return React.useContext(LocationContext).location;
 }
-function Routes({ children }) {
+function Routes({ children }) { // 匹配当前路由对应的路由组件
   return useRoutes(createRoutesFromChildren(children));
 }
 function useRoutes(routes) {
@@ -53,7 +53,7 @@ function compilePath(path) {
   let matcher = new RegExp(regexpSource);
   return matcher;
 }
-function createRoutesFromChildren(children) {
+function createRoutesFromChildren(children) { // 根据route vdom数组提取 路由数组信息
   let routes = [];
   React.Children.forEach(children, (child) => {
     let route = {

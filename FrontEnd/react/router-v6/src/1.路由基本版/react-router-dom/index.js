@@ -2,7 +2,7 @@ import React from "react";
 import { Router } from "../react-router";
 import { createBrowserHistory, createHashHistory } from "history";
 export * from "../react-router";
-function BrowserRouter({ children }) {
+function BrowserRouter({ children }) { // 监听history，history发生变化，更新 history action location，将最新的路由信息传给Router
   let historyRef = React.useRef();
   if (historyRef.current == null) {
     historyRef.current = createBrowserHistory();
@@ -12,7 +12,7 @@ function BrowserRouter({ children }) {
     action: history.action,
     location: history.location,
   });
-  React.useLayoutEffect(() => history.listen(setState), [history]);
+  React.useLayoutEffect(() => history.listen(setState), [history]); // 监听history变化
   return (
     <Router
       children={children}

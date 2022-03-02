@@ -1,12 +1,17 @@
-// import './1.基本路由'
-import './2.获取路径参数'
 
 /**
  * 基本路由
- * 路径参数
- * Link NavLink导航 js导航调整
+ * not found 路由
+ * Link和NavLink路由，active Link
+ * 编程式导航
  * 嵌套路由
- * 获取参数 路径参数 location query 动态参数
- * 路由保护
- * 完整案例
+ * 动态路由，动态路由参数
+ * Index路由
+ * 相对路由
+ * 查询参数
+ * 多组Routes
+ * 后代Routes
+ * 自定义行为
  */
+
+
