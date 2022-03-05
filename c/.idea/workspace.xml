@@ -7,12 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6bdafbe-2149-43e8-b4e1-38d78c53ca33" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/helloworld/CMakeLists.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/helloworld/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontEnd/react/1.my-react-basic/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/react/1.my-react-basic/yarn.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,13 +33,13 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Chapter3" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Chapter5" />
     <property name="settings.editor.selected.configurable" value="CPPToolchains" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
   </component>
@@ -58,6 +53,7 @@
       <updated>1645332046791</updated>
       <workItem from="1645332049441" duration="185000" />
       <workItem from="1645346389382" duration="69000" />
+      <workItem from="1646348460558" duration="64000" />
     </task>
     <servers />
   </component>
