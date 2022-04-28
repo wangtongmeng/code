@@ -1,0 +1,13 @@
+// 混合器主要用于展示性样式的重用，而类名用于语义化样式的重用
+
+// 混合器更像是独立的样式功能
+
+//通过选择器继承继承样式
+.error {
+  border: 1px solid red;
+  background-color: #fdd;
+}
+.seriousError {
+  @extend .error;
+  border-width: 3px;
+}

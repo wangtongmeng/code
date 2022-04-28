@@ -1,0 +1,15 @@
+// 嵌套 嵌套功能避免了重复输入父选择器，而且令复杂的 CSS 结构更易于管理
+#content {
+  background-color: #f5f5f5;
+  article {
+    h1 {
+      color: #333;
+    }
+    p {
+      margin-bottom: 1.4em;
+    }
+  }
+  aside {
+    background-color: #eee;
+  }
+}

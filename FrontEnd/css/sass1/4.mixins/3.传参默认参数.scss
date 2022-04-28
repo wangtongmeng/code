@@ -1,0 +1,15 @@
+// 默认参数
+
+@mixin link-colors($normal, $hover: $normal, $visited: $normal) {
+  color: $normal;
+  &:hover {
+    color: $hover;
+  }
+  &:visited {
+    color: $visited;
+  }
+}
+
+a {
+  @include link-colors(blue);
+}

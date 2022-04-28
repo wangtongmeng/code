@@ -1,0 +1,7 @@
+article a {
+  color: blue;
+}
+
+article a:hover {
+  color: red;
+}

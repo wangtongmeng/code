@@ -1,0 +1,6 @@
+@import "./2.importing-variable.scss";
+@import "./3.importing-module1.scss";
+@import "./4.importing-module2.scss";
+
+// 这种注释内容不会出现在生成的css文件中
+/* 这种注释内容会出现在生成的css文件中 */
