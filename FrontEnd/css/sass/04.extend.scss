@@ -1,0 +1,14 @@
+//通过选择器继承继承样式
+.error {
+    border: 1px #f00;
+    background-color: #fdd;
+}
+
+.seriousError {
+    @extend .error;
+    border-width: 3px;
+}
+
+
+
+
