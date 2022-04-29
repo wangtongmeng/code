@@ -1,0 +1,18 @@
+.test1 {
+  width: length($list: 10px) + "%";
+}
+.test2 {
+  width: nth($list: 100 50 30, $n: 2);
+}
+.test3 {
+  border: join($list1: 10px 20px, $list2: 30px 40px);
+}
+.test4 {
+  border: append(10px 20px 30px, 40px);
+}
+.test5 {
+  width: index($list: 100 50 30, $value: 50) + "px";
+}
+.test6 {
+  width: if(true, 100%, 50%);
+}

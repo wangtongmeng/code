@@ -1,0 +1,31 @@
+.test1 {
+  width: percentage($number: 5px /10px);
+}
+
+.test2 {
+  width: round($number: 15.8px);
+}
+
+.test3 {
+  width: ceil($number: 18.1px);
+}
+
+.test4 {
+  width: floor($number: 13.5px);
+}
+
+.test5 {
+  width: abs($number: -8.9px);
+}
+
+.test6 {
+  width: min(6, 20, 10%, 3, 300%);
+}
+
+.test7 {
+  width: max(6, 20, 10%, 3, 300%);
+}
+
+.test8 {
+  width: random() + "%";
+}

@@ -1,0 +1,31 @@
+/*
+为RGB颜色提供六种函数
+rgb($red,$green,$blue)：根据红、绿、蓝三个值创建一个颜色；
+rgba($red,$green,$blue,$alpha)：根据红、绿、蓝和透明度值创建一个颜色；
+red($color)：从一个颜色中获取其中红色值；
+green($color)：从一个颜色中获取其中绿色值；
+blue($color)：从一个颜色中获取其中蓝色值；
+mix($color-1,$color-2,[$weight])：把两种颜色混合在一起。
+
+
+更多颜色函数参考 https://www.sass.hk/skill/sass25.html
+*/
+.test1 {
+  color: rgb(200, 40, 88); //根据r:200,g:40,b:88计算出一个十六进制颜色值
+}
+.test2 {
+  color: rgba(#c82858, 0.65); //根据#c82858的65%透明度计算出一个rgba颜色值
+}
+.test3 {
+  color: red(#c82858); //从#c82858颜色值中得到红色值200
+}
+.test4 {
+  color: green(#c82858); //从#c82858颜色值中得到绿色值40
+}
+.test5 {
+  color: blue(#c82858); //从#c82858颜色值中得到蓝色值88
+}
+.test6 {
+  //把#c82858和rgba(200,40,88,.65)两颜色按比例混合得到一个新颜色 rgba(200, 40, 80, 0.65105);
+  color: mix(#c82858, rgba(200, 40, 80, 0.65), 0.3);
+}

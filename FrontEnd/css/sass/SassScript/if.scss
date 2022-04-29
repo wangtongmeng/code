@@ -1,0 +1,14 @@
+// if() 是 Sass 的一个内建函数，与之相似的 @if 则是一个内建指令。
+
+@mixin test($condition) {
+  $color: if($condition, blue, red);
+  color: $color;
+}
+
+.firstClass {
+  @include test(true);
+}
+
+.secondClass {
+  @include test(false);
+}

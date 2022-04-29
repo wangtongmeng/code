@@ -1,0 +1,15 @@
+.test1 {
+  content: "Helvetica";
+}
+
+.test2 {
+  content: Helvetica;
+}
+
+.test3 {
+  content: "HELLO WORLD";
+}
+
+.test4 {
+  content: "hello world";
+}

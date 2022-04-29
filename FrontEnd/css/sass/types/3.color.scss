@@ -1,0 +1,16 @@
+$color: yellowgreen; // #9ACD32
+.test1 {
+  color: lighten($color, 15%); // #b8dc70
+}
+.test2 {
+  color: darken($color, 15%); // #6c9023
+}
+.test3 {
+  color: saturate($color, 15%); // #a1e01f
+}
+.test4 {
+  color: desaturate($color, 15%); // #93ba45
+}
+.test5 {
+  color: (green + red); // #ff8000
+}

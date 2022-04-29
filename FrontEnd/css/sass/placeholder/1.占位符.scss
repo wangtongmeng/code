@@ -1,0 +1,13 @@
+// 使用%声明占位符，@extend 来应用占位符
+// 占位符的功能非常强大，如果只声明了占位符，没有引用，编辑完成时，则不会生成代码
+$main-color: #ccc;
+
+// 1.声明占位符
+%border {
+  border: 1px solid $main-color;
+}
+
+.box {
+  // 2.使用占位符
+  @extend %border;
+}

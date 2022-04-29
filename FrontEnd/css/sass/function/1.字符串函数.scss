@@ -1,0 +1,15 @@
+.test1 {
+  content: quote($string: Helvetica);
+}
+
+.test2 {
+  content: unquote($string: "Helvetica");
+}
+
+.test3 {
+  content: to-upper-case($string: "Hello World");
+}
+
+.test4 {
+  content: to-lower-case($string: "Hello World");
+}

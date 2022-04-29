@@ -1,0 +1,19 @@
+// 数字运算
+.test1 {
+  width: 1px + 2px;
+}
+// 颜色值运算
+.test2 {
+  color: #010203 + #040506;
+}
+// 字符串运算
+.test3 {
+  width: 1 + "px";
+}
+// 布尔运算
+$age: 20;
+.bool {
+  @if ($age > 10 and $age < 25) {
+    color: green;
+  }
+}

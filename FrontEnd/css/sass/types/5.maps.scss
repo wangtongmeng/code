@@ -1,0 +1,11 @@
+$styling: (
+  "font-family": "Lato",
+  "font-size": 1.5em,
+  "color": tomato,
+  "background": black,
+);
+
+h1 {
+  color: map-get($styling, "color");
+  background: map-get($styling, "background");
+}
