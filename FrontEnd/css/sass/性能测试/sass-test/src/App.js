@@ -1,12 +1,10 @@
-import './App.css';
+import "./App.scss";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          hello world
-        </p>
+        <p className="loading">hello world</p>
       </header>
     </div>
   );

@@ -5,3 +5,9 @@ article a {
 article a:hover {
   color: red;
 }
+
+.element > .dialog {
+  color: red;
+}
+
+/* multiline comments value */
