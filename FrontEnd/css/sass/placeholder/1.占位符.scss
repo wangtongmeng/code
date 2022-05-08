@@ -1,13 +1,16 @@
 // 使用%声明占位符，@extend 来应用占位符
 // 占位符的功能非常强大，如果只声明了占位符，没有引用，编辑完成时，则不会生成代码
-$main-color: #ccc;
-
-// 1.声明占位符
-%border {
-  border: 1px solid $main-color;
+%icon {
+  transition: background-color ease .2s;
+  margin: 0 .5em;
 }
 
-.box {
-  // 2.使用占位符
-  @extend %border;
+.error-icon {
+  @extend %icon;
+  /*错误图标指定的样式... */
+}
+
+.info-icon {
+  @extend %icon;
+  /* 信息图标指定的样式... */
 }
