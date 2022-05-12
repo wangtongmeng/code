@@ -1,7 +1,13 @@
-.box, .box1 {
-  border: 1px solid #ccc;
+@charset "UTF-8";
+.error-icon, .info-icon {
+  transition: background-color ease 0.2s;
+  margin: 0 0.5em;
 }
 
-.box {
-  color: red;
+.error-icon {
+  /*错误图标指定的样式... */
+}
+
+.info-icon {
+  /* 信息图标指定的样式... */
 }

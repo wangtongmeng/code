@@ -1,0 +1,95 @@
+@import "theme";
+/*! 你好*/
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: $bg-color;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+// mixin
+@mixin foo {
+  color: red;
+  font-weight: bold;
+  line-height: 2;
+}
+
+@for $i from 1 through 1000 {
+  .#{unique-id()}-#{$i} {
+      @include foo;
+      content: "ibf#{&}jaslbw";
+  }
+}
+
+// 占位符
+// %foo {
+//   color: red;
+//   font-weight: bold;
+//   line-height: 2;
+// }
+
+// @for $i from 1 through 1000 {
+//   .#{unique-id()}-#{$i} {
+//     @extend %foo;
+//     content: "ibf#{&}jaslbw";
+//   }
+// }
+
+// extend
+// .foo {
+//   color: red;
+//   font-weight: bold;
+//   line-height: 2;
+// }
+
+// @for $i from 1 through 1000 {
+//   .#{unique-id()}-#{$i} {
+//     @extend .foo;
+//     content: "ibf#{&}jaslbw";
+//   }
+// }
+
+// @mixin spin-keyframes() {
+//   @keyframes spin {
+//     from {
+//       transform: rotate(0deg);
+//     }
+//     to {
+//       transform: rotate(360deg);
+//     }
+//   }
+// }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// .loading {
+//   animation: spin 1.1s infinite linear;
+//   @include spin-keyframes;
+// }
+
+
+@for $i from 1 through 10 {
+  .#{unique-id()}-#{$i} {
+      animation: spin 1.1s infinite linear;
+      content: "ibf#{&}jaslbw";
+  }
+}
+
+
+
+

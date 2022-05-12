@@ -6,3 +6,13 @@ article a {
     color: red;
   }
 }
+
+.element {
+  > .dialog {
+      color: red;
+  }
+}
+
+
+$var : "value";
+/* multiline comments #{$var} */

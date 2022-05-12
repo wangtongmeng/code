@@ -1,11 +1,10 @@
-@mixin rounded-corners {
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .notice {
-  background-color: green;
-  border: 2px solid #00aa00;
-  @include rounded-corners;
+  font-size: 14px;
+  @include text-ellipsis;
 }

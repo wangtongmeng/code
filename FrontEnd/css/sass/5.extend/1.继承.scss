@@ -3,19 +3,29 @@
 // 混合器更像是独立的样式功能
 
 //通过选择器继承继承样式
-.error {
-  border: 1px solid red;
-  background-color: #fdd;
-}
-.seriousError {
-  @extend .error;
-  border-width: 3px;
-}
+// .error {
+//   border: 1px solid red;
+//   background-color: #fdd;
+// }
+// .seriousError {
+//   @extend .error;
+//   border-width: 3px;
+// }
 
 // 可以看出占位符和继承中都运用了@extend
 // 区别是占位符不会生成有效代码，而继承一个父类时，父类是有效的代码
 
-.seriousError1 {
-  @extend .error;
-  border-width: 3px;
+.icon {
+  transition: background-color ease 0.2s;
+  margin: 0 0.5em;
+}
+
+.error-icon {
+  @extend .icon;
+  /*错误图标指定的样式... */
+}
+
+.info-icon {
+  @extend .icon;
+  /* 信息图标指定的样式... */
 }
