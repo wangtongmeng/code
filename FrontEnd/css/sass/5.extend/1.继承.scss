@@ -14,3 +14,8 @@
 
 // 可以看出占位符和继承中都运用了@extend
 // 区别是占位符不会生成有效代码，而继承一个父类时，父类是有效的代码
+
+.seriousError1 {
+  @extend .error;
+  border-width: 3px;
+}

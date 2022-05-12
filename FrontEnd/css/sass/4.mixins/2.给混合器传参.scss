@@ -13,3 +13,7 @@
 a {
   @include link-colors(blue, red, green);
 }
+
+b {
+  @include link-colors(blue, red, green);
+}

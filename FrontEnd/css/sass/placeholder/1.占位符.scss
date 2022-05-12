@@ -10,4 +10,10 @@ $main-color: #ccc;
 .box {
   // 2.使用占位符
   @extend %border;
+  color: red;
+}
+
+.box1 {
+  // 2.使用占位符
+  @extend %border;
 }

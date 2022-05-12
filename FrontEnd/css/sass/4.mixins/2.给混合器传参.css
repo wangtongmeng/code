@@ -9,3 +9,15 @@ a:hover {
 a:visited {
   color: green;
 }
+
+b {
+  color: blue;
+}
+
+b:hover {
+  color: red;
+}
+
+b:visited {
+  color: green;
+}

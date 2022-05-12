@@ -1,8 +1,12 @@
-.error, .seriousError {
+.error, .seriousError, .seriousError1 {
   border: 1px solid red;
   background-color: #fdd;
 }
 
 .seriousError {
+  border-width: 3px;
+}
+
+.seriousError1 {
   border-width: 3px;
 }
