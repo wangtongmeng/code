@@ -1,9 +1,10 @@
 #main {
   width: 5em;
   color: red;
+  background-color: #fff;
 }
 
 #sidebar {
   width: 5em;
-  background-color: #ddd;
+  background-color: #fff;
 }

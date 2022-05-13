@@ -15,10 +15,9 @@
 // 可以看出占位符和继承中都运用了@extend
 // 区别是占位符不会生成有效代码，而继承一个父类时，父类是有效的代码
 
-
 .icon {
-  transition: background-color ease .2s;
-  margin: 0 .5em;
+  transition: background-color ease 0.2s;
+  margin: 0 0.5em;
 }
 
 .error-icon {

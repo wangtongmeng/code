@@ -1,7 +1,7 @@
 @charset "UTF-8";
 .error-icon, .info-icon {
-  transition: background-color ease .2s;
-  margin: 0 .5em;
+  transition: background-color ease 0.2s;
+  margin: 0 0.5em;
 }
 
 .error-icon {
