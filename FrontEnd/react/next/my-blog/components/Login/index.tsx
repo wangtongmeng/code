@@ -1,7 +1,9 @@
 
+import { message } from 'antd';
 import CountDown from 'components/CountDown';
 import { ChangeEvent, useState } from 'react';
 import styles from './index.module.scss'
+import request from 'service/fetch'
 interface IProps {
   isShow: boolean;
   onClose: Function // 简单定义，没有定义入参
@@ -37,7 +39,13 @@ const Login = (props: IProps) => {
   }
   console.log(setForm);
   const handleGetVerifyCode = () => {
-    setShowVerifyCode(true)
+    // setShowVerifyCode(true)
+    if (!form?.phone) {
+      message.warning("请输入手机号")
+      return
+    }
+
+    request.post('/api/user/sendVerifyCode')
   }
   const handleCountDownEnd = () => {
     setShowVerifyCode(false)
