@@ -1,4 +1,5 @@
 
+import CountDown from 'components/CountDown';
 import { ChangeEvent, useState } from 'react';
 import styles from './index.module.scss'
 interface IProps {
@@ -7,10 +8,6 @@ interface IProps {
 }
 
 const handleClose = () => {
-
-}
-
-const handleGetVerifyCode = () => {
 
 }
 
@@ -26,6 +23,7 @@ const handleOAuthGithub = () => {
 
 const Login = (props: IProps) => {
   const { isShow = false } = props
+  const [isShowVerifyCode, setShowVerifyCode] = useState(false)
   const [form, setForm] = useState({
     phone: '',
     verify: '',
@@ -38,6 +36,12 @@ const Login = (props: IProps) => {
     })
   }
   console.log(setForm);
+  const handleGetVerifyCode = () => {
+    setShowVerifyCode(true)
+  }
+  const handleCountDownEnd = () => {
+    setShowVerifyCode(false)
+  }
 
   return isShow ? <div className={styles.loginArea}>
     <div className={styles.loginBox}>
@@ -48,7 +52,9 @@ const Login = (props: IProps) => {
       <input name='phone' type="text" placeholder='请输入手机号' value={form.phone} onChange={handleFormChange} />
       <div className={styles.verifyCodeArea}>
         <input name='verify' type="text" placeholder='请输入验证码' value={form.verify} onChange={handleFormChange} />
-        <span className={styles.verifyCode} onClick={handleGetVerifyCode}>获取验证码</span>
+        <span className={styles.verifyCode} onClick={handleGetVerifyCode}>
+          {isShowVerifyCode ? <CountDown time={10} onEnd={handleCountDownEnd} /> : '获取验证码'}
+        </span>
       </div>
       <div className={styles.loginBtn} onClick={handleLogin}>登录</div>
       <div className={styles.otherLogin} onClick={handleOAuthGithub}>使用 Github 登录</div>
