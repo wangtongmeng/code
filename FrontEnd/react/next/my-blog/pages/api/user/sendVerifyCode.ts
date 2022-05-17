@@ -12,6 +12,7 @@ export default withIronSessionApiRoute(sendVerifyCode, ironOptions);
 async function sendVerifyCode(req: NextApiRequest, res: NextApiResponse) {
   // get user from database then:
   const verifyCode = Math.floor(Math.random() * (9999 - 1000)) + 1000;
+  console.log(verifyCode) // 模拟手机收到验证码
   req.session.verifyCode = verifyCode;
   await req.session.save();
       res.status(200).json({
