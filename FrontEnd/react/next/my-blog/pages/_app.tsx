@@ -1,21 +1,31 @@
-import '../styles/globals.css'
-import { NextPage } from 'next';
-import Layout from 'components/layout'
+import '../styles/globals.css';
 import { StoreProvider } from 'store/index';
+import Layout from 'components/layout';
+import { NextPage } from 'next';
+
 interface IProps {
   initialValue: Record<any, any>;
   Component: NextPage;
   pageProps: any;
 }
 function MyApp({ initialValue, Component, pageProps }: IProps) {
-  return (
-    <StoreProvider initialValue={initialValue}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </StoreProvider>
+  const renderLayout = () => {
+    if ((Component as any).layout === null) {
+      return <Component {...pageProps} />;
+    } else {
+      return (
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      );
+    }
+  };
 
-  )
+  return (
+      <StoreProvider initialValue={initialValue}>
+        {renderLayout()}
+      </StoreProvider>
+  );
 }
 
 MyApp.getInitialProps = async ({ ctx }: { ctx: any }) => {
@@ -34,4 +44,4 @@ MyApp.getInitialProps = async ({ ctx }: { ctx: any }) => {
   };
 };
 
-export default MyApp
+export default MyApp;

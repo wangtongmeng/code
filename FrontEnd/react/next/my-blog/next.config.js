@@ -1,6 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-}
+  images: {
+    domains: ['img1.mukewang.com'], // 使用Image组件时的限制
+  },
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+};
 
-module.exports = nextConfig
+const withMDX = require('@next/mdx')({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+  },
+});
+
+const removeImports = require('next-remove-imports')();
+
+module.exports = removeImports(withMDX(nextConfig));
