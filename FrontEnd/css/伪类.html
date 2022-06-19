@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* #ul li:nth-of-type(1) {
+      color: red;
+    } */
+    #ul li.box:first-of-type {
+      color: red;
+    }
+  </style>
+</head>
+<!-- https://blog.csdn.net/liuarmyliu/article/details/105084577 -->
+<!-- https://www.cnblogs.com/2050/p/3569509.html -->
+<!-- https://stackoverflow.com/questions/24657555/what-is-the-difference-between-first-child-and-first-of-type -->
+<!-- 因为last-child：指的是父元素的第一个元素，在上面的例子中，要实现样式的话需要保证父元素ul内的li元素除li元素之外没有兄弟元素，或者在创建一个单独 div 包裹起来；first-child也是如此； -->
+
+<body>
+  <ul id="ul">
+    <a href="">1</a>
+    <li>test</li>
+    <li class="box">2</li>
+    <li class="box">3</li>
+    <p>4</p>
+  </ul>
+</body>
+
+</html>
