@@ -25,7 +25,7 @@ function div(a, b int) (q, r int) {
 
 指针
 - 指针不能运算
-参数传递
+参数传递(值传递？引用传递？)
 - go语言只有值传递一种方式
 */
 package main
@@ -47,7 +47,7 @@ func eval1(a, b int, op string) (int, error) {
 		return a * b, nil
 	case "/":
 		//return a / b
-		q, _ := div(a, b)
+		q, _ := div(a, b) // 不想用可以用_站位
 		return q, nil
 	default:
 		//panic("unsupported operation: " + op) panic会终端程序 不是很好
@@ -89,6 +89,13 @@ func swap1 (a, b int) (int, int) {
 	return b, a
 }
 
+func pointer () {
+	var a int = 2
+	var pa *int = &a
+	*pa = 3
+	fmt.Println(a) // 3
+}
+
 func main() {
 	//fmt.Println(eval1(3,4,"x"))
 	if result, err := eval1(3, 4, "x"); err != nil {
@@ -112,4 +119,8 @@ func main() {
 	swap(&a, &b)
 	a1, b1 := swap1(a, b)
 	fmt.Println(a, b, a1, b1)
+
+
+	pointer()
+
 }

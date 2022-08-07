@@ -37,7 +37,7 @@ func printFile(filename string) {
 		panic(err)
 	}
 	scanner := bufio.NewScanner(file)
-	for scanner.Scan() { // 相当于while
+	for scanner.Scan() { // 省略初始和递增条件，相当于while
 		fmt.Println(scanner.Text())
 	}
 }
