@@ -36,7 +36,7 @@ func main() {
 	// 声明定义数组
 	var arr1 [5]int
 	arr2 := [3]int{1, 3, 5}
-	arr3 := [...]int{2, 4, 6, 8, 10}
+	arr3 := [...]int{2, 4, 6, 8, 10} // 让编译器来熟
 	var grid [4][5]int // 4行5列 4个常用为5的int数组
 	fmt.Println(arr1, arr2, arr3)
 	fmt.Println(grid)
@@ -47,12 +47,12 @@ func main() {
 	for i, v := range arr3 { // 使用range关键字遍历 不想要可用用_占位
 		fmt.Println(i, v)
 	}
-
+	// 数组是值类型
 	printArray(arr1)
 	printArray(arr3)
-	fmt.Println(arr1, arr3)
+	fmt.Println(arr1, arr3) // [0 0 0 0 0] [2 4 6 8 10] 没变
 
 	printArray1(&arr1)
 	printArray1(&arr3)
-	fmt.Println(arr1, arr3)
+	fmt.Println(arr1, arr3) // [100 0 0 0 0] [100 4 6 8 10] 变了
 }
