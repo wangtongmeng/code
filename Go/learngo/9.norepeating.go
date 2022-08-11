@@ -5,11 +5,11 @@ import (
 )
 
 func lengthOfNonRepeatingSubStr(s string) int {
-	lastOccurred := make(map[rune]int)
+	lastOccurred := make(map[rune]int) // byte换成rune
 	start := 0
 	maxLength := 0
 
-	for i, ch := range []rune(s) {
+	for i, ch := range []rune(s) { // byte换成rune就能处理中文字符了
 		if lastI, ok := lastOccurred[ch]; ok && lastI >= start {
 			start = lastI + 1
 		}
