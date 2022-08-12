@@ -10,4 +10,5 @@
 // import "./mobx-use/10.when";
 // import "./mobx-use/11.runInAction";
 
-import "./react-mobx-use/1.observer";
+// import "./react-mobx-use/1.observer";
+import "./react-mobx-use/2.observer-class";
