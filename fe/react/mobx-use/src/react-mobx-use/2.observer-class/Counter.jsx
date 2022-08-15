@@ -14,7 +14,7 @@ class Store {
 
 let store = new Store();
 
-@observer
+@observer // 和用observer包起来是一样的
 export default class Counter extends React.Component {
   render() {
     return (

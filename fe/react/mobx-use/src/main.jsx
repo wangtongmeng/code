@@ -11,4 +11,8 @@
 // import "./mobx-use/11.runInAction";
 
 // import "./react-mobx-use/1.observer";
-import "./react-mobx-use/2.observer-class";
+// import "./react-mobx-use/2.observer-class";
+// import "./react-mobx-use/3.Observer";
+// import "./react-mobx-use/4.useObserver";
+// import "./react-mobx-use/5.useLocalObservable";
+import "./react-mobx-use/6.todos";
