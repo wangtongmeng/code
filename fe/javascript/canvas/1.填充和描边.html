@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  #drawing {
+    width: 200px;
+    height: 200px;
+    border: 1px solid red;
+  }
+
+  * {
+    padding: 0;
+    margin: 0;
+  }
+</style>
+
+<body>
+  <canvas id="drawing"></canvas>
+  <script>
+    let drawing = document.getElementById('drawing')
+    if (drawing.getContext) {
+      let context = drawing.getContext("2d")
+
+      // 初始值
+      // context.strokeStyle = "red" // 填充
+      // context.fillStyle = "#0000ff" // 描边
+
+      // 绘制矩形
+      function drawRect() {
+        // 绘制红色图形
+        context.fillStyle = '#ff0000' // 填充色 红色
+        context.fillRect(10, 10, 50, 50) // x坐标 y坐标 长 宽
+        // 绘制蓝色矩形
+        context.fillStyle = "blue"
+        context.fillRect(30, 30, 50, 50)
+      }
+      drawRect()
+    }
+  </script>
+</body>
+
+</html>
