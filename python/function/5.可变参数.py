@@ -24,15 +24,25 @@ def fun3(*param):
 
 fun3((1, 2, 3))  # ((1, 2, 3),)
 
+# 也可以元组前面加星号
+
+
+def fun4(*param):
+    print(param)
+
+
+fun4(*(1, 2, 3))  # (1, 2, 3)
 
 # 和其他参数混用，尽量少用
-def fun4(a, *b, c=3):
+
+
+def fun5(a, *b, c=3):
     print(a)
     print(b)
     print(c)
 
 
-fun4(1, 2, 3, 4, 1, c=234324)
+fun5(1, 2, 3, 4, 1, c=234324)
 # 1
 # (2, 3, 4, 1)
 # 234324
