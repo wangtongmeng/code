@@ -1,0 +1,14 @@
+.show-enter {
+  opacity: 1;
+   }
+ .show-enter-active {
+  opacity: 1;
+  transition: all 1s ease-out;
+ }
+ .show-exit {
+  opacity: 0.01;
+ }
+ .show-exit-active {
+  opacity: 0.01;
+  transition: all 1s ease-out;
+ }

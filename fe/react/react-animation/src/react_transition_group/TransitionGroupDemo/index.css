@@ -1,0 +1,62 @@
+.show-enter {
+  opacity: 0.01;
+   }
+ .show-enter-active {
+  opacity: 1;
+  transition: all 1s ease-out;
+ }
+ .show-exit {
+  opacity: 1;
+ }
+ .show-exit-active {
+  opacity: 0.01;
+  transition: all 1s ease-out;
+ }
+ ​
+ .container {
+  position: absolute;
+  top: 20px;
+  left: 100px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 1px rgb(202, 202, 202);
+ }
+ ​
+ .todo-list {
+  border-radius: 5px;
+  box-shadow: 0 0 5px 1px rgb(202, 202, 202);
+ }
+ ​
+ .todo-list-item {
+  height: 35px;
+  line-height: 35px;
+  padding: 0 10px;
+  border-bottom: 1px solid rgb(202, 202, 202);
+ }
+ ​
+ .todo-list-item:last-of-type {
+  border-bottom: 0;
+ }
+ ​
+ .item-text {
+  margin-left: 10px;
+ }
+ ​
+ .cancel {
+  border: 0;
+  color: #fff;
+  background-color: #F04134;
+  border-radius: 3px;
+  box-shadow: 0 0 5px 1px rgb(202, 202, 202);
+ }
+ ​
+ .add {
+  border: 0;
+  height: 30px;
+  line-height: 30x;
+  width: 120px;
+  margin-top: 15px;
+  font-size: 14px;
+  border-radius: 3px;
+  box-shadow: 0 0 5px 1px rgb(202, 202, 202);
+ }

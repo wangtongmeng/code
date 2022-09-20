@@ -1,0 +1,5 @@
+.title {
+  display: inline-block;
+  border: 1px solid red;
+  transition: all 1s;
+}
