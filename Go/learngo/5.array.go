@@ -12,16 +12,16 @@
 - [10]int 和 [20]int 是不同类型
 - 调用func f(arr [10]int) 会**拷贝**数组
 - 在go语言中一般不直接使用数组
- */
+*/
 package main
 
 import "fmt"
 
 func printArray(arr [5]int) {
 	arr[0] = 100
-	 for i, v := range arr {
-	 	fmt.Println(i, v)
-	 }
+	for i, v := range arr {
+		fmt.Println(i, v)
+	}
 
 }
 func printArray1(arr *[5]int) {
@@ -37,7 +37,7 @@ func main() {
 	var arr1 [5]int
 	arr2 := [3]int{1, 3, 5}
 	arr3 := [...]int{2, 4, 6, 8, 10} // 让编译器来熟
-	var grid [4][5]int // 4行5列 4个常用为5的int数组
+	var grid [4][5]int               // 4行5列 4个常用为5的int数组
 	fmt.Println(arr1, arr2, arr3)
 	fmt.Println(grid)
 	// 遍历数组

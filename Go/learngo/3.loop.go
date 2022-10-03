@@ -12,7 +12,7 @@ for
 - 没有 while
 - switch 不需要break，也可以直接switch多个条件
 
- */
+*/
 package main
 
 import (
@@ -37,6 +37,7 @@ func printFile(filename string) {
 		panic(err)
 	}
 	scanner := bufio.NewScanner(file)
+	// 一行行读
 	for scanner.Scan() { // 省略初始和递增条件，相当于while
 		fmt.Println(scanner.Text())
 	}
@@ -50,7 +51,7 @@ func forever() { // 死循环
 
 func main() {
 	fmt.Println(
-		convertToBin(5), // 101
+		convertToBin(5),  // 101
 		convertToBin(13), // 1101
 	)
 

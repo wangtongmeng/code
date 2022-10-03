@@ -54,18 +54,19 @@ func eval1(a, b int, op string) (int, error) {
 		return 0, fmt.Errorf("unsupported operation: %s", op)
 	}
 }
+
 // 13 / 3 = 4 ... 1
 func div(a, b int) (q, r int) {
-	//return a / b, a % b
+	//return a / b, a % b 推荐
 	q = a / b
 	r = a % b
 	return
 }
 
-func apply (op func(int, int) int, a, b int) int {
+func apply(op func(int, int) int, a, b int) int {
 	p := reflect.ValueOf(op).Pointer()
 	opName := runtime.FuncForPC(p).Name()
-	fmt.Printf("Calling function %s with args" + "%d, %d\n", opName, a, b)
+	fmt.Printf("Calling function %s with args"+"%d, %d\n", opName, a, b)
 	return op(a, b)
 }
 
@@ -73,7 +74,7 @@ func pow(a, b int) int {
 	return int(math.Pow(float64(a), float64(b)))
 }
 
-func sum (numbers ...int) int {
+func sum(numbers ...int) int {
 	s := 0
 	for i := range numbers {
 		s += numbers[i]
@@ -81,19 +82,20 @@ func sum (numbers ...int) int {
 	return s
 }
 
-func swap (a, b *int) {
+func swap(a, b *int) {
 	*b, *a = *a, *b
 }
 
-func swap1 (a, b int) (int, int) {
+func swap1(a, b int) (int, int) {
 	return b, a
 }
 
-func pointer () {
+func pointer() {
 	var a int = 2
 	var pa *int = &a
 	*pa = 3
 	fmt.Println(a) // 3
+	// 指针不能运算
 }
 
 func main() {
@@ -113,13 +115,12 @@ func main() {
 	}, 3, 4))
 	// Calling function main.pow with args3, 4
 	// 81
-	fmt.Println(sum(1,2,3,4,5))
+	fmt.Println(sum(1, 2, 3, 4, 5))
 
 	a, b := 3, 4
 	swap(&a, &b)
 	a1, b1 := swap1(a, b)
 	fmt.Println(a, b, a1, b1)
-
 
 	pointer()
 

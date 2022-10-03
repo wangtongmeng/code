@@ -7,7 +7,7 @@ if
 switch
 - switch 会自动break，除非使用fallthrough
 - switch后可以没有表达式，在case里写也可以
- */
+*/
 package main
 
 import (
@@ -15,7 +15,7 @@ import (
 	"io/ioutil"
 )
 
-func ifExample () {
+func ifExample() {
 	// 当前项目根目录
 	const filename = "abc.txt"
 	//contents, err := ioutil.ReadFile(filename)
@@ -31,7 +31,7 @@ func ifExample () {
 	}
 }
 
-func eval(a,b int,op string) int {
+func eval(a, b int, op string) int {
 	var result int
 	switch op {
 	case "+":
@@ -39,9 +39,9 @@ func eval(a,b int,op string) int {
 	case "-":
 		result = a - b
 	case "*":
-		result = a*b
+		result = a * b
 	case "/":
-		result = a/b
+		result = a / b
 	default:
 		panic("unsupported operator:" + op)
 	}
@@ -54,13 +54,13 @@ func grade(score int) string {
 	case score < 0 || score > 100:
 		panic(fmt.Sprintf("Wrong score: %d", score))
 	case score < 60:
-		g="F"
+		g = "F"
 	case score < 80:
-		g="C"
+		g = "C"
 	case score < 90:
-		g="B"
-	case score <=100:
-		g="A"
+		g = "B"
+	case score <= 100:
+		g = "A"
 	}
 	return g
 }
@@ -68,7 +68,7 @@ func grade(score int) string {
 func main() {
 	ifExample()
 	// switch
-	fmt.Println(eval(1,2,"+"))
+	fmt.Println(eval(1, 2, "+"))
 	fmt.Println(
 		grade(0),
 		grade(59),
@@ -76,6 +76,6 @@ func main() {
 		grade(82),
 		grade(99),
 		grade(100),
-		//grade(-1), 中断执行
-		)
+	//grade(-1), 中断执行
+	)
 }

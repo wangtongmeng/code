@@ -4,6 +4,11 @@ import (
 	"fmt"
 )
 
+// 对于每个字母x
+// - lastOccurred[x]不存在，或者 < start -> 无需操作
+// lastOccurred[x] >= start -> 更新start
+// 更新lastOccurred[x]， 更新maxLength
+
 func lengthOfNonRepeatingSubStr(s string) int {
 	lastOccurred := make(map[rune]int) // byte换成rune
 	start := 0

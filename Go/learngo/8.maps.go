@@ -3,6 +3,8 @@ package main
 import "fmt"
 
 /**
+Map的定义
+- map[K]V, map[K1]map[K2]V
 Map的操作
 - 创建：make(map[string]int)
 - 获取元素： m[key]
