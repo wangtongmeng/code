@@ -15,7 +15,11 @@ app.get("/", function (req, res) {
 });
 
 app.get("/about", function (req, res) {
-  res.redirect(302, "/");
+  res.redirect(302, "/new");
+});
+
+app.get("/new", function (req, res) {
+  res.end("new");
 });
 
 app.listen(3000);

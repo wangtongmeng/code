@@ -3,11 +3,24 @@ var app = express();
 var path = require("path");
 
 app.use(function (req, res, next) {
+  console.log("全部匹配");
   res.setHeader("Content-Type", "text/plain;charset=utf-8");
   next();
 });
+app.use("/about", function (req, res, next) {
+  console.log("只匹配/about");
+  next();
+});
+
 app.use(function (req, res, next) {
-  console.log("日志", req.method, req.path);
+  console.log(
+    "日志",
+    req.method,
+    req.path,
+    req.params,
+    req.originalUrl,
+    req.url
+  );
   next();
 });
 
@@ -27,6 +40,7 @@ app.get("/:id/:name", function (req, res) {
 });
 
 app.get("/about", function (req, res) {
+  console.log("1");
   res.end("欢迎");
 });
 
