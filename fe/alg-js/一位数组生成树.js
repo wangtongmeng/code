@@ -1,12 +1,12 @@
 // https://juejin.cn/post/7212263304395735096
 // https://juejin.cn/post/6983904373508145189
 const arr = [
-  { id: "1", parentId: "0" },
-  { id: "2", parentId: "0" },
-  { id: "3", parentId: "0" },
-  { id: "4", parentId: "1" },
-  { id: "5", parentId: "1" },
-  { id: "6", parentId: "2" },
+  { id: "4", pid: "1" },
+  { id: "5", pid: "1" },
+  { id: "6", pid: "2" },
+  { id: "1", pid: "0" },
+  { id: "2", pid: "0" },
+  { id: "3", pid: "0" },
 ];
 
 let mapSelf = {};
@@ -38,7 +38,7 @@ function arrayToTree(items) {
 
     const treeItem = itemMap[id];
 
-    if (pid === 0) {
+    if (pid === "0") {
       result.push(treeItem);
     } else {
       if (!itemMap[pid]) {
@@ -51,3 +51,45 @@ function arrayToTree(items) {
   }
   return result;
 }
+
+console.log(JSON.stringify(arrayToTree(arr)));
+
+// export const uisToTree = (items: IMenuNewConfig[]) => {
+//   const rootId = '0';
+//   const result = []; // 存放结果集
+//   const itemMap = {}; //
+//   for (const item of items) {
+//     const id = item.code;
+//     const pid = item.parentCode;
+
+//     if (!itemMap[id]) {
+//       itemMap[id] = {
+//         children: [],
+//       };
+//     }
+
+//     itemMap[id] = {
+//       ...item,
+//       children: itemMap[id].children,
+//     };
+
+//     const treeItem = itemMap[id];
+
+//     if (pid === rootId) {
+//       result.push(treeItem);
+//     } else {
+//       if (!itemMap[pid]) {
+//         itemMap[pid] = {
+//           children: [],
+//         };
+//       }
+//       itemMap[pid].children.push(treeItem);
+//       itemMap[pid].children = itemMap[pid].children.sort((a: IMenuNewConfig, b: IMenuNewConfig) => {
+//         const aOder = a.settings.order || 0;
+//         const bOder = b.settings.order || 0;
+//         return aOder - bOder;
+//       });
+//     }
+//   }
+//   return result;
+// };
