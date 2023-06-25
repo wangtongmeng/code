@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+
+  <body>
+    <div id="root"></div>
+  </body>
+  <script>
+    Vue.createApp({
+      data() {
+        return {
+          content: 'hello world',
+          show: true,
+        }
+      },
+      methods: {
+        onBtnClick() {
+          this.content = this.content.split('').reverse().join('')
+        },
+        onToggle() {
+          this.show = !this.show
+        }
+      },
+
+      template: `
+        <div>
+          <span v-if="show">{{content}}</span>
+          <button v-on:click="onBtnClick">反转</button>
+          <button v-on:click="onToggle">显示/隐藏</button>
+        </div>
+      `
+
+    }).mount('#root')
+  </script>
+</body>
+
+</html>
