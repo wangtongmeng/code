@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //http://localhost:4000/users
+        async function loadData(){
+            const response = await fetch('http://localhost:4000/users',{
+                method:'GET',
+                headers:{'Accept':"application/json",age:10}
+            });
+            console.log(response.headers.get('custom-response-header'));
+            const bodyData = await response.json();
+            console.log(bodyData);
+        }
+        loadData();
+    </script>
+</body>
+</html>

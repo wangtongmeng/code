@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //监听别的窗口向我发过来的消息
+        //window.onmessage = ()=>{}
+        window.addEventListener('message',(event)=>{
+            //console.log(event.source);//来源窗口，就是说是哪个窗口向我发的消息
+            //console.log(event.origin);//来源域 http://localhost:3000
+            if(event.origin === 'http://localhost:3000'){
+                console.log(event.data);
+                event.source.postMessage('world',event.origin);
+            }
+        });
+    </script>
+</body>
+</html>

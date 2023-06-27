@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jsonp</title>
+</head>
+
+<body>
+    <input id="search-input" placeholder="请输入关键词">
+    <ul id="suggest-list"></ul>
+
+    <script>
+        function jsonp({ url, jsonp, data }, callback) {
+            return new Promise((resolve, reject) => {
+                let script = document.createElement('script');
+                //先拼出方法名
+                let callbackName = `jQuery_${Date.now()}`;//jQuery1300000000
+                //给window添加一个全局变量，指向上面拼的那个方法名
+                //window.jQuery1300000000= (response)=>{}
+                window[callbackName] = function (response) {
+                    //把服务器返回的数据传递给resolve,让Promise成功，并把response传入成功的回调
+                    resolve(response);
+                    callback?.(null, response)
+                    delete window[callbackName];
+                    document.head.removeChild(script);
+                }
+                //如果用户给的url里面没有?,说明原来没有查询参数,queryString以?开头，否则 说明
+                //原来已经有了查询 参数，只需要通过&在后面追加参数就可以了
+                let queryString = url.indexOf('?') == -1 ? '?' : '&';
+                //遍历data对象的所有属性
+                for (let key in data) {
+                    //把每个key value拼成查询参数
+                    queryString += `${key}=${data[key]}&`;
+                }
+                //https://www.baidu.com/sugrec?prod=pc&wd=a&cb=jQuery1300000000
+                script.src = `${url}${queryString}${jsonp}=${callbackName}`;
+                document.head.appendChild(script);
+            });
+        }
+        let searchInput = document.getElementById('search-input');
+        let suggestList = document.getElementById('suggest-list');
+        searchInput.addEventListener('input', (event) => {
+            //调用jsonp方法
+            jsonp({
+                //url:'https://www.baidu.com/sugrec',//调用的jsonp接口
+                url: 'http://localhost:3000/sugrec',
+                //传递jsonp回调函数名的参数名
+                jsonp: 'cb',//&cb=jQuery110206648557500369825_1687695022686
+                data: { prod: 'pc', wd: event.target.value }//携带的其它数据
+            }).then(response => {
+                const suggestions = response.g;
+                let html = '';
+                for (let i = 0; i < suggestions.length; i++) {
+                    html += `<li>${suggestions[i].q}</li>`;
+                }
+                suggestList.innerHTML = html;
+            });
+            /* jsonp({
+                url:'https://www.baidu.com/sugrec',//调用的jsonp接口
+                //传递jsonp回调函数名的参数名
+                jsonp:'cb',//&cb=jQuery110206648557500369825_1687695022686
+                data:{prod:'pc',wd:event.target.value}//携带的其它数据
+            },response=>{
+                const suggestions = response.g;
+                let html =  '';
+                for(let i=0;i<suggestions.length;i++){
+                    html+=`<li>${suggestions[i].q}</li>`;
+                }
+                suggestList.innerHTML = html;
+            }); */
+        });
+    </script>
+</body>
+
+</html>

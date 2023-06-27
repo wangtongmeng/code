@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function jsonp({ url, jsonp, data }) {
+      return new Promise((resolve, reject) => {
+        // 创建script
+        let script = document.createElement('script')
+        let callbackName = `cb_${Date.now()}`;
+        // 创建全局回调函数
+        window[callbackName] = function (response) {
+          resolve(response)
+          delete window[callbackName]
+          document.head.removeChild(script)
+        }
+        // 拼接查询参数
+        let queryString = url.indexOf('?') === -1 ? '?' : '&'
+        for (let key in data) {
+          queryString += `${key}=${data[key]}&`
+        }
+
+        // https://localhost:3000/dosomething?param1=a&param2=b&cb=cb_1300000000
+        script.src = `${url}${queryString}${jsonp}=${callbackName}`
+        // 加载script
+        document.head.appendChild(script)
+
+      })
+    }
+
+    jsonp({
+      url: 'http://localhost:3000/dosomething',
+      jsonp: 'cb',
+      data: { param1: 'a', param2: 'b' }
+    }).then(res => {
+      // 获取localhost:3000返回的信息
+      console.log(res) // {success: true, param1: 'a', param2: 'b'}
+    })
+
+  </script>
+</body>
+
+</html>

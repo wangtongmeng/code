@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <iframe id="b-iframe" src="http://localhost:4000/b.html" onload="loaded()"></iframe>
+    <script>
+        window.addEventListener('message',(event)=>{
+            if(event.origin === 'http://localhost:4000'){
+                console.log(event.data);
+            }
+        });
+        function loaded(){
+            //获取b-iframe对应的window对象，也就是窗口对象
+            const bWindow = document.getElementById('b-iframe').contentWindow;
+            //向bWindow发送一条跨域的消息
+            bWindow.postMessage('hello','http://localhost:4000');
+        }
+    </script>
+</body>
+</html>
