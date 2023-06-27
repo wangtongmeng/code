@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+
+  <body>
+    <div id="root"></div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          inputValue: '',
+          list: [],
+        }
+      },
+      methods: {
+        onAdd() {
+          if (!this.inputValue) return
+          this.list.push(this.inputValue)
+          this.inputValue = ''
+        }
+      },
+
+      template: `
+        <div>
+          <input v-model="inputValue" />  
+          <button @click="onAdd">增加</button>
+          <ul>
+            <todo-item
+              v-for="(item, index) of list"
+              :content="item"
+              :index="index"
+            />
+          </ul>
+        </div>
+      `
+
+    })
+
+    app.component('todo-item', {
+      props: ['content', 'index'],
+      template: '<li>{{index}} -- {{content}}</li>'
+    })
+
+    app.mount('#root')
+  </script>
+</body>
+
+</html>
