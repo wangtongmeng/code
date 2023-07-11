@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+  <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+
+<body>
+
+  <body>
+    <div id="root"></div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      template: `
+        <div @click="handleClick">{{name}}</div>
+      `,
+      methods: {
+        test() {
+          console.log(this.$options.setup());
+        }
+      },
+      mounted() {
+        this.test();
+      },
+      // created 实例被完全初始化之前
+      setup(props, context) {
+        return {
+          name: 'zhangsan',
+          handleClick: () => {
+            alert(123)
+          }
+        }
+      }
+    });
+    // vm 代表的就是 Vue 应用的根组件
+    const vm = app.mount('#root');
+  </script>
+</body>
+
+</html>
