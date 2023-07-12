@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+
+  <body>
+    <div id="root"></div>
+  </body>
+  <script>
+
+    // 封装list操作
+    const listEffect = () => {
+      const { reactive } = Vue
+      const list = reactive([])
+      const addItem = (item) => {
+        list.push(item)
+      }
+      return { list, addItem }
+    }
+
+    // 封装inputValue操作
+    const inputEffect = () => {
+      const { ref } = Vue
+      const inputValue = ref('')
+      const onValChange = (e) => {
+        inputValue.value = e.target.value
+      }
+      return { inputValue, onValChange }
+    }
+
+    const app = Vue.createApp({
+      setup(props, context) {
+        const { list, addItem } = listEffect()
+        const { inputValue, onValChange } = inputEffect()
+        return {
+          list, addItem,
+          inputValue, onValChange
+        }
+      },
+      template: `
+        <div>
+          <div>
+            <input :value="inputValue" @input="onValChange" />
+            <button @click="() => addItem(inputValue)">提交</button>
+          </div>
+          <ul>
+            <li v-for="(item, index) in list" :key="index">{{item}}</li>  
+          </ul>
+        </div>
+      `
+    });
+
+    // vm 代表的就是 Vue 应用的根组件
+    const vm = app.mount('#root');
+  </script>
+</body>
+
+</html>

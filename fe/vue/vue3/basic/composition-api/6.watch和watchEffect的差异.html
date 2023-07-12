@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+
+  <body>
+    <div id="root"></div>
+  </body>
+  <script>
+    // watch 侦听器
+    // watchEffect 侦听器，偏向于 effect
+    const app = Vue.createApp({
+      setup() {
+        const { reactive, watch, watchEffect, toRefs } = Vue
+        const person = reactive({ name: 'lisi', age: 18 })
+        const { name, age } = toRefs(person)
+
+        // 具备一定的惰性 lazy
+        // 参数可以拿到原始和当前值
+        // 可以侦听多个数据的变化，用一个侦听器承载
+        watch([() => person.name, () => person.age], ([curName, curAge], [prevName, prevAge]) => {
+          console.log('watch', `curName ${curName} prevName ${prevName} curAge ${curAge} prevAge ${prevAge}`)
+        }, { immediate: true })
+
+
+        // 立即执行，没有惰性 immediate
+        // 不需要传递你要侦听的内容，自动会感知代码依赖，不需要传递很多参数，只要传递一个毁掉函数
+        // 不能获取之前数据的值
+        const stop = watchEffect(() => {
+          console.log('watchEffect', `name ${name.value} age ${age.value}`)
+          console.log('watchEffect1', `name ${person.name} age ${person.age}`)
+        })
+
+        return { name, age, stop }
+      },
+      template: `
+       <div>
+        <div>name: <input v-model="name" />  {{name}}</div>
+        <div>age: <input v-model="age" /> {{age}}</div>
+        <button @click="stop">停止监听watchEffect</button>
+      </div>
+      `
+    })
+
+    app.mount('#root')
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+
+  <body>
+    <div id="root"></div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      setup() {
+        const { reactive, computed } = Vue
+        const countObj = reactive({ count: 0 })
+        const onClick = () => {
+          countObj.count += 1
+        }
+        const onComputedSetterChange = () => {
+          countAddFive.value = 100
+        }
+        const countAddFive = computed({
+          get: () => {
+            return countObj.count + 5
+          },
+          set: (params) => {
+            countObj.count = 100
+          }
+        })
+
+        return { countObj, countAddFive, onClick, onComputedSetterChange }
+      },
+      template: `
+        <div>
+          <button @click="onClick">+1</button>
+          <button @click="onComputedSetterChange">修改computed setter</button>
+          <div>{{countObj.count}}</div>
+          <div>{{countAddFive}}</div>
+        </div>
+      `
+    })
+
+    app.mount('#root')
+
+  </script>
+</body>
+
+</html>
