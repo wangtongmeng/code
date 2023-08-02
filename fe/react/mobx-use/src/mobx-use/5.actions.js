@@ -16,6 +16,7 @@ class Doubler {
   increment() {
     this.value++;
     this.value++;
+    // 这里是一个action，相当于+2 触发一次autorun回调函数的执行
   }
 }
 
@@ -29,6 +30,5 @@ doubler.increment();
 
 /**
  * 1
- * 2
  * 3
  */

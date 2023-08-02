@@ -43,7 +43,7 @@ class Doubler {
   }
 }
 const doubler = new Doubler(1);
-//
+
 autorun(() => {
   console.log(doubler.PI);
 });
