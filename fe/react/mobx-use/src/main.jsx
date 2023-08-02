@@ -7,7 +7,7 @@
 // import "./mobx-use/7.bound";
 // import "./mobx-use/8.makeAutoObservable";
 // import "./mobx-use/9.reaction";
-// import "./mobx-use/10.when";
+import "./mobx-use/10.when";
 // import "./mobx-use/11.runInAction";
 
 // import "./react-mobx-use/1.observer";
@@ -15,4 +15,4 @@
 // import "./react-mobx-use/3.Observer";
 // import "./react-mobx-use/4.useObserver";
 // import "./react-mobx-use/5.useLocalObservable";
-import "./react-mobx-use/6.todos";
+// import "./react-mobx-use/6.todos";

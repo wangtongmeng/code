@@ -3,8 +3,21 @@ import Link from "next/link";
 import _appStyle from "./_app.module.css";
 import "../style/global.css";
 class LayoutApp extends App {
+  static async getInitialProps({ Component, ctx }) {
+    console.log("LayoutApp getInitialPrps");
+    let pageProps = {};
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx);
+    }
+    return { pageProps };
+  }
+  constructor(props) {
+    super(props);
+    console.log("LayoutApp constructor");
+  }
+
   render() {
-    let { Component } = this.props;
+    let { Component, pageProps } = this.props;
     return (
       <div>
         <style jsx>
@@ -23,14 +36,14 @@ class LayoutApp extends App {
               <Link href="/">首页</Link>
             </li>
             <li>
-              <Link href="/user">用户管理</Link>
+              <Link href="/user/list">用户管理</Link>
             </li>
             <li>
               <Link href="/profile">个人中心</Link>
             </li>
           </ul>
         </header>
-        <Component />
+        <Component {...pageProps} />
         <footer>页尾</footer>
       </div>
     );
