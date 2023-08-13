@@ -41,6 +41,9 @@ class LayoutApp extends App {
             <li>
               <Link href="/profile">个人中心</Link>
             </li>
+            <li>
+              <Link href="/login">登录</Link>
+            </li>
           </ul>
         </header>
         <Component {...pageProps} />

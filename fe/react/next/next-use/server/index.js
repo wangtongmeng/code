@@ -2,7 +2,7 @@ let express = require("express");
 let bodyParser = require("body-parser");
 let cors = require("cors");
 let session = require("express-session");
-let MongoStore = require("connect-mongo")(session);
+let MongoStore = require("connect-mongo");
 
 let config = require("./config");
 let { UserModel } = require("./model");
@@ -24,8 +24,8 @@ app.use(
     secret: config.secret,
     resave: false,
     saveUninitialized: true,
-    store: new MongoStore({
-      url: config.dbUrl,
+    store: MongoStore.create({
+      mongoUrl: config.dbUrl,
       mongoOptions: {
         useNewUrlParser: true,
         useUnifiedTopology: true,

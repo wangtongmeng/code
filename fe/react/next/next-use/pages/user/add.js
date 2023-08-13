@@ -12,10 +12,12 @@ function UserAdd(props) {
       name: nameRef.current.value,
       password: passwordRef.current.value,
     };
+
     let response = await axios
       .post("/api/register", user)
       .then((res) => res.data);
-    if (response.success) {
+    console.log("res", response);
+    if (response.code === 0) {
       router.push("/user/list");
     } else {
       alert("添加用户失败");
