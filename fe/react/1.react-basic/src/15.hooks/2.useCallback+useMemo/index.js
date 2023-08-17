@@ -3,33 +3,34 @@
 把创建函数和依赖项数组作为参数传入 useMemo，它仅会在某个依赖项改变时才重新计算 memoized 值。这种优化有助于避免在每次渲染时都进行高开销的计算
 */
 
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from "react";
+import ReactDOM from "react-dom";
 
-let Child = ({data, handleClick})=>{
-    console.log('Child render');
-    return (
-        <button onClick={handleClick}>{data.number}</button>
-    )
-}
-let MemoChild = React.memo(Child)
+let Child = ({ data, handleClick }) => {
+  console.log("Child render");
+  return <button onClick={handleClick}>{data}</button>;
+};
+let MemoChild = React.memo(Child);
 
 function App() {
-    console.log('App render');
-    const [name, setName] = React.useState('lisi')
-    const [number, setNumber] = React.useState(0)
-    let data = React.useMemo(()=>({number}), [number])
-    let handleClick = React.useCallback(()=>setNumber(number+1), [number])
-    return (
-        <div>
-            <input type="text" value={name} onChange={event=>setName(event.target.value)} />
-            <MemoChild data={data} handleClick={handleClick} />
-        </div>
-    )
+  console.log("App render");
+  const [name, setName] = React.useState("lisi");
+  const [number, setNumber] = React.useState(0);
+  let data = React.useMemo(() => ({ number }), [number]);
+  let handleClick = React.useCallback(() => setNumber(number + 1), [number]);
+  return (
+    <div>
+      <input
+        type="text"
+        value={name}
+        onChange={(event) => setName(event.target.value)}
+      />
+      <MemoChild data={data} handleClick={handleClick} />
+    </div>
+  );
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
-
+ReactDOM.render(<App />, document.getElementById("root"));
 
 /* 
 初次渲染
