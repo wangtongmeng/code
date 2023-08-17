@@ -14,4 +14,5 @@
  */
 
 // import "./1.clientSideRouting";
-import "./2.nestedRoutes";
+// import "./2.nestedRoutes";
+import "./base";

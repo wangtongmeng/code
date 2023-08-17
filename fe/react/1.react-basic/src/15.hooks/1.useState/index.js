@@ -8,19 +8,52 @@ useState 唯一的参数就是初始 state
     setState 函数用于更新 state。它接收一个新的 state 值并将组件的一次重新渲染加入队列
 */
 
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from "react";
+import ReactDOM from "react-dom";
 
 function App() {
-    const [number,setNumber] = React.useState(0)
-    let handleClick = () => setNumber(number+1)
-    return (
-        <div>
-            <p>{number}</p>
-            <button onClick={handleClick}>+</button>
-        </div>
-    )
+  const [number, setNumber] = React.useState(0);
+  let onClick1 = () => {
+    setNumber(number + 1);
+  };
+
+  let onClick2 = () => {
+    setNumber(number + 1);
+    setNumber(number + 1);
+    console.log(number); // 0
+  };
+
+  let onClick3 = () => {
+    setNumber(number + 1);
+    setNumber(number + 1);
+    console.log(number); // 0
+    setTimeout(() => {
+      setNumber(number + 1);
+      console.log(number); // 0
+      setNumber(number + 1);
+      console.log(number); // 0
+    }, 1000);
+  };
+  let onClick4 = () => {
+    setNumber((a) => {
+      console.log(a); // 0
+      return a + 1; // 0 -> 1
+    });
+
+    setNumber((a) => {
+      console.log(a); // 1
+      return a + 1; // 1 -> 2
+    });
+  };
+  return (
+    <div>
+      <p>{number}</p>
+      <button onClick={onClick1}>+</button>
+      <button onClick={onClick2}>setNumber两次</button>
+      <button onClick={onClick3}>settimeout click</button>
+      <button onClick={onClick4}>同步更新</button>
+    </div>
+  );
 }
 
-
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<App />, document.getElementById("root"));

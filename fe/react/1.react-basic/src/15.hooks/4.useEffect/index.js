@@ -5,24 +5,22 @@ useEffect 就是一个 Effect Hook，给函数组件增加了操作副作用的�
 该 Hook 接收一个包含命令式、且可能有副作用代码的函数
 */
 
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from "react";
+import ReactDOM from "react-dom";
 
 function Counter() {
-    const [number,setNumber] = React.useState(0)
-    React.useEffect(()=>{
-        console.log('开启一个新的定时器');
-        const $timer = setInterval(()=>{
-            setNumber(number=>number+1)
-        },1000)
-        return () => {
-            console.log('销毁老的定时器');
-            clearInterval($timer)
-        }
-    })
-    return (
-        <p>{number}</p>
-    )
+  const [number, setNumber] = React.useState(0);
+  React.useEffect(() => {
+    console.log("开启一个新的定时器");
+    const $timer = setInterval(() => {
+      setNumber((number) => number + 1);
+    }, 1000);
+    return () => {
+      console.log("销毁老的定时器");
+      clearInterval($timer);
+    };
+  });
+  return <p>{number}</p>;
 }
 
-ReactDOM.render(<Counter />, document.getElementById('root'))
+ReactDOM.render(<Counter />, document.getElementById("root"));
