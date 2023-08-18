@@ -2,21 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {
   BrowserRouter as Router,
-  Route,
-  Routes,
   Link,
-  useNavigate,
-  Navigate,
+  Outlet,
+  useRoutes,
 } from "react-router-dom";
 
 function Home() {
-  const navigate = useNavigate();
-  return (
-    <div>
-      home
-      <button onClick={() => navigate("/user")}>跳转到/user</button>
-    </div>
-  );
+  return <div>home</div>;
 }
 
 function UserAdd() {
@@ -27,6 +19,9 @@ function UserList() {
 }
 function UserDetail() {
   return <div>UserDetail</div>;
+}
+function NotFound() {
+  return <div>NotFound</div>;
 }
 
 function User() {
@@ -40,11 +35,7 @@ function User() {
           <Link to="list">用户列表</Link>
         </li>
       </ul>
-      <Routes>
-        <Route path="add" element={<UserAdd />} />
-        <Route path="list" element={<UserList />} />
-        <Route path="detail/:id" element={<UserDetail />} />
-      </Routes>
+      <Outlet />
     </div>
   );
 }
@@ -52,6 +43,26 @@ function User() {
 function Profile() {
   return <div>profile</div>;
 }
+
+const routes = [
+  { path: "/", element: <Home /> },
+  { path: "/profile", element: <Profile /> },
+  {
+    path: "user",
+    element: <User />,
+    children: [
+      { path: "add", element: <UserAdd /> },
+      { path: "list", element: <UserList /> },
+      { path: "detail/:id", element: <UserDetail /> },
+    ],
+  },
+  // 404找不到
+  { path: "*", element: <NotFound /> },
+];
+
+// useRoutes钩子在功能上等同于Routes，但它使用JavaScript对象而不是Route元素来定义路由
+// 这些对象与普通Route元素具有相同的属性，但它们不需要JSX
+const App = () => useRoutes(routes);
 
 ReactDOM.render(
   <Router>
@@ -66,16 +77,7 @@ ReactDOM.render(
         <Link to="/profile">Profile</Link>
       </li>
     </ul>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/user/*" element={<User />} />
-      <Route path="/profile" element={<Profile />} />
-      {/* 
-        Redirect 标签删除
-      解决方案：新版的路由需要引入标签
-Navigate元素在渲染时更改当前位置 */}
-      <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
+    <App />
   </Router>,
   document.getElementById("root")
 );

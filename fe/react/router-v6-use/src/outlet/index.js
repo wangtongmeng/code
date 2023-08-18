@@ -5,18 +5,11 @@ import {
   Route,
   Routes,
   Link,
-  useNavigate,
-  Navigate,
+  Outlet,
 } from "react-router-dom";
 
 function Home() {
-  const navigate = useNavigate();
-  return (
-    <div>
-      home
-      <button onClick={() => navigate("/user")}>跳转到/user</button>
-    </div>
-  );
+  return <div>home</div>;
 }
 
 function UserAdd() {
@@ -40,11 +33,7 @@ function User() {
           <Link to="list">用户列表</Link>
         </li>
       </ul>
-      <Routes>
-        <Route path="add" element={<UserAdd />} />
-        <Route path="list" element={<UserList />} />
-        <Route path="detail/:id" element={<UserDetail />} />
-      </Routes>
+      <Outlet />
     </div>
   );
 }
@@ -68,13 +57,12 @@ ReactDOM.render(
     </ul>
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/user/*" element={<User />} />
+      <Route path="/user" element={<User />}>
+        <Route path="add" element={<UserAdd />} />
+        <Route path="list" element={<UserList />} />
+        <Route path="detail/:id" element={<UserDetail />} />
+      </Route>
       <Route path="/profile" element={<Profile />} />
-      {/* 
-        Redirect 标签删除
-      解决方案：新版的路由需要引入标签
-Navigate元素在渲染时更改当前位置 */}
-      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   </Router>,
   document.getElementById("root")
