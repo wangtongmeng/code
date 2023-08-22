@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+
+  <body>
+    <div id="root"></div>
+  </body>
+  <script>
+    // 动态组件: 根据数据的变化，结合 compoent 这个标签，来随时动态切换组件的现实
+
+    const Comp1 = { template: 'Comp1' }
+    const Comp2 = { template: 'Comp2' }
+    const Comp3 = { template: 'Comp3' }
+
+    const app = Vue.createApp({
+      components: {
+        Comp1,
+        Comp2,
+        Comp3
+      },
+      data() {
+        return {
+          tabs: ['Comp1', 'Comp2', 'Comp3'],
+          currentTab: 'Comp1'
+        }
+
+      },
+      template: `
+        <button v-for="tab in tabs" :key="tab" @click="currentTab = tab">{{tab}}</button>
+        <component :is="currentTab"></component>
+       
+      `
+    })
+
+    app.mount('#root')
+  </script>
+</body>
+
+</html>

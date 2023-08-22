@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+
+  <body>
+    <div id="root"></div>
+  </body>
+  <script>
+
+
+    var app = Vue.createApp({
+      data() {
+        return { count: 1 }
+      },
+      provide() {
+        return {
+          count: () => this.count, // 注意这里传函数
+        }
+      },
+      template: `
+        <div>
+          <comp1 />  
+          {{count}}
+          <button @click="count += 1">add</button>
+        </div>
+      `
+    })
+
+    app.component('comp1', {
+      template: '<comp2 />'
+    })
+
+    app.component('comp2', {
+      inject: ['count'],
+      template: '<div>{{count()}}</div>'
+    })
+
+
+    app.mount('#root')
+
+
+    // 其他 ref v-once
+  </script>
+</body>
+
+</html>

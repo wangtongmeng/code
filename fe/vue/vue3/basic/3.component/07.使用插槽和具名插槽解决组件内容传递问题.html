@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+
+  <body>
+    <div id="root"></div>
+  </body>
+  <script>
+    // 作用域插槽
+    // 子组件向父组件传递数据，父组件向子组件传递ui及自己的数据
+    const app = Vue.createApp({
+      data: {
+        key: 1,
+      },
+      template: `
+        <list v-slot="{item}">
+          <div>{{item}} - {{key}}</div>
+        </list>
+      `
+
+    })
+
+    app.component('list', {
+      data() {
+        return { list: [1, 2, 3] }
+      },
+      template: `
+        <div>
+          <slot v-for="item in list" :item="item" />  
+        </div>
+      `
+    })
+
+
+
+    app.mount('#root')
+  </script>
+</body>
+
+</html>
