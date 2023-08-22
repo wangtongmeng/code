@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+
+
+<body>
+  <div id="root"></div>
+</body>
+<script>
+  // plugin 插件, 也是把通用性的功能封装起来
+  const myPlugin = {
+    install(app, options) {
+      app.provide('name', 'wtm')
+      app.directive('focus', {
+        mounted(el) {
+          el.focus()
+        }
+      })
+      app.mixin({
+        mounted() {
+          console.log('mixin');
+        }
+      })
+      app.config.globalProperties.$sayHello = 'hello world';
+    }
+  }
+
+  const app = Vue.createApp({
+    template: `<comp1 />`
+  })
+
+  app.component('comp1', {
+    inject: ['name'],
+    mounted() {
+      console.log(this.$sayHello)
+    },
+    template: `<div>{{name}}<input v-focus /></div>`
+
+  })
+
+  app.use(myPlugin, { name: 'wtm' })
+
+  app.mount('#root')
+
+
+</script>
+
+</html>

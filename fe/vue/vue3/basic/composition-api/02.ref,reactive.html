@@ -18,7 +18,7 @@
   <script>
     // ref, reactive 响应式的引用
     // 原理，通过 proxy 对数据进行封装，当数据变化时，触发模版等内容的更新
-    // ref 处理基础类型的数据
+    // ref 处理基础类型的数据 ref传入引用类型会通过toReactive
     // reactive 处理非基础类型的数据
     const app = Vue.createApp({
       template: `
@@ -26,6 +26,7 @@
       `,
       // created 实例被完全初始化之前
       setup(props, context) {
+
         // const { ref } = Vue
         // let name = ref('lisi') // proxy({value: 'lisi'})
         // setTimeout(() => {
@@ -45,6 +46,7 @@
         //  age: proxy({value: 28})
         // }
         const { name, age } = toRefs(nameObj)
+        console.log('name', name); // ObjectRefImpl 
         return { name }
       }
     });

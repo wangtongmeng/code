@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+
+<body>
+  <div id="root"></div>
+</body>
+<script>
+  // 自定义指令 directive v-xxx
+  // 自定义指令主要是为了重用涉及普通元素的底层 DOM 访问的逻辑
+  const app = Vue.createApp({
+    data() {
+      return {
+        distance: 110,
+      }
+    },
+    template: `
+        <div>
+          <div v-pos:right="distance>
+            <input />  
+          </div>
+        </div>
+      `
+  })
+
+  app.directive('pos', (el, binding) => {
+    el.style[binding.arg] = binding.value + 'px'
+  })
+
+  app.mount('#root')
+
+</script>
+
+</html>

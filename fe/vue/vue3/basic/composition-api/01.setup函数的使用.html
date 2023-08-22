@@ -23,7 +23,7 @@
       `,
       methods: {
         test() {
-          console.log(this.$options.setup());
+          console.log(this.$options.setup()); // {name: 'zhangsan', handleClick: ƒ}
         }
       },
       mounted() {
@@ -31,6 +31,8 @@
       },
       // created 实例被完全初始化之前
       setup(props, context) {
+        console.log('setup props', props)
+        console.log('setup context', context)
         return {
           name: 'zhangsan',
           handleClick: () => {

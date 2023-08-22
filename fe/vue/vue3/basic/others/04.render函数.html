@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+
+
+<body>
+  <div id="root"></div>
+</body>
+<script>
+  // render function
+  // template -> render -> h -> 虚拟DOM（JS对象）-> 真实 DOM -> 展示到页面上
+  const app = Vue.createApp({
+    template: `
+      <my-title :level="1">hello</my-title>
+      <my-title :level="2">hello</my-title>
+      <my-title :level="3">hello</my-title>
+    `
+  })
+
+  app.component('my-title', {
+    props: ['level'],
+    render() {
+      const { h } = Vue
+      return h('h' + this.level, {}, [
+        this.$slots.default(),
+      ])
+    }
+  })
+
+  app.mount('#root')
+
+
+</script>
+
+</html>

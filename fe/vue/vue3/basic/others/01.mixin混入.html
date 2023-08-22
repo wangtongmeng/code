@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+
+  <body>
+    <div id="root"></div>
+  </body>
+  <script>
+    // mixin 混入
+    // 组件 data, methods 优先级高于 mixin data, methods 优先级
+    // 生命周期函数，先执行 mixin 里面的，再执行组件里面的
+    // 自定义的属性，组件中的属性优先级高于 mixin 属性的优先级
+
+    // 总结：生命周期都执行mixin排前面，其他组件中优先级高会覆盖，如果名字相同组件中的会覆盖mixin中的
+
+    const myMixin = {
+      data() {
+        return { number: 1 }
+      },
+      mounted() {
+        console.log('mixin mounted')
+      },
+      methods: {
+        add() {
+          console.log('mixin methods');
+          this.number += 1
+        }
+      }
+
+    }
+
+    const app = Vue.createApp({
+      mixins: [myMixin],
+      data() {  // 组件中的优先级高
+        return { number: 2 }
+      },
+      mounted() {
+        console.log('comp mounted');
+      },
+      methods: {
+        add() {
+          console.log('comp methods');
+          this.number += 2
+        },
+      },
+      template: `
+      <div>{{number}}</div>
+      
+      <button @click="add">添加</button>
+    `
+    })
+
+    // 自定义优先级
+    // app.config.optionMergeStrategies.number = (mixinVal, appValue) => {
+    //   return mixinVal || appValue;
+    // }
+
+    app.mount('#root')
+
+    // mixin mounted
+    // comp mounted
+    // 点击添加按钮
+    // comp methods
+
+  </script>
+</body>
+
+</html>
