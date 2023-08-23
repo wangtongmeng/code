@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+
+  <body>
+    <div id="root"></div>
+  </body>
+  <script>
+    const app = Vue.createApp({
+      setup() {
+        const { ref, onMounted } = Vue
+        const helloRef = ref(null)
+        onMounted(() => {
+          console.log(helloRef.value.innerHTML); // 你好
+        })
+        return { helloRef }
+      },
+      template: `
+        <div>
+          <div ref="helloRef">你好</div>  
+        </div>
+      `
+    })
+
+    app.mount('#root')
+  </script>
+</body>
+
+</html>
