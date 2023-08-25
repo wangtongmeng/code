@@ -1,29 +1,24 @@
 # pinia-use
 
-This template should help get you started developing with Vue 3 in Vite.
+## 特点
 
-## Recommended IDE Setup
+- 弃用 mutation
+- 对 ts 友好
+- 无需要动态添加 Store，它们默认都是动态的
+- 不再有嵌套结构的模块
+- 不再有可命名的模块
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## 安装
 
-## Customize configuration
+## Store
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+它有三个概念，state、getter 和 action，相当于组件中的 data、 computed 和 methods。
 
-## Project Setup
+## 定义 Store
 
-```sh
-npm install
-```
+defineStore() 的第二个参数可接受两类值：Setup 函数或 Option 对象。
 
-### Compile and Hot-Reload for Development
+定义的 store 何时创建
 
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+store 结合 setup 组件
+store 结合 options api 写法的组件
