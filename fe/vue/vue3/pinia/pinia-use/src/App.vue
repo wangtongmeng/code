@@ -1,14 +1,15 @@
 <script setup>
-import {  RouterView } from 'vue-router'
-import Counter from './views/Counter.vue';
-import Counter1 from './views/Counter1.vue';
+import OptComp from './views/OptComp.vue';
+import SetupComp from './views/SetupComp.vue';
+import OptCompWithSetup from './views/OptCompWithSetup.vue';
 </script>
 
 <template>
-  <!-- <RouterView /> -->
-  <Counter />
+  <SetupComp />
   <div>=======组件用options api，通过映射辅助函数使用Store</div>
-  <Counter1 />
+  <OptComp />
+  <div>=======组件用options api，使用Setup辅助</div>
+  <OptCompWithSetup />
 </template>
 
 <style scoped>
