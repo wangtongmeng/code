@@ -11,6 +11,16 @@ registerApplication({
   activeWhen: location => location.pathname === '/',
 });
 
+registerApplication({
+  // 不重名即可
+  name: "@wtm/react", 
+  app: () =>
+    System.import(
+      "@wtm/react" // 获取 import map 里找
+    ),
+  activeWhen: location => location.pathname === '/react',
+});
+
 // registerApplication({
 //   name: "@wtm/navbar",
 //   app: () => System.import("@wtm/navbar"),
