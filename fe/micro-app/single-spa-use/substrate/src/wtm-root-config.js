@@ -12,13 +12,21 @@ registerApplication({
 });
 
 registerApplication({
-  // 不重名即可
-  name: "@wtm/react", 
+  name: "@wtm/react",  // 不重名即可
   app: () =>
     System.import(
       "@wtm/react" // 获取 import map 里找
     ),
-  activeWhen: location => location.pathname === '/react',
+  activeWhen: location => location.pathname.startsWith('/react'),
+});
+
+registerApplication({
+  name: "@wtm/vue", // 不重名即可
+  app: () =>
+    System.import(
+      "@wtm/vue" // 获取 import map 里找
+    ),
+  activeWhen: location => location.pathname.startsWith('/vue'),
 });
 
 // registerApplication({

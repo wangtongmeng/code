@@ -18,13 +18,14 @@
   <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js" as="script">
 
 
+  <!-- 2. 加载wtm-root-config.js -->
   <% if (isLocal) { %>
     <script type="systemjs-importmap">
       {
         "imports": {
-        <!-- 2. 加载wtm-root-config.js -->
         "@wtm/root-config": "//localhost:9000/wtm-root-config.js",
-        "@wtm/react": "//localhost:3000/wtm-react.js"
+        "@wtm/react": "//localhost:3000/wtm-react.js",
+        "@wtm/vue": "//localhost:4000/js/app.js"
       }
     }
   </script>
@@ -47,6 +48,7 @@
   <main>
     <a onclick="go('/')">去基座项目</a>
     <a onclick="go('/react')">去react项目</a>
+    <a onclick="go('/vue')">去vue项目</a>
   </main>
   <script>
     function go(url) {
