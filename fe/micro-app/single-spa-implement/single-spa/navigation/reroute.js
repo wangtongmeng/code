@@ -4,6 +4,8 @@ import { toLoadPromise } from "../lifecycles/load.js";
 import { toMountPromise } from "../lifecycles/mount.js";
 import { toUnmountPromise } from "../lifecycles/unmount.js";
 import { started } from "../start.js";
+import './navigation-event.js'
+import { callCaptureEventListeners } from "./navigation-event.js";
 
 
 
@@ -33,7 +35,7 @@ export function reroute(event) {
     return loadApps();
     function loadApps() {
         // 应用的加载
-        return Promise.all(appsToLoad.map(toLoadPromise))// 目前我们没有调用start 
+        return Promise.all(appsToLoad.map(toLoadPromise)).then(callEventListener)// 目前我们没有调用start 
     }
     function performAppChange(){
         // 将不需要的应用卸载掉, 返回一个卸载的promise
@@ -61,6 +63,7 @@ export function reroute(event) {
         }
         
         return Promise.all([loadMountPromises,MountPromises]).then(()=>{ // 卸载完毕后
+            callEventListener();
             appChangeUnderWay = false;
             if(peopleWaitingOnAppChange.length > 0){
                 peopleWaitingOnAppChange = []; // 多次操作 我缓存起来，。。。。
@@ -69,6 +72,10 @@ export function reroute(event) {
         })
 
         
+    }
+
+    function callEventListener(){
+        callCaptureEventListeners(event)
     }
 
 }
