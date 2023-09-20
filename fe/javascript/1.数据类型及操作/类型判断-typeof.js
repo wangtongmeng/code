@@ -1,4 +1,5 @@
 console.log(typeof 2); // number
+console.log(typeof NaN); // number
 console.log(typeof true); // boolean
 console.log(typeof 'str'); // string
 console.log(typeof undefined); // undefined
