@@ -23,18 +23,32 @@ var fib = function(n) {
   // return dp[n]
   // 3.优化空间复杂度
   // 时间复杂度：O(n) 空间复杂度：O(1)
-  if (n <= 1) {
-    return n
-  }
+  // if (n <= 1) {
+  //   return n
+  // }
 
-  let n1 = 0
-  let n2 = 1
-  for (let i = 2; i <= n; i++)  {
-    const n3 = n1 + n2
-    n1 = n2
-    n2 = n3
+  // let n1 = 0
+  // let n2 = 1
+  // for (let i = 2; i <= n; i++)  {
+  //   const n3 = n1 + n2
+  //   n1 = n2
+  //   n2 = n3
+  // }
+  // return n2
+
+  // 4. 递归+备忘录的方式，提高时间复杂度
+  function helper(memo, n) {
+    if (n <= 1) {
+      return n
+    }
+    if (memo[n]) {
+      return memo[n]
+    }
+    memo[n] = helper(memo, n - 1) + helper(memo, n - 2)
+    return memo[n]
   }
-  return n2
+  const memo = []
+  return helper(memo, n)
 };
 // @lc code=end
 
