@@ -15,13 +15,13 @@ var fib = function(n) {
   //   return n
   // }
   // return fib(n-1) + fib(n-2)
-  // 2.公式推理
+  // 2.动态规划
   // let dp = [0, 1]
   // for (let i = 2; i <=n; i++) {
   //   dp[i] = dp[i - 1] + dp[i - 2]
   // }
   // return dp[n]
-  // 3.优化空间复杂度
+  // 3.动态规划 优化空间复杂度
   // 时间复杂度：O(n) 空间复杂度：O(1)
   // if (n <= 1) {
   //   return n
