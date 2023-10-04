@@ -18,10 +18,9 @@
  * @return {ListNode}
  */
 var removeElements = function(head, val) {
-  // 虚拟头节点的方式
   const vhead = new ListNode(0, head)
   let cur = vhead
-  while(cur.next) {
+  while (cur.next) {
     if (cur.next.val === val) {
       cur.next = cur.next.next
       continue
@@ -31,4 +30,17 @@ var removeElements = function(head, val) {
   return vhead.next
 };
 // @lc code=end
+
+
+// // 虚拟头节点的方式
+// const vhead = new ListNode(0, head)
+// let cur = vhead
+// while(cur.next) {
+//   if (cur.next.val === val) {
+//     cur.next = cur.next.next
+//     continue
+//   }
+//   cur = cur.next
+// }
+// return vhead.next
 
