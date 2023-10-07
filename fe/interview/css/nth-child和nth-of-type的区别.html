@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 先找奇数位，再找其中的div */
+    /* 先找奇数位135，再找div 13 */
+    div:nth-child(2n+1) {
+      color: red;
+    }
+    /* 先过滤出div，再找奇数行的div */
+    /* 找到所有div，1346，取奇数位，14 */
+    /* div:nth-of-type(2n+1) {
+      color: red;
+    } */
+  </style>
+</head>
+<body>
+  <div>1</div>
+  <span>2</span>
+  <div>3</div>
+  <div>4</div>
+  <span>5</span>
+  <div>6</div>
+</body>
+</html>
