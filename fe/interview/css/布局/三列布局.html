@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<!-- 通过BFC实现 -->
+<style>
+  .left,.right {
+    width: 200px;
+    height: 500px;
+    background-color: aquamarine;
+  }
+  .left {
+    float: left;
+  }
+  .right {
+    float: right;
+  }
+  .center {
+    /* width: calc(100% - 400px);
+    margin-left: 200px;
+    margin-right: 200px; */
+    background-color: bisque;
+    height: 800px;
+    overflow: hidden;
+  }
+</style>
+<body>
+  <div id="container">
+    <div class="left">left</div>
+    <div class="right">right</div>
+    <!-- 注意center放到最后，但这样不利于seo优化-->
+    <div class="center">center</div>
+  </div>
+</body>
+</html>

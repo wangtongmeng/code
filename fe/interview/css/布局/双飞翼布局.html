@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .left,.right {
+    width: 200px;
+    height: 500px;
+    background-color: aquamarine;
+  }
+
+  .center {
+    width: 100%;
+  }
+  /* 2.全部浮动 原则上应在一行，但center 100%放不下 */
+  .left,.right,.center {
+    float: left;
+  }
+  /* 3.让容器流出左右的间距 */
+  .container {
+  }
+  /* 4.采用位置移动，-margin来实现 */
+  .left {
+    margin-left: -100%;
+  }
+  .right {
+    margin-left: -200px;
+  }
+  .center-inner {
+    background-color: bisque;
+    margin: 0 200px;
+    height: 300px;
+  }
+</style>
+<body>
+  <div class="container">
+    <!-- center放前面，有利于seo优化-->
+    <!-- 1.center在前 -->
+    <div class="center">
+      <div class="center-inner">center</div>
+    </div>
+    <div class="left">left</div>
+    <div class="right">right</div>
+  </div>
+</body>
+<!-- 双飞翼布局的优势：比圣杯布局简单，但增加了个盒子来撑开 -->
+</html>

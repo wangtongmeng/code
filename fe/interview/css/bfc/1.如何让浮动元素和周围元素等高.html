@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  .box {
+    background-color: red;
+    overflow: hidden; /*出发box的bfc，计算了float的高度*/
+  }
+  .float {
+    width: 200px;
+    height: 200px;
+    background-color: aquamarine;
+    float: left;
+  }
+</style>
+<body>
+  <!-- 计算BFC的高度时，浮动元素也参与计算。  bfc中的内容（浮动元素与其他元素不能重叠） -->
+  <div class="box">
+    <div class="float">浮动盒子</div>
+    <p>容器内容</p>
+  </div>
+</body>
+</html>
