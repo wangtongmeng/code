@@ -1,21 +1,31 @@
-~(function (prototype) {
-  Object.create = function (prototype) {
-      function F() { }
-      F.prototype = prototype;
-      return new F();
+Function.prototype.myCall = function (context, ...args) {
+  function getContext(context) {
+    context = context || window;
+    let type = typeof context;
+    if (["number", "string", "boolean", null].includes(type)) {
+      context = new type.constructor(context);
+    }
+    return context;
   }
-  prototype.myBind = function (OThis, ...outerArgs) {
-      let thatFunc = this;//缓存当前的函数 Point
-      let fBound = function (...innerArgs) {
-          //如果在这里判断我这个函数是new来调用的还是直接调用？
-          return thatFunc.apply(
-              //如果你是在new这个绑定的后的函数的话，则bind绑定的时候传的oThis没有用了
-              this instanceof thatFunc ? this : OThis, [...outerArgs, ...innerArgs]
-          );
-      };
-      fBound.prototype = Object.create(thatFunc.prototype);
-      // fBound.prototype = thatFunc.prototype;
-      //new fBound() this fBound
-      return fBound;
-  };
-})(Function.prototype);
+
+  context = getContext(context);
+  context._fn = this;
+  const result = context._fn(...args);
+  delete context._fn;
+  return result;
+};
+
+Function.prototype.myBind = function (context, ...bindArgs) {
+  return (...args) => this.myCall(context, ...bindArgs, ...args);
+};
+
+
+
+function test() {
+  return this.a + this.b;
+}
+
+
+let obj = { a: 1, b: 2 };
+let fun = test.bind(obj)
+console.log(fun()); // 3

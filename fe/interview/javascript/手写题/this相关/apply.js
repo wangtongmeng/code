@@ -1,13 +1,22 @@
 Function.prototype.myApply = function (context, args) {
-  // 判断调用对象
-  if (typeof this !== 'function') {
-    console.error('type error')
+  function getContext(context) {
+    context = context || window
+    const type = typeof context
+    if (['number', 'string', 'boolean', null].includes(type)) {
+      context = new context.constructor(context)
+    }
+    return context
   }
-  context = context || window
-  let result = null
-  // 通过对象调用方法，fn中this指向调用对象context
-  context.fn = this
-  result = context.fn(...args)
-  delete context.fn
+
+  context = getContext(context)
+  context_.fn = this
+  const result = context._fn(...args)
+  delete context._fn
   return result
 }
+
+function test(c,d) {
+  return this.a+this.b+c+d
+}
+const obj = {a:1,b:2}
+console.log(test.apply(obj, [3,4])); // 10

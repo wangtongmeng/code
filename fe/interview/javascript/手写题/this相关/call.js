@@ -1,13 +1,23 @@
 Function.prototype.myCall = function (context, ...args) {
-  // 判断调用对象
-  if (typeof this !== 'function') {
-    console.error('type error')
-  }
+ function getContext(context) {
   context = context || window
-  let result = null
-  // 通过对象调用方法，fn中this指向调用对象context
-  context.fn = this
-  result = context.fn(...args)
-  delete context.fn
-  return result
+  let type = typeof context
+  if (['number', 'string', 'boolean', null].includes(type)) {
+    context = new type.constructor(context)
+  }
+  return context
+ }
+
+ context = getContext(context)
+ context._fn = this
+ const result = context._fn(...args)
+ delete context._fn
+ return result
 }
+
+function test() {
+  return this.a + this.b
+}
+
+let obj = {a: 1, b: 2}
+console.log(test.call(obj)); // 3
