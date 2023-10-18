@@ -11,27 +11,37 @@
  * @return {number[]}
  */
 var intersection = function(nums1, nums2) {
-  if (nums1.length === 0 || nums2.length === 0) {
-    return []
-  }
-  let map = new Map()
+  let set = new Set(nums1)
   let ret = []
-  
-  for (i = 0; i < nums1.length; i++) {
-    let n = nums1[i]
-    if (!map.get(n)) {
-      map.set(n, 1)
-    }
-  }
-  for (i = 0; i < nums2.length; i++) {
-    let n = nums2[i]
-    if (map.get(n)) {
+  nums2.forEach(n => {
+    if (set.has(n)) {
       ret.push(n)
-      map.set(n, 0)
+      set.delete(n)
     }
-  }
-
+  })
   return ret
+ 
 };
 // @lc code=end
 
+// if (nums1.length === 0 || nums2.length === 0) {
+//   return []
+// }
+// let map = new Map()
+// let ret = []
+
+// for (i = 0; i < nums1.length; i++) {
+//   let n = nums1[i]
+//   if (!map.get(n)) {
+//     map.set(n, 1)
+//   }
+// }
+// for (i = 0; i < nums2.length; i++) {
+//   let n = nums2[i]
+//   if (map.get(n)) {
+//     ret.push(n)
+//     map.set(n, 0)
+//   }
+// }
+
+// return ret
