@@ -13,29 +13,25 @@ var evalRPN = function (tokens) {
   let stack = [];
   let n1, n2;
   for (token of tokens) {
-    switch (token) {
-      case "+":
-        n1 = stack.pop();
-        n2 = stack.pop();
-        stack.push(n1 + n2);
-        break;
-      case "-":
-        n1 = stack.pop();
-        n2 = stack.pop();
-        stack.push(n1 - n2);
-        break;
-      case "*":
-        n1 = stack.pop();
-        n2 = stack.pop();
-        stack.push(n1 * n2);
-        break;
-      case "/":
-        n1 = stack.pop(); 
-        n2 = stack.pop();
-        stack.push(Math.trunc(n2 / n1)); // 这里需要取整，注意是左边除以右边
-        break;
-      default:
-        stack.push(Number(token));
+    if (isNaN(Number(token))) {
+      n2 = stack.pop(); // 先pop的放后面
+      n1 = stack.pop();
+      switch (token) {
+        case "+":
+          stack.push(n1 + n2);
+          break;
+        case "-":
+          stack.push(n1 - n2);
+          break;
+        case "*":
+          stack.push(n1 * n2);
+          break;
+        case "/":
+          stack.push(Math.trunc(n1 / n2)); // 整数除法只保留整数部分，注意是左边除以右边
+          break;
+      }
+    } else {
+      stack.push(Number(token));
     }
   }
   return stack[0];
