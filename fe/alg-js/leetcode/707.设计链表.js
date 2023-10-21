@@ -13,11 +13,12 @@ var MyLinkedList = function() {
 };
 
 MyLinkedList.prototype.getNode = function(index) {
-  let vhead = new ListNode(0, this.head)
-  while (index--) {
-    vhead = vhead.next
+  let cur = this.head
+  while (index) {
+    cur = cur.next
+    index--
   }
-  return vhead.next
+  return cur
 }
 
 /** 
@@ -30,6 +31,7 @@ MyLinkedList.prototype.get = function(index) {
     return -1
   }
   return this.getNode(index)?.val
+  
 }
 
 /** 
@@ -37,8 +39,8 @@ MyLinkedList.prototype.get = function(index) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtHead = function(val) {
-  const node = new ListNode(val, this.head)
-  if (!this.tail) {
+  let node = new ListNode(val, this.head)
+  if (this.size === 0) {
     this.tail = node
   }
   this.head = node
@@ -50,13 +52,13 @@ MyLinkedList.prototype.addAtHead = function(val) {
  * @return {void}
  */
 MyLinkedList.prototype.addAtTail = function(val) {
-  const node = new ListNode(val, null)
-  if (this.tail) {
-    this.tail.next = node
-  } else {
-    // 空链表
+  let node = new ListNode(val, null)
+  if (this.size === 0) {
     this.head = node
+  } else {
+    this.tail.next = node
   }
+  
   this.tail = node
   this.size++
 };
@@ -70,17 +72,16 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
   if (index > this.size) {
     return
   }
-  let node = new ListNode(val, null)
- if (index === this.size) {
-  this.addAtTail(val)
- } else if (index <= 0) {
-  this.addAtHead(val)
- } else {
-  const pre = this.getNode(index - 1)
-  const node = new ListNode(val, pre.next)
-  pre.next = node
-  this.size++
- }
+  if (index <= 0) {
+    this.addAtHead(val)
+  } else if (index === this.size) {
+    this.addAtTail(val)
+  } else {
+    let prev = this.getNode(index - 1)
+    let node = new ListNode(val, prev.next)
+    prev.next = node
+    this.size++
+  }
 };
 
 /** 
@@ -88,26 +89,26 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
  * @return {void}
  */
 MyLinkedList.prototype.deleteAtIndex = function(index) {
- if (index < 0 || index >= this.size) {
-  return
- }
- // 删除头结点
- if (index === 0) {
-  this.head = this.head.next
-  if (this.size === 1) {
-    this.tail = null
+  if (index < 0 || index >= this.size) {
+    return
+  }
+  if (this.size === 0) {
+    return
+  }
+
+  if (index === 0) {
+    this.head = this.head.next
+    if (this.size === 1) {
+      this.tail = null
+    }
+  } else {
+    let prev = this.getNode(index - 1)
+    prev.next  = prev.next.next
+    if (index === this.size - 1) {
+      this.tail = prev
+    }
   }
   this.size--
-  return
- }
- // 索引有效的情况
- let curNode = this.getNode(index - 1)
- curNode.next =curNode.next.next
- // 处理尾节点
- if (index = this.size - 1) {
-  this.tail = curNode
- }
- this.size--
 
 };
 

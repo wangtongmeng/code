@@ -17,7 +17,33 @@
  * @return {ListNode}
  */
 var reverseList = function(head) {
-  // // 1.双指针
+  if (!head || !head.next) {
+    return head
+  }
+  let temp = null, pre = null, cur = head
+  while (cur) {
+    temp = cur.next
+    cur.next = pre
+    pre = cur
+    cur = temp
+  }
+  return pre
+  // 递归
+  // function reverse(pre, cur) {
+  //   if (!cur) {
+  //     return pre
+  //   }
+  //   let nextNode = cur.next
+  //   cur.next = pre
+  //   return reverse(cur, nextNode)
+  // }
+  // return reverse(null, head)
+};
+// @lc code=end
+
+
+
+// // 1.双指针
   // if (!head || !head.next) return head
   // let temp = null, pre = null, cur = head
   // while (cur) {
@@ -32,19 +58,17 @@ var reverseList = function(head) {
   // // 循环完毕后，pre存储着最后节点的值，cur则是null
   // return pre
   // 2.递归
-  function reverse(pre, cur) {
-    // 终止条件
-    if (!cur) {
-      return pre
-    }
-    // 暂存当前节点的下一个节点
-    const temp = cur.next
-    // 改变当前节点next指针，指向前一个节点
-    cur.next = pre
-    // 将当前节点和下一个节点传入reverse继续递归执行（执行循序是从后往前翻）
-    return reverse(cur, temp)
-  }
-  return reverse(null, head)
-};
-// @lc code=end
+  // function reverse(pre, cur) {
+  //   // 终止条件
+  //   if (!cur) {
+  //     return pre
+  //   }
+  //   // 暂存当前节点的下一个节点
+  //   const temp = cur.next
+  //   // 改变当前节点next指针，指向前一个节点
+  //   cur.next = pre
+  //   // 将当前节点和下一个节点传入reverse继续递归执行（执行循序是从后往前翻）
+  //   return reverse(cur, temp)
+  // }
+  // return reverse(null, head)
 
