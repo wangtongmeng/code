@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>九宫格布局</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    li {
+      list-style: none;
+    }
+    /* 通过table */
+    ul {
+      width: 100px;
+      height: 100px;
+      display: table;
+    }
+    li {
+      display: table-row;
+    }
+    div {
+      width: 30%;
+      height: 30%;
+      display: table-cell;
+      background-color: aqua;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li>
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+    </li>
+    <li>
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+    </li>
+    <li>
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+    </li>
+  </ul>
+</body>
+</html>
