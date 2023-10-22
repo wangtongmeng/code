@@ -2,102 +2,92 @@ class MyPromise {
   state = 'pending'
   value = undefined
   reason = undefined
-  resolveCallbacks = []
-  rejectCallbacks = []
+  resolvedCallbacks = []
+  rejectedCallbacks = []
   constructor(fn) {
-    const resolveHandler = (value) => {
+    const resolvedHandler = (value) => {
       setTimeout(() => {
-        if (this.state = 'pending') {
+        if (this.state === 'pending') {
           this.state = 'fulfilled'
           this.value = value
-          this.resolveCallbacks.forEach(fn => fn(value))
+          this.resolvedCallbacks.forEach(fn => fn(value))
         }
       })
     }
-    const rejectHandler = (reason => {
+    const rejectedHandler = (reason) => {
       setTimeout(() => {
         if (this.state === 'pending') {
           this.state = 'rejected'
           this.reason = reason
-          this.rejectCallbacks.forEach(fn => fn(reason))
+          this.rejectedCallbacks.forEach(fn => fn(reason))
         }
       });
-    })
-    
+    }
     try {
-      fn(resolveHandler, rejectHandler)
+      fn(resolvedHandler, rejectedHandler)
     } catch (err) {
-      rejectHandler(err)
+      rejectedHandler(err)
     }
   }
   then(fn1, fn2) {
-    fn1 = typeof fn1 === 'function' ? fn1 : (v) => v
-    fn2 = typeof fn2 === 'function' ? fn2: (e) => e
-    if (this.state === 'pending') {
-      const p = new Promise((resolve, reject) => {
-        this.resolveCallbacks.push(() => {
+    fn1 = typeof fn1 === 'function' ? fn1 : v => v
+    fn2 = typeof fn2 === 'function' ? fn2 : err => err
+    const p = new Promise((resolve, reject) => {
+      if (this.state === 'pending') {
+        this.resolvedCallbacks.push(() => {
           try {
-            const newValue = fn1(this.value)
-            resolve(newValue)
-          } catch (err) { 
-            reject(err)
-          }
-        })
-        this.rejectCallbacks.push(() => {
-          try {
-            const newReason = fn2(this.reason)
-            reject(newReason)
+            resolve(fn1(this.value))
           } catch (err) {
             reject(err)
           }
         })
-      })
-      return p
-    }
-    if (this.state === 'fulfilled') {
-      const p = new Promise((resolve, reject) => {
+        this.rejectedCallbacks.push(() => {
+          try {
+            reject(fn2(this.reason))
+          } catch (err) {
+            reject(err)
+          }
+        })
+      }
+
+      if (this.state === 'fulfilled') {
         try {
-          const newValue = fn1(this.value)
-          resolve(newValue)
+          resolve(fn1(this.value))
         } catch (err) {
           reject(err)
         }
-      })
-      return p
-    }
-    if (this.state === 'rejected') {
-      const p = new Promise((resolve, reject) => {
+      }
+      if (this.state === 'rejected') {
         try {
-          const newReason = fn2(this.reason)
-          reject(newReason)
+          resolve(fn2(this.value))
         } catch (err) {
           reject(err)
         }
-      })
-    }
+      }
+    })
+    
+    return p
+
   }
-  // then的特殊形式
   catch(fn) {
     return this.then(null, fn)
   }
 }
-
-MyPromise.resolve = function (value) {
+MyPromise.resolve = function(value) {
   return new Promise((resolve, reject) => resolve(value))
 }
-MyPromise.reject = function (reason) {
+MyPromise.reject = function(reason) {
   return new Promise((resolve, reject) => reject(reason))
 }
-MyPromise.all = function (pList = []) {
+MyPromise.all = function(pList = []) {
   const p = new Promise((resolve, reject) => {
-    let result = []
-    const len = pList.length
+    const result = []
     let resolvedCount = 0
-    pList.forEach(p => {
-      p.then(data => {
-        result.push(data)
+    pList.forEach((p, i) => {
+      p.then(value => {
+        result[i] = value
         resolvedCount++
-        if (resolvedCount === len) {
+        if (resolvedCount === pList.length) {
           resolve(result)
         }
       }).catch(err => {
@@ -107,14 +97,14 @@ MyPromise.all = function (pList = []) {
   })
   return p
 }
-MyPromise.race = function (pList = []) {
+MyPromise.race = function(pList = []) {
   let resolved = false
   const p = new Promise((resolve, reject) => {
     pList.forEach(p => {
-      p.then(data => {
+      p.then(value => {
         if (!resolved) {
-          resolve(data)
           resolved = true
+          resolve(value)
         }
       }).catch(err => {
         reject(err)
