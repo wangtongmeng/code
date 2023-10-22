@@ -18,8 +18,19 @@
  * @return {ListNode}
  */
 var removeNthFromEnd = function(head, n) {
-  
-};
+  let vhead = new ListNode(0, head)
+  let slow = vhead, fast = vhead
+  while (n) {
+    fast = fast.next
+    n--
+  }
+  while (fast.next) {
+    fast = fast.next
+    slow = slow.next // 遍历完 slow 正好是倒数第n个节点的前一个
+  }
+  slow.next = slow.next.next
+  return vhead.next
+}; 
 // @lc code=end‘’
 
 
