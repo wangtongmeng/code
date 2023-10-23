@@ -35,3 +35,17 @@ var removeElement = function(nums, val) {
 //   }
 //   return slow
 
+// 双指针 头尾交换
+// let left = 0, right = nums.length - 1
+//     while (left <= right) {
+//         if (nums[left] === val) {
+//             let temp = nums[right]
+//             nums[right] = nums[left]
+//             nums[left] = temp
+//             right--
+//         } else {
+//             left++
+//         }
+
+//     }
+//     return right + 1

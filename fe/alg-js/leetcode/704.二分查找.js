@@ -11,11 +11,10 @@
  * @return {number}
  */
 var search = function(nums, target) {
-  let left = 0
-  let right = nums.length - 1
+  let left = 0, right = nums.length - 1
   while (left <= right) {
     let middle = Math.floor((left + right) / 2)
-    let n = nums[middle] 
+    let n = nums[middle]
     if (target === n) {
       return middle
     } else if (target > n) {
