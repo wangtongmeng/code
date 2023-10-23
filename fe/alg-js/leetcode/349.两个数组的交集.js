@@ -11,16 +11,27 @@
  * @return {number[]}
  */
 var intersection = function(nums1, nums2) {
-  let set = new Set(nums1)
+  // let set1 = new Set(nums1)
+  // let set2 = new Set(nums2)
+  // let set3= new Set()
+  // for (n of set1) {
+  //   if (set2.has(n)) {
+  //     set3.add(n)
+  //   }
+  // }
+  // return Array.from(set3)
+  let map = {}
   let ret = []
-  nums2.forEach(n => {
-    if (set.has(n)) {
+  for (let n of nums1) {
+    map[n] = true
+  }
+  for (let n of nums2) {
+    if (map[n]) {
       ret.push(n)
-      set.delete(n)
+      map[n] = false
     }
-  })
+  }
   return ret
- 
 };
 // @lc code=end
 
