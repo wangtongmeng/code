@@ -1,11 +1,11 @@
 // 节流函数
 function throttle(fn, delay) {
-  let curTime = null // 初始值为null，第一次调用时如果为null则执行
+  let lastTime = Date.now()
   return function() {
-    let nowTime = Date.now()
-    if (!curTime || nowTime - curTime >= delay) {
-      curTime = Date.now()
-      return fn(...arguments)
+    let context = this, args = arguments, curTime = Date.now()
+    if (curTime - lastTime >= delay) {
+      lastTime = curTime
+      fn.apply(context, args)
     }
   }
 }
