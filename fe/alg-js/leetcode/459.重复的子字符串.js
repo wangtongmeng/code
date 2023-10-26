@@ -10,13 +10,16 @@
  * @return {boolean}
  */
 var repeatedSubstringPattern = function(s) {
-  if (s.length % 2 !== 0) {
-    return false
-  }
-  let middle = s.length / 2
-  let leftStr = s.substring(0, middle)
-  let rightStr = s.substring(middle)
-  return leftStr === rightStr
+ 
 };
 // @lc code=end
+
+
+// if (s.length % 2 !== 0) {
+//   return false
+// }
+// let middle = s.length / 2
+// let leftStr = s.substring(0, middle)
+// let rightStr = s.substring(middle)
+// return leftStr === rightStr
 
