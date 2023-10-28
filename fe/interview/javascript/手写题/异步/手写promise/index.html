@@ -36,6 +36,8 @@
         p5.then(result => console.log('all result', result)).catch(err => console.log(err))
         const p6 = MyPromise.race([p1, p2, p3]) // 传入 promise 数组，只要有一个 fulfilled 即可返回
         p6.then(result => console.log('race result', result)).catch(err => console.log(err))
+        const p7 = MyPromise.allSettled([p1, p2, p3, Promise.reject('reject')]) // 传入 promise 数组，返回全部promise的数组[{status: 'fulfilled', value: ''}, {status: 'rejected', reason: ''}]
+        p7.then(result => console.log('allSettled result', result)).catch(err => console.log(err))
 
     </script>
 </body>

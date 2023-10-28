@@ -21,18 +21,33 @@ var maxDepth = function(root) {
   if (!root) {
     return 0
   }
-  let queue = [root]
-  let height = 0
-  while (queue.length) {
-    let len = queue.length
-    height++
-    for (let i = 0; i < len; i++) {
-      let node = queue.shift()
-      node.left && queue.push(node.left)
-      node.right && queue.push(node.right)
+  let max = 0
+  const dfs = (node, depth) => {
+    if (!node.left && !node.right) {
+      max = Math.max(max, depth)
     }
+    node.left && dfs(node.left, depth + 1)
+    node.right && dfs(node.right, depth + 1)
   }
-  return height
+  dfs(root, 1)
+  return max
 };
 // @lc code=end
+
+// 层序遍历
+// if (!root) {
+//   return 0
+// }
+// let queue = [root]
+// let height = 0
+// while (queue.length) {
+//   let len = queue.length
+//   height++
+//   for (let i = 0; i < len; i++) {
+//     let node = queue.shift()
+//     node.left && queue.push(node.left)
+//     node.right && queue.push(node.right)
+//   }
+// }
+// return height
 

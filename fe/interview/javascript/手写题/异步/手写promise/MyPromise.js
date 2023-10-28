@@ -59,7 +59,7 @@ class MyPromise {
       }
       if (this.state === 'rejected') {
         try {
-          resolve(fn2(this.value))
+          reject(fn2(this.value))
         } catch (err) {
           reject(err)
         }
@@ -112,4 +112,26 @@ MyPromise.race = function(pList = []) {
     })
   })
   return p
+}
+
+MyPromise.allSettled = function (pList = []) {
+  return new Promise((resolve, reject) => {
+    let ret = []
+    let count = 0
+    pList.forEach((p, i) => {
+      p.then(val => {
+        ret[i] = {status: 'fulfilled', value: val}
+        count++
+        if (count === pList.length) {
+          resolve(ret)
+        }
+      }).catch(err => {
+        ret[i] = {status: 'rejected', reason: err}
+        count++
+        if (count === pList.length) {
+          resolve(ret)
+        }
+      })
+    })
+  })
 }
