@@ -13,9 +13,16 @@
 var topKFrequent = function(nums, k) {
   let map = {}
   for (n of nums) {
-    map[n] = (map[n] || 0) + 1
+    map[n] = map[n] ? map[n] + 1 : 1
   }
   return Object.entries(map).sort((a,b) => b[1] - a[1]).slice(0, k).map(i => i[0])
 };
 // @lc code=end
+
+
+// let map = {}
+//   for (n of nums) {
+//     map[n] = (map[n] || 0) + 1
+//   }
+//   return Object.entries(map).sort((a,b) => b[1] - a[1]).slice(0, k).map(i => i[0])
 

@@ -10,24 +10,23 @@
  * @return {number[]}
  */
 var sortedSquares = function(nums) {
-  let len = nums.length
-  let ret = new Array(len).fill(0)
-  let left = 0;
-  let right = len - 1
-  let cur = len - 1
-  while (left <= right) {
-    let leftSquare = nums[left] * nums[left]
-    let rightSquare = nums[right] * nums[right]
-    if (leftSquare < rightSquare) {
-      ret[cur] = rightSquare
-      right--
-    } else {
-      ret[cur] = leftSquare
-      left++
-    }
-    cur--
+ let left = 0, right = nums.length - 1
+ let ret = new Array(nums.length).fill(0)
+ let index = nums.length - 1
+
+ while (left <= right) {
+  let leftSqr = nums[left] * nums[left]
+  let rightSqr = nums[right] * nums[right]
+  if (leftSqr >= rightSqr) {
+    ret[index] = leftSqr
+    left++
+  } else {
+    ret[index] = rightSqr
+    right--
   }
-  return ret
+  index--
+ }
+ return ret
 };
 // @lc code=end
 

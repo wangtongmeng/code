@@ -14,16 +14,17 @@ var search = function(nums, target) {
   let left = 0, right = nums.length - 1
   while (left <= right) {
     let middle = Math.floor((left + right) / 2)
-    let n = nums[middle]
-    if (target === n) {
+    if (nums[middle] === target) {
       return middle
-    } else if (target > n) {
-      left = middle + 1
-    } else {
+    } else if (nums[middle] > target) {
       right = middle - 1
+    } else {
+      left = middle + 1
     }
   }
+
   return -1
+
 };
 // @lc code=end
 
