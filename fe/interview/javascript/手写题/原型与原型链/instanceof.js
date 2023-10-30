@@ -14,4 +14,4 @@ function myInstanceOf(left, right) {
 
 
 console.log(myInstanceOf(function fn1(){}, Object)); // true
-console.log(myInstanceOf(function fn1(){}, Array)); // true
+console.log(myInstanceOf(function fn1(){}, Array)); // false
