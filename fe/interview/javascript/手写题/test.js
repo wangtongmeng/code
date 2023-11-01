@@ -1,17 +1,41 @@
-function ajax(url) {
-  let xhr = new XMLHttpRequest()
-  xhr.open('GET', url, true)
-  xhr.onreadystatechange = function () {
-    if (this.readyState === 4 && this.status === 200) {
-      console.log(this.response);
-    } else {
-      console.log(this.statusText);
+function limit(maxCount) {
+  let queue = []
+  let activeCount = 0
+  const next = () => {
+    activeCount--
+    if (queue.length > 0) {
+      queue.shift()()
     }
   }
-  xhr.onerror = function () {
-    console.log(this.statusText);
+  const run = async (fn, resolve, args) => {
+    activeCount++
+    const result = await (async () => fn(...args))
+    resolve(result)
+    next()
   }
-  xhr.responseType = 'json'
-  xhr.setRequestHeader("Accept", 'application/json')
-  xhr.send(null)
+  const push = async (fn, resolve, args) => {
+    queue.push(run.bind(null, fn, resolve, args))
+    if (activeCount < maxCount && queue.length > 0) {
+      queue.shift()()
+    }
+  }
+  const runner = (fn, ...args) => {
+    return new Promise((resolve, reject) => {
+      push(fn, resolve, args)
+    })
+  }
+  return runner
 }
+async function start() {
+  let runner = limit(3);
+  let tasks = [
+    () => sleep(1, "1"),
+    () => sleep(1, "1"),
+    () => sleep(1, "1"),
+    () => sleep(1, "1"),
+    () => sleep(1, "1"),
+  ].map(runner);
+  let result = await Promise.all(tasks);
+  console.log(result);
+}
+start()
