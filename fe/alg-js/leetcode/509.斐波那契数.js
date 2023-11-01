@@ -10,7 +10,22 @@
  * @return {number}
  */
 var fib = function(n) {
-  // 1.递归的写法
+  if (n <= 1) {
+    return n
+  }
+  let n1 = 0
+  let n2 = 1
+  for (let i = 2; i <= n; i++) {
+    let n3 = n1 + n2
+    n1 = n2
+    n2 = n3
+  }
+  return n2
+};
+// @lc code=end
+
+
+ // 1.递归的写法
   // if (n <= 1) {
   //   return n
   // }
@@ -37,18 +52,16 @@ var fib = function(n) {
   // return n2
 
   // 4. 递归+备忘录的方式，提高时间复杂度
-  function helper(memo, n) {
-    if (n <= 1) {
-      return n
-    }
-    if (memo[n]) {
-      return memo[n]
-    }
-    memo[n] = helper(memo, n - 1) + helper(memo, n - 2)
-    return memo[n]
-  }
-  const memo = []
-  return helper(memo, n)
-};
-// @lc code=end
+  // function helper(memo, n) {
+  //   if (n <= 1) {
+  //     return n
+  //   }
+  //   if (memo[n]) {
+  //     return memo[n]
+  //   }
+  //   memo[n] = helper(memo, n - 1) + helper(memo, n - 2)
+  //   return memo[n]
+  // }
+  // const memo = []
+  // return helper(memo, n)
 
