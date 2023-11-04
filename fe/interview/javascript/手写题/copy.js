@@ -27,7 +27,7 @@ console.log(shadowCopy(1)); // {}
 // 只考虑引用类型是对象或者数组的情况
 function deepCopy(obj) {
   // 如果不是引用类型，则直接返回
-  if (typeof obj === 'object' && obj !== null) {
+  if (typeof obj !== 'object' || obj === null) {
     return obj
   }
 
