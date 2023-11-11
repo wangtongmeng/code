@@ -25,7 +25,9 @@ var searchInsert = function (nums, target) {
   }
 
   return leftIndex // 如果没找到返回leftIndex
+//   返回值究竟是low还是high的思考过程： 如果数组中没有target，那么跳出循环前的一步一定是mid=low=high （我用的条件是while(low<=high) ） (1)如果target>nums[mid],low=mid+1 target的位置在右侧，正好是low (2)如果target<nums[mid],high=mid-1 target的位置就是mid这个位置（这里有个隐含条件是target比nums[mid-1]大）。
 
+// 综上，可以通过返回 low 这个值获得正确答案
 
 };
 // @lc code=end
