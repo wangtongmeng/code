@@ -23,7 +23,8 @@
       },
       mounted() {
         setInterval(() => {
-          this.$data.content += 1
+          this.content += 1
+          // this.$data.content += 1
         }, 1000)
       },
       template: '<div>{{content}}</div>'
