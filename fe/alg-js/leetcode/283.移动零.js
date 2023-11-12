@@ -10,15 +10,28 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var moveZeroes = function(nums) {
-  // 快指针：寻找新数组的元素 ，新数组就是不含有目标元素的数组
-  // 慢指针：指向更新 新数组下标的位置
-  let slowIndex = 0;
-  for (let fastIndex = 0; fastIndex < nums.length; fastIndex++) {
-    if (nums[fastIndex] !== 0) {
-      [nums[slowIndex], nums[fastIndex]] = [nums[fastIndex], nums[slowIndex]];
-      slowIndex++;
+  let left = right = 0;
+  while (right < nums.length) {
+    if (nums[right] === 0) {
+      right++
+    } else {
+      let temp = nums[left]
+      nums[left] = nums[right]
+      nums[right] = temp
+      left++
+      right++
     }
   }
 };
 // @lc code=end
+
+// 快指针：寻找新数组的元素 ，新数组就是不含有目标元素的数组
+  // 慢指针：指向更新 新数组下标的位置
+  // let slowIndex = 0;
+  // for (let fastIndex = 0; fastIndex < nums.length; fastIndex++) {
+  //   if (nums[fastIndex] !== 0) {
+  //     [nums[slowIndex], nums[fastIndex]] = [nums[fastIndex], nums[slowIndex]];
+  //     slowIndex++;
+  //   }
+  // }
 

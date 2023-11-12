@@ -11,11 +11,11 @@
  * @return {number[]}
  */
 var topKFrequent = function(nums, k) {
-  let map = {}
-  for (n of nums) {
-    map[n] = map[n] ? map[n] + 1 : 1
-  }
-  return Object.entries(map).sort((a,b) => b[1] - a[1]).slice(0, k).map(i => i[0])
+ let map = {}
+ for (let n of nums) {
+  map[n] = map[n] ? map[n] + 1 : 1
+ }
+ return Object.entries(map).sort((a, b) => b[1] - a[1]).slice(0, k).map(item => item[0])
 };
 // @lc code=end
 

@@ -10,24 +10,23 @@
  * @return {boolean}
  */
 var isValid = function(s) {
-  let stack = []
-  let map = {
-    '(': ')',
-    '{': '}',
-    '[': ']'
-  }
-  for (let i = 0; i < s.length; i++) {
-    let letter = s[i]
-    if (map[letter]) {
-      stack.push(map[letter])
-    } else {
-      let last = stack.pop()
-      if (last !== letter) {
-        return false
-      }
+ let map = {
+  "(": ")",
+  "{": "}",
+  "[": "]"
+ }
+ let stack = []
+ for (let letter of s) {
+  if (map[letter]) {
+    stack.push(map[letter])
+  } else {
+    let last = stack.pop()
+    if (last !== letter) {
+      return false
     }
   }
-  return stack.length === 0
+ }
+ return stack.length === 0
 };
 // @lc code=end
 

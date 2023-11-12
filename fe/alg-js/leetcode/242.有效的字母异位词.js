@@ -15,14 +15,14 @@ var isAnagram = function(s, t) {
     return false
   }
   let map = {}
-  for (letter of s) {
-    map[letter] = map[letter] ?  map[letter] + 1 : 1
+  for (let letter of s) {
+    map[letter] = map[letter] ? map[letter] + 1 : 1
   }
-  for (letter of t) {
-    if (map[letter]) {
-      map[letter]--
-    } else {
+  for (let letter of t) {
+    if (!map[letter]) {
       return false
+    } else {
+      map[letter]--
     }
   }
   return true
