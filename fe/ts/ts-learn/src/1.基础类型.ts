@@ -55,9 +55,9 @@ let u: undefined = undefined
 let n: null = null
 // 非严格模式在关闭时，null可以赋值给undefined(在tsconfig.json中，"strictNullChecks": false,)
 // 如果禁用非严格null检测，null和undefined 可以赋值给任何类型（null,undefined是任何类型的子类型）
-u = null
-n = undefined
-let s: string = null
+// u = null
+// n = undefined
+// let s: string = null
 
 // void 空类型 一般表示函数的返回值
 function func1():void {
@@ -111,4 +111,4 @@ create([])
 const symbol: symbol = Symbol()
 const bigint:bigint = BigInt(Number.MAX_SAFE_INTEGER) // 配置 tsconfig.json  lib: ["ESNext", "DOM"] "DOM"是为了解决console.log报错
 
-
+export {}
