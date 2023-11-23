@@ -26,8 +26,14 @@ class Animal {
     // this.name = 'name' // 添加 readonly 初始化期间可以修改
   }
   // 原型方法，每一个实例共享的方法，父类提供的方法，子类是可以进行方法重写的
-  changeName(value: string) {
+  // void 意味着不关心函数的返回值，并不是空的意思
+  changeName(value: string): void {
       this.name = value
+  }
+  // 原型属性 需要通过访问器实现
+  // tsconfig修改 "target": "es2016", => "target": "ES5",  
+  get aliasName() {
+    return '$' + this.name
   }
 }
 // super 在构造函数中，指向的是父类，在原型的方法中调用指向的是父类的原型
@@ -37,8 +43,10 @@ class Cat extends Animal {
     // this.age = age
   }
   // 子类在重写父类方法时，要兼容
+  // 所以子类重写父类方法时，入参可以少，返回值也可以是固定的(void能兼容)
   changeName(value: string) {
     super.changeName(value)
+    return 'abc' // 父类返回值是void，可以兼容
   }
 }
 const tom = new Cat("tom", 12);

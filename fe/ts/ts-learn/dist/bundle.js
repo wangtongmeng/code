@@ -6,20 +6,41 @@
   // public 公开属性，类的实例外部/类的内部/继承的子类都可以访问属性
   // protected(自己和儿子能访问，外部无法访问)
   // private (私有的，自己能访问)
+  // readonly 标识仅读属性，意味着如果初始化后，不能修改
   class Animal {
+      // constructor(public readonly name: string) { // 等价于声明了属性的类型, 给属性添加了public
       constructor(name) {
           this.name = name;
+          // 等价于声明了属性的类型, 给属性添加了public
           // this.name = name // 加了 public后 这里不用写了
+          // this.name = 'name' // 添加 readonly 初始化期间可以修改
+      }
+      // 原型方法，每一个实例共享的方法，父类提供的方法，子类是可以进行方法重写的
+      // void 意味着不关心函数的返回值，并不是空的意思
+      changeName(value) {
+          this.name = value;
+      }
+      // 原型属性 需要通过访问器实现
+      get aliasName() {
+          return '$' + this.name;
       }
   }
+  // super 在构造函数中，指向的是父类，在原型的方法中调用指向的是父类的原型
   class Cat extends Animal {
       constructor(name, age) {
           super(name); // Animal.call(this)
           this.age = age;
           // this.age = age
       }
+      // 子类在重写父类方法时，要兼容
+      // 所以子类重写父类方法时，入参可以少，返回值也可以是固定的(void能兼容)
+      changeName(value) {
+          super.changeName(value);
+          return 'abc'; // 父类返回值是void，可以兼容
+      }
   }
-  new Cat('tom', 12);
+  const tom = new Cat("tom", 12);
+  tom.changeName('jerry');
 
 })();
 //# sourceMappingURL=bundle.js.map
