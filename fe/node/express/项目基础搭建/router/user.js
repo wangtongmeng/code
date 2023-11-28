@@ -5,6 +5,7 @@ router.get('/', (req, res) => {
   res.send('/index')
 })
 router
+.post('/register', userController.register)
 .get('/list', userController.list)
 .delete('/', userController.delete)
 
