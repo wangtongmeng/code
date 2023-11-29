@@ -10,7 +10,9 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true
+    required: true,
+    // set: value => md5(value), // TODO
+    select: false, // 获取数据剔除掉密码
   },
   phone: {
     type: String,
