@@ -1,6 +1,7 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const { mongopath } = require('../config/config.default');
 async function main() {
-  await mongoose.connect('mongodb://localhost:27017/test1')
+  await mongoose.connect(mongopath)
 }
 main().then(res => {
   console.log('mongo连接成功');
