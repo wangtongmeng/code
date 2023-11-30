@@ -11,6 +11,7 @@ router
   .post('/register', validator.register, userController.register) // validator.register 使用中间件校验
   .post('/login', validator.login, userController.login)
   .get('/list', verifyToken, userController.list) // 用户列表接口，需要做登录认证
+  .put('/', verifyToken, validator.update, userController.update) // 修改用户信息
   .delete('/', userController.delete)
 
 module.exports = router

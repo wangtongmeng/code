@@ -23,6 +23,16 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null
   },
+  // 频道封面
+  image: {
+    type: String,
+    default: null
+  },
+  // 频道
+  channeldes: {
+    type: String,
+    default: null
+  },
   createAt: {
     type: Date,
     default: Date.now()

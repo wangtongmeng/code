@@ -23,8 +23,8 @@ module.exports.register = validate([
       }
     }).bail(),
   body('password')
-  .notEmpty().withMessage('密码不能为空').bail()
-  .isLength({ min: 5 }).withMessage('密码长度不能小于5').bail(),
+    .notEmpty().withMessage('密码不能为空').bail()
+    .isLength({ min: 5 }).withMessage('密码长度不能小于5').bail(),
 
 ])
 
@@ -40,4 +40,28 @@ module.exports.login = validate([
     }).bail(),
   body('password')
     .notEmpty().withMessage('密码不能为空').bail()
+])
+
+module.exports.update = validate([
+  body('email')
+    .custom(async val => {
+      const emailValidate = await User.findOne({ email: val })
+      if (emailValidate) {
+        return Promise.reject('邮箱已注册')
+      }
+    }).bail(),
+  body('name')
+    .custom(async val => {
+      const nameValidate = await User.findOne({ name: val })
+      if (nameValidate) {
+        return Promise.reject('用户名已注册')
+      }
+    }).bail(),
+    body('phone')
+    .custom(async val => {
+      const phoneValidate = await User.findOne({ phone: val })
+      if (phoneValidate) {
+        return Promise.reject('手机已注册')
+      }
+    }).bail(),
 ])

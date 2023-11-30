@@ -23,6 +23,13 @@ exports.login = async (req, res) => {
   dbBack.token = await createToken(dbBack)
   res.status(200).json(dbBack)
 }
+
+exports.update = async (req, res) => {
+  console.log('1',req);
+  let dbBack = await User.findByIdAndUpdate(req.user.userInfo._id, req.body, {new: true})
+  res.status(202).json({user: dbBack})
+}
+
 exports.list = async (req, res) => {
   res.send('/users')
 }
