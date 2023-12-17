@@ -3,7 +3,8 @@
     <!-- 模板语法 -->
     <!-- <templatesyntax /> -->
     <!-- <reactiveRefVue/> -->
-    <reactiveReactive />
+    <!-- <reactiveReactive /> -->
+    <computedVue />
   </div>
 </template>
 
@@ -11,6 +12,7 @@
 import templatesyntax from './template.vue'
 import reactiveRefVue from './reactive-ref.vue';
 import reactiveReactive from './reactive-reactive.vue';
+import computedVue from './computed.vue';
 </script>
 
 <style lang="scss" scoped>
