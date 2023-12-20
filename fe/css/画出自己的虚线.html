@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box1,
+      .box2 {
+        width: 300px;
+        height: 200px;
+        border-radius: 50px;
+      }
+
+      .box1 {
+        border: 1px dashed red;
+      }
+
+      .box2 {
+        /* background-image: linear-gradient(to bottom, red 0%, red 80%, transparent 50%);
+      background-size: 3px 18px;
+      background-repeat: repeat-y;
+
+      background-image: linear-gradient(to right, red 0%, red 50%, transparent 50%);
+      background-size: 8px 1px;
+      background-repeat: repeat-x; */
+
+        padding: 1em;
+        border: 1px dashed transparent;
+        background: linear-gradient(white, white) padding-box,
+          repeating-linear-gradient(
+            -45deg,
+            #ccc 0,
+            #ccc 0.25em,
+            white 0,
+            white 0.75em
+          );
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- <div class="box1">原生边框</div> -->
+    <div class="box2">自定义边框</div>
+  </body>
+</html>
