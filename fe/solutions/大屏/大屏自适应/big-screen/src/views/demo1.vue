@@ -1,5 +1,6 @@
 <!-- 整个页面都是大屏 -->
 <!-- 通过屏幕变化适配比例 -->
+<!-- 参考： https://juejin.cn/post/7148733509744459790?searchId=2023122109340129A1D5FAA6830ABEEA81 -->
 <template>
   <div className="screen-wrapper">
     <div className="screen" id="screen">
