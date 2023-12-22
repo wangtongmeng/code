@@ -22,6 +22,7 @@
 </template>
 
 <script setup>
+import _ from 'lodash'
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 const collapse = ref(false)
 const onChange = () => {
@@ -32,11 +33,11 @@ const navClass = computed(() => ({
 }))
 //数据大屏自适应函数
 const handleScreenAuto = () => {
-  const designDraftWidth = 1440 - 200;//设计稿的宽度
-  const designDraftHeight = 764 - 60;//设计稿的高度
+  const designDraftWidth = window.clientWidth - 200;//设计稿的宽度
+  const designDraftHeight = window.clientHeight - 60;//设计稿的高度
   //根据屏幕的变化适配的比例
-  console.log(screen);
   const screenWrapper = document.getElementById('screen-wrapper')
+  console.log(screenWrapper.clientWidth, screenWrapper.clientHeight);
   const scale = screenWrapper.clientWidth / screenWrapper.clientHeight < designDraftWidth / designDraftHeight ?
     (screenWrapper.clientWidth / designDraftWidth) :
     (screenWrapper.clientHeight / designDraftHeight);
@@ -49,7 +50,7 @@ onMounted(() => {
   //初始化自适应  ----在刚显示的时候就开始适配一次
   handleScreenAuto();
   //绑定自适应函数   ---防止浏览器栏变化后不再适配
-  window.onresize = () => handleScreenAuto();
+  window.onresize = _.debounce(handleScreenAuto, 2000);
 })
 
 onUnmounted(() => {
@@ -95,8 +96,7 @@ onUnmounted(() => {
         display: flex;
 
         div {
-          // flex: 1;
-          width: 413px;
+          flex: 1;
           height: 100%;
         }
 

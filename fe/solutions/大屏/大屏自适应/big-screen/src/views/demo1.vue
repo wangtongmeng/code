@@ -20,6 +20,7 @@
 
 <script setup>
 import { onMounted, onUnmounted } from 'vue'
+import _ from 'lodash'
 //数据大屏自适应函数
 const handleScreenAuto = () => {
   const designDraftWidth = 1920;//设计稿的宽度
@@ -37,7 +38,7 @@ onMounted(() => {
   //初始化自适应  ----在刚显示的时候就开始适配一次
   handleScreenAuto();
   //绑定自适应函数   ---防止浏览器栏变化后不再适配
-  window.onresize = () => handleScreenAuto();
+  window.onresize = _.debounce(handleScreenAuto, 200);
 })
 
 onUnmounted(() => {
