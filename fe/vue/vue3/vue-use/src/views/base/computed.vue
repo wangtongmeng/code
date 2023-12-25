@@ -24,6 +24,8 @@ setTimeout(() => {
   author.books.push('vue 5')
 }, 1000);
 
+
+// 计算属性 vs 方法
 </script>
 
 <style lang="scss" scoped>
