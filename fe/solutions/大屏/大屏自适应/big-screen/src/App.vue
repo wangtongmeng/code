@@ -8,7 +8,13 @@
     <!-- <demo3-vue /> -->
 
     <!-- vw vh 方案 -->
-    <demo4-vue />
+    <!-- <demo4-vue /> -->
+
+    <!-- terminal打印 -->
+    <!-- <demo5-vue /> -->
+
+    <!-- v-scale-screen  -->
+    <demo6-vue />
   </div>
 </template>
 
@@ -17,6 +23,8 @@ import demo1Vue from './views/demo1.vue';
 import demo2Vue from './views/demo2.vue';
 import demo3Vue from './views/demo3.vue';
 import demo4Vue from './views/demo4.vue';
+import demo5Vue from './views/demo5.vue';
+import demo6Vue from './views/demo6.vue';
 </script>
 
 <style lang="scss" scoped>
