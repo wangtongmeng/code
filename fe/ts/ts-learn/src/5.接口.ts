@@ -219,4 +219,38 @@ class Speaker2 implements Speakable2 {
     throw new Error("Method not implemented.")
   }
 }
+// 6. 类作为参数
+class Dog {
+  public a: number = 1
+}
+class Cat {
+  public a:number = 2
+  public v: number = 1 
+}
+// 类的类型，不能描述类本身，描述的是实例
+// 类的类型，需要通过 typeof 来取类型
+// ts 的校验规则，鸭子类型检测，Cat可以当成Dog的子类作为参数传入，所以能通过校验
+function createInstance(clazz: typeof Dog) {
+  return new clazz
+}
+const instance = createInstance(Cat)
+// 通过泛型：泛型坑位（函数的形参形式） 刚开始类型不确定，通过使用的时候，来确定类型
+// function createInstance1<T>(clazz: {new (): T}) {
+  // 函数的形式
+  function createInstance1<T>(clazz: new () => T) {
+  return new clazz
+}
+const instance1 = createInstance1<Cat>(Cat)
+const instance2 = createInstance1<Dog>(Dog)
+const instance3 = createInstance1(Cat) // 可以省略，ts根据传参推导
+const instance4 = createInstance1(Dog)
+// 7. 描述构造函数
+// interface IClazz<T> {
+//   new (): T
+// }
+type IClazz<T> = new (name?: string) => T
+function createInstance2<T>(clazz: IClazz<T>, name: string) {
+  return new clazz(name)
+}
+const instance5 = createInstance2(Cat, 'tom')
 export {}
