@@ -2,7 +2,7 @@
   <!-- 占据全屏，会拉伸dom -->
   <!-- <v-scale-screen width="1920" height="1080" fullScreen> -->
     <div class="parent">
-      <v-scale-screen width="1920" height="1080" :autoScale="{x: true, y: false}">
+      <v-scale-screen width="1920" height="1080" fullScreen>
         <div class="container">
           <div class="section">1</div>
           <div class="section">2</div>

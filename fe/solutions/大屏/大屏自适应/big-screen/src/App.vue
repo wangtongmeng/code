@@ -14,7 +14,9 @@
     <!-- <demo5-vue /> -->
 
     <!-- v-scale-screen  -->
-    <demo6-vue />
+    <!-- <demo6-vue /> -->
+    <!-- 自定义组件 扩展 v-scale-screen 支持按父容器scale缩放 -->
+    <demo7-vue />
   </div>
 </template>
 
@@ -25,6 +27,7 @@ import demo3Vue from './views/demo3.vue';
 import demo4Vue from './views/demo4.vue';
 import demo5Vue from './views/demo5.vue';
 import demo6Vue from './views/demo6.vue';
+import demo7Vue from './views/demo7.vue';
 </script>
 
 <style lang="scss" scoped>
