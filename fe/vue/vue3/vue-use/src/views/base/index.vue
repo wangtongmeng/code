@@ -1,13 +1,13 @@
 <template>
   <div>
     <!-- 模板语法 -->
-    <!-- <templatesyntax /> -->
+    <templatesyntax />
     <!-- <reactiveRefVue/> -->
     <!-- <reactiveReactive /> -->
     <!-- <computedVue /> -->
     <!-- <class-style /> -->
     <!-- <condition /> -->
-    <list />
+    <!-- <list /> -->
   </div>
 </template>
 

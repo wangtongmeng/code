@@ -5,6 +5,7 @@
     <span>{{ msg }}</span>
     <!-- 原始 html -->
     <p>{{ rawHtml }}</p>
+    <p class="test">{{ rawHtml1 }}</p>
     <p v-html="rawHtml"></p>
     <!-- Attribute 绑定 -->
     <div v-bind:id="id">属性绑定</div>
@@ -30,6 +31,7 @@ import {ref} from 'vue'
 const msg = ref('msg')
 
 const rawHtml = ref('<span style="color: red">This should be red.</span>')
+const rawHtml1 = ref('<span style="color: red">This should be red. </span> \r\n xxxx')
 
 const id = ref(1)
 
@@ -45,5 +47,7 @@ const ok = ref(true)
 </script>
 
 <style lang="scss" scoped>
-
+.test {
+  white-space: pre-wrap;
+}
 </style>
