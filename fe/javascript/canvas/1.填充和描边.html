@@ -9,8 +9,8 @@
 </head>
 <style>
   #drawing {
-    width: 200px;
-    height: 200px;
+    width: 50vw;
+    height: 50vh;
     border: 1px solid red;
   }
 
@@ -33,14 +33,77 @@
 
       // 绘制矩形
       function drawRect() {
-        // 绘制红色图形
-        context.fillStyle = '#ff0000' // 填充色 红色
-        context.fillRect(10, 10, 50, 50) // x坐标 y坐标 长 宽
-        // 绘制蓝色矩形
-        context.fillStyle = "blue"
-        context.fillRect(30, 30, 50, 50)
+        // 红色矩形
+        context.fillStyle = '#ff0000' // 填充用红色
+        context.fillRect(10, 10, 50, 50) // x坐标 y坐标 width height
+        // 半透明蓝色矩形
+        context.fillStyle = 'rgba(0,0,225,0.5)'
+        context.fillRect(30,30,50,50)
       }
-      drawRect()
+      function drawRect1() {
+        // 红色轮廓矩形
+        context.strokeStyle = 'red' // 描边用红色
+        context.strokeRect(10, 10, 50, 50)
+        // 半透明蓝色轮廓矩形
+        context.strokeStyle = "rgba(0,0,255,0.5)"
+        context.strokeRect(30,30,50,50)
+      }
+      // 清楚画布指定区域
+      function clearRect() {
+        drawRect()
+        context.clearRect(40,40,10,10)
+      }
+
+      function drawPath () {
+        // 创建路径
+        context.beginPath()
+        // 绘制外圆
+        context.arc(100, 100, 99, 0, 2 * Math.PI, false)
+        // 绘制内圆
+        context.arc(100, 100, 94, 0, 2 * Math.PI, false)
+        // 绘制分针
+        context.moveTo(100, 100)
+        context.lineTo(100, 15)
+        // 绘制时针
+        context.moveTo(100, 100)
+        context.lineTo(35, 100)
+        // 描画路径
+        context.stroke()
+      }
+
+      function drawPath1 () {
+        // 创建路径
+        context.beginPath()
+        // 绘制外圆
+        context.arc(100, 100, 99, 0, 2 * Math.PI, false)
+        // 绘制内圆
+        context.arc(100, 100, 94, 0, 2 * Math.PI, false)
+        // 移动原点到表盘中心（后面就相当于相对路径了）
+        context.translate(100, 100)
+        // 旋转表针
+        context.rotate(1)
+        // 绘制分针
+        context.moveTo(0, 0)
+        context.lineTo(0, -85)
+        // 绘制时针
+        context.moveTo(0, 0)
+        context.lineTo(-65, 0)
+        // 描画路径
+        context.stroke()
+      }
+
+
+      // 实心矩形
+      // drawRect()
+      // 描边矩形
+      // drawRect1()
+      // 擦除指定区域
+      // clearRect()
+      // 使用路径绘制时钟
+      // drawPath()
+      // 变换(原点移动，旋转)
+      drawPath1()
+      
     }
   </script>
 </body>
