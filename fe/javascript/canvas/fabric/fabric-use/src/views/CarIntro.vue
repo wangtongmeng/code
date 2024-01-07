@@ -24,10 +24,12 @@
 <script setup>
 import { fabric } from 'fabric'
 import { onMounted, ref } from 'vue';
+import { Tween } from '@tweenjs/tween.js';
 // import vueSvg from '../assets/vue.svg'
 import carPic from '../assets/car.png'
 import lineSvg from '../assets/line.svg'
 const canvasContainer = ref()
+const fabricRef = ref()
 
 function setSize(canvas) {
   const { width, height } = getContainerSize()
@@ -96,18 +98,28 @@ function calcCoodinates() {
   return data
 }
 
-function drawStartCircle (canvas, startX, startY) {
-   // 画车的起始点
-   const startOuterCircle = new fabric.Path(`M ${startX}, ${startY} m -12,0 a 12,12 0 1,0 24,0 a 12,12 0 1,0 -24,0`);
-  startOuterCircle.set({ stroke: '#36B5AC', fill: 'transparent' });
+function drawStartCircle(canvas, startX, startY, isActive = false, id) {
+  let color = isActive ? '#F79595' : '#36B5AC'
+  let color1 = isActive ? 'rgba(243,89,89, 0.23)' : '#36B5AC'
+  // 画车的起始点
+  const startOuterCircle = new fabric.Path(`M ${startX}, ${startY} m -12,0 a 12,12 0 1,0 24,0 a 12,12 0 1,0 -24,0`);
+  startOuterCircle.set({ stroke: color, fill: 'transparent' });
   const startInnerCircle = new fabric.Path(`M ${startX}, ${startY} m -4,0 a 4,4 0 1,0 8,0 a 4,4 0 1,0 -8,0`);
-  startInnerCircle.set({ fill: '#36B5AC' });
+  startInnerCircle.set({ fill: color });
+
+  if (isActive) {
+    const startActiveCircle = new fabric.Path(`M ${startX}, ${startY} m -16,0 a 16,16 0 1,0 32,0 a 16,16 0 1,0 -32,0`);
+    startActiveCircle.set({ fill: color1 });
+    canvas.add(startActiveCircle)
+  }
+  startOuterCircle.id = id
   canvas.add(startOuterCircle)
   canvas.add(startInnerCircle)
 }
-function drawEndCircle (canvas, endX, endY, bottomOrRight) {
-   // 画卡片的终点
-   let endCirclePath = ''
+function drawEndCircle(canvas, endX, endY, bottomOrRight, isActive = false) {
+  let color = isActive ? '#F79595' : '#36B5AC'
+  // 画卡片的终点
+  let endCirclePath = ''
   if (bottomOrRight === 'bottom') {
     // 终点在下面一行
     endCirclePath = `M ${endX}, ${endY - 4} m -4,0 a 4,4 0 1,0 8,0 a 4,4 0 1,0 -8,0`
@@ -116,25 +128,27 @@ function drawEndCircle (canvas, endX, endY, bottomOrRight) {
     endCirclePath = `M ${endX - 4}, ${endY} m -4,0 a 4,4 0 1,0 8,0 a 4,4 0 1,0 -8,0`
   }
   const endCircle = new fabric.Path(endCirclePath);
-  endCircle.set({ fill: '#36B5AC' });
+  endCircle.set({ fill: color });
   canvas.add(endCircle)
 }
 
-function drawLine (canvas, path) {
+function drawLine(canvas, path, isActive = false) {
+  let color = isActive ? '#F79595' : '#36B5AC'
   const line = new fabric.Path(path)
-  line.set({stroke: '#36B5AC', fill: 'transparent'})
+  line.set({ stroke: color, fill: 'transparent' })
   canvas.add(line)
 }
 
 // 一个拐角的
-function drawLineType1(canvas, startX, startY, endX, endY, bottomOrRight) {
-   // 算终点相对于起点的相对位置
+function drawLineType1(canvas, startX, startY, endX, endY, bottomOrRight, isActive = false) {
+  let color = isActive ? '#F79595' : '#36B5AC'
+  // 算终点相对于起点的相对位置
   // 终点相对于起点，在右边还是左边
   let isRightX = endX - startX > 0
   // 终点相当于起点，在上面还是下面
-  let isBottomY = endY -  startY > 0
-  drawStartCircle(canvas, startX, startY)
-  drawEndCircle(canvas, endX, endY, bottomOrRight) 
+  let isBottomY = endY - startY > 0
+  drawStartCircle(canvas, startX, startY, isActive)
+  drawEndCircle(canvas, endX, endY, bottomOrRight, isActive)
   // 画连线
   let path = ''
   if (isRightX) {
@@ -142,52 +156,78 @@ function drawLineType1(canvas, startX, startY, endX, endY, bottomOrRight) {
       // 终点相对于起点，在右下
     } else {
       // 终点相对于起点，在右上
-      path = `M ${startX} ${startY - 12} L ${startX} ${endY + 20} Q ${startX} ${endY} ${startX + 20} ${endY} L ${endX - 8} ${endY}`
+      path = `
+        M ${startX} ${startY - 12} 
+        L ${startX} ${endY + 20} 
+        Q ${startX} ${endY} ${startX + 20} ${endY} 
+        L ${endX - 8} ${endY}
+      `
     }
   }
   if (!isRightX) {
     if (isBottomY) {
       // 终点相对于起点，在左下
-      path = `M ${startX - 12} ${startY} L ${endX + 20} ${startY} Q ${endX} ${startY} ${endX} ${startY + 20} L ${endX} ${endY - 8}`
+      path = `
+        M ${startX - 12} ${startY} 
+        L ${endX + 20} ${startY} 
+        Q ${endX} ${startY} ${endX} ${startY + 20} 
+        L ${endX} ${endY - 8}
+      `
     } else {
       // 终点相对于起点，在左上
     }
   }
   const line = new fabric.Path(path)
-  line.set({stroke: '#36B5AC', fill: 'transparent'})
+  line.set({ stroke: color, fill: 'transparent' })
   canvas.add(line)
 }
 
-function drawLineBottom1 (canvas) {
+function drawLineBottom1(canvas, isActive) {
   const { startX, startY, endX, endY } = calcCoodinates().sys1
-  drawLineType1(canvas, startX, startY, endX, endY, 'bottom')
+  drawStartCircle(canvas, startX, startY, isActive, 'bottom1Circle')
+  drawEndCircle(canvas, endX, endY, 'bottom', isActive)
+  // 画连线
+  drawLine(canvas, `
+        M ${startX - 12} ${startY} 
+        L ${endX + 20} ${startY} 
+        Q ${endX} ${startY} ${endX} ${startY + 20} 
+        L ${endX} ${endY - 8}
+      `)
 }
-function drawLineBottom2 (canvas) {
+function drawLineBottom2(canvas, isActive) {
   const { startX, startY, endX, endY } = calcCoodinates().sys2
-  drawLineType1(canvas, startX, startY, endX, endY, 'bottom')
+  drawStartCircle(canvas, startX, startY, isActive)
+  drawEndCircle(canvas, endX, endY, 'bottom', isActive)
+  // 画连线
+  drawLine(canvas, `
+        M ${startX - 12} ${startY} 
+        L ${endX + 20} ${startY} 
+        Q ${endX} ${startY} ${endX} ${startY + 20} 
+        L ${endX} ${endY - 8}
+      `)
 }
-function drawLineBottom3 (canvas) {
+function drawLineBottom3(canvas) {
   const { startX, startY, endX, endY } = calcCoodinates().sys3
   drawStartCircle(canvas, startX, startY)
   drawEndCircle(canvas, endX, endY, 'bottom')
   // 画连线
   let radius = Math.abs(startX - endX) / 2
   let middleY = startY + (endY - startY) / 2 // 两点的y坐标的中间
-  drawLine(canvas,`
+  drawLine(canvas, `
     M ${startX} ${startY + 12} 
-    L ${startX} ${middleY - radius }
-    Q ${startX} ${middleY} ${ startX - radius} ${middleY}
+    L ${startX} ${middleY - radius}
+    Q ${startX} ${middleY} ${startX - radius} ${middleY}
     Q ${endX} ${middleY} ${endX} ${middleY + radius}
     L ${endX} ${endY - 4}
   `)
 }
-function drawLineBottom4 (canvas) {
+function drawLineBottom4(canvas) {
   const { startX, startY, endX, endY } = calcCoodinates().sys4
   drawStartCircle(canvas, startX, startY)
   drawEndCircle(canvas, endX, endY, 'bottom')
   // 画连线
   let middleY = startY + (endY - startY) / 2  // 两点的y坐标的中间
-  drawLine(canvas,`
+  drawLine(canvas, `
     M ${startX} ${startY + 12} 
     L ${startX} ${middleY - 20}
     Q ${startX} ${middleY} ${startX + 20} ${middleY}
@@ -196,7 +236,7 @@ function drawLineBottom4 (canvas) {
     L ${endX} ${endY - 4}
   `)
 }
-function drawLineBottom5 (canvas) {
+function drawLineBottom5(canvas) {
   const { startX, startY, endX, endY } = calcCoodinates().sys5
   drawStartCircle(canvas, startX, startY)
   drawEndCircle(canvas, endX, endY, 'bottom')
@@ -215,16 +255,23 @@ function drawLineBottom5 (canvas) {
     L ${endX} ${endY}
   `)
 }
-function drawLineRight6 (canvas) {
+function drawLineRight6(canvas) {
   const { startX, startY, endX, endY } = calcCoodinates().sys6
-  drawLineType1(canvas, startX, startY, endX, endY, 'right')
+  drawStartCircle(canvas, startX, startY)
+  drawEndCircle(canvas, endX, endY, 'right')
+  drawLine(canvas, `
+        M ${startX} ${startY - 12} 
+        L ${startX} ${endY + 20} 
+        Q ${startX} ${endY} ${startX + 20} ${endY} 
+        L ${endX - 8} ${endY}
+      `)
 }
-function drawLineRight7 (canvas) {
+function drawLineRight7(canvas) {
   const { startX, startY, endX, endY } = calcCoodinates().sys7
   drawStartCircle(canvas, startX, startY)
   drawEndCircle(canvas, endX, endY)
   // 画连线
-  drawLine(canvas,`
+  drawLine(canvas, `
     M ${startX} ${startY - 12} 
     L ${startX} ${percentY(18)} 
     Q ${startX} ${percentY(18) - 20} ${startX + 20} ${percentY(18) - 20} 
@@ -235,13 +282,13 @@ function drawLineRight7 (canvas) {
     L ${endX - 4} ${endY}
   `)
 }
-function drawLineRight8 (canvas) {
+function drawLineRight8(canvas) {
   const { startX, startY, endX, endY } = calcCoodinates().sys8
   drawStartCircle(canvas, startX, startY)
   drawEndCircle(canvas, endX, endY)
   let middleX = startX + (endX - startX) / 2
   // 画连线
-  drawLine(canvas,`
+  drawLine(canvas, `
     M ${startX + 12} ${startY} 
     L ${middleX - 20} ${startY} 
     Q ${middleX} ${startY} ${middleX} ${startY + 20}
@@ -250,13 +297,13 @@ function drawLineRight8 (canvas) {
     L ${endX - 4} ${endY}
   `)
 }
-function drawLineRight9 (canvas) {
+function drawLineRight9(canvas) {
   const { startX, startY, endX, endY } = calcCoodinates().sys9
   drawStartCircle(canvas, startX, startY)
   drawEndCircle(canvas, endX, endY)
   let middleX = startX + (endX - startX) / 2
   // 画连线
-  drawLine(canvas,`
+  drawLine(canvas, `
     M ${startX + 12} ${startY} 
     L ${middleX - 20} ${startY} 
     Q ${middleX} ${startY} ${middleX} ${startY + 20}
@@ -265,14 +312,13 @@ function drawLineRight9 (canvas) {
     L ${endX - 4} ${endY}
   `)
 }
-onMounted(() => {
-  // 绑定画布
-  const canvas = new fabric.StaticCanvas('stockGraph')
+
+const init = (canvas, isActive = false) => {
   // 设置画布大小
   setSize(canvas)
   // 引入图片
   addImg(canvas)
-  drawLineBottom1(canvas)
+  drawLineBottom1(canvas, isActive)
   drawLineBottom2(canvas)
   drawLineBottom3(canvas)
   drawLineBottom4(canvas)
@@ -282,6 +328,61 @@ onMounted(() => {
   drawLineRight7(canvas)
   drawLineRight8(canvas)
   drawLineRight9(canvas)
+}
+onMounted(() => {
+  // 绑定画布
+  const canvas = new fabric.StaticCanvas('stockGraph')
+  fabricRef.value = canvas
+  init(canvas)
+  console.log('objects', canvas.getObjects().find(object => object.id === 'bottom1Circle'));
+  let circle = canvas.getObjects().find(object => object.id === 'bottom1Circle')
+  setTimeout(() => {
+    // circle.animate('stroke', '87ceeb', {
+    //   onChange: canvas.renderAll.bind(canvas),
+    //   duration: 300,
+    // })
+
+    updateObjectColor(circle)
+
+    // 使用 Tween.js 实现平滑的颜色过渡
+    function updateObjectColor(object) {
+      const targetColor = 'red'; // 目标颜色为绿色
+
+      // 使用 Tween.js 实现平滑的颜色过渡
+      const tween = new Tween({ value: 0 })
+        .to({ value: 1 }, 300)
+        .onUpdate(() => {
+          const value = tween._object.value;
+          const currentColor = interpolateColor('red', targetColor, value);
+          object.set('stroke', currentColor);
+          object.setCoords();
+          object.canvas && object.canvas.requestRenderAll();
+        });
+
+      function animate() {
+        if (tween.isPlaying()) {
+          tween.update();
+          requestAnimationFrame(animate);
+        }
+      }
+
+      tween.start();
+      animate();
+    }
+    // 插值函数，用于在起始颜色和目标颜色之间进行插值
+    function interpolateColor(startColor, endColor, value) {
+      const startRGB = fabric.Color.fromHex(startColor).getSource();
+      const endRGB = fabric.Color.fromHex(endColor).getSource();
+      const currentRGB = startRGB.map((start, index) =>
+        Math.round(start + (endRGB[index] - start) * value)
+      );
+      return new fabric.Color(currentRGB, { format: 'rgb' }).toRgb();
+    }
+  }, 1000);
+
+  // setTimeout(() => {
+  //   init(canvas, true)
+  // }, 2000);
 })
 </script>
 
@@ -291,6 +392,7 @@ onMounted(() => {
   height: 100vh;
   overflow: hidden;
   background-color: black;
+  transition-duration: 0.3s;
 }
 
 .row1 {
@@ -301,9 +403,9 @@ onMounted(() => {
   &-left {
     width: 80%;
     // background-color: blueviolet;
-  position: relative;
-  margin-bottom: -4px;
-  margin-right: -4px;
+    position: relative;
+    margin-bottom: -4px;
+    margin-right: -4px;
   }
 
   &-right {
