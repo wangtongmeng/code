@@ -85,12 +85,12 @@ function calcCoodinates() {
     sys2: { startX: percentX(55), startY: percentY(70), endX: percentX(37.5), endY: percentY(100) },
     sys3: { startX: percentX(65), startY: percentY(70), endX: percentX(62.5), endY: percentY(100) },
     sys4: { startX: percentX(70), startY: percentY(65), endX: percentX(87.5), endY: percentY(100) },
-    sys5: { startX: 0, startY: 0, endX: 0, endY: 0 },
+    sys5: { startX: percentX(85), startY: percentY(68), endX: percentX(100), endY: percentY(100) },
     // row1-right
     sys6: { startX: percentX(55), startY: percentY(40), endX: percentX(100), endY: percentY(12.5) },
     sys7: { startX: percentX(60), startY: percentY(38), endX: percentX(100), endY: percentY(37.5) },
-    sys8: { startX: 0, startY: 0, endX: 0, endY: 0 },
-    sys9: { startX: 0, startY: 0, endX: 0, endY: 0 },
+    sys8: { startX: percentX(86), startY: percentY(26), endX: percentX(100), endY: percentY(62.5) },
+    sys9: { startX: percentX(80), startY: percentY(30), endX: percentX(100), endY: percentY(87.5) },
   }
 
   return data
@@ -195,28 +195,73 @@ function drawLineBottom4 (canvas) {
     Q ${endX} ${middleY} ${endX} ${middleY + 20}
     L ${endX} ${endY - 4}
   `)
-  // L ${startX} ${middleY - radius }
-  //   Q ${startX} ${middleY} ${ startX - radius} ${middleY}
-  //   Q ${endX} ${middleY} ${endX} ${middleY + radius}
-  //   L ${endX} ${endY - 4}
 }
-function drawLineBottom6 (canvas) {
+function drawLineBottom5 (canvas) {
+  const { startX, startY, endX, endY } = calcCoodinates().sys5
+  drawStartCircle(canvas, startX, startY)
+  drawEndCircle(canvas, endX, endY, 'bottom')
+  let x1 = startX + (endX - startX) * 0.2
+  let y2 = startY + (endY - startY) * 0.8
+  let x3 = endX - (endY - startY) * (1 - 0.8)
+  let y3 = endY - (endY - startY) * (1 - 0.8)
+  drawLine(canvas, `
+    M ${startX + 12} ${startY}
+    L ${x1 - 20} ${startY}
+    Q ${x1} ${startY} ${x1} ${startY + 20}
+    L ${x1} ${y2 - 20}
+    Q ${x1} ${y2} ${x1 + 20} ${y2}
+    L ${x3 - 10} ${y3}
+    Q ${x3} ${y3} ${x3 + 20} ${y3 + 20}
+    L ${endX} ${endY}
+  `)
+}
+function drawLineRight6 (canvas) {
   const { startX, startY, endX, endY } = calcCoodinates().sys6
   drawLineType1(canvas, startX, startY, endX, endY, 'right')
 }
-function drawLineBottom7 (canvas) {
+function drawLineRight7 (canvas) {
   const { startX, startY, endX, endY } = calcCoodinates().sys7
   drawStartCircle(canvas, startX, startY)
   drawEndCircle(canvas, endX, endY)
   // 画连线
   drawLine(canvas,`
     M ${startX} ${startY - 12} 
-    L ${startX} ${percentY(17)} 
-    Q ${startX} ${percentY(17) - 20} ${startX + 20} ${percentY(17) - 20} 
-    L ${percentX(92)} ${percentY(17) - 20} 
-    Q ${percentX(92) + 20} ${percentY(17) - 20} ${percentX(92) + 20} ${percentY(17)}
-    L ${percentX(92) + 20} ${endY - 20}
-    Q ${percentX(92) + 20} ${endY} ${percentX(92) + 40} ${endY}
+    L ${startX} ${percentY(18)} 
+    Q ${startX} ${percentY(18) - 20} ${startX + 20} ${percentY(18) - 20} 
+    L ${percentX(94)} ${percentY(18) - 20} 
+    Q ${percentX(94) + 20} ${percentY(18) - 20} ${percentX(94) + 20} ${percentY(18)}
+    L ${percentX(94) + 20} ${endY - 20}
+    Q ${percentX(94) + 20} ${endY} ${percentX(94) + 40} ${endY}
+    L ${endX - 4} ${endY}
+  `)
+}
+function drawLineRight8 (canvas) {
+  const { startX, startY, endX, endY } = calcCoodinates().sys8
+  drawStartCircle(canvas, startX, startY)
+  drawEndCircle(canvas, endX, endY)
+  let middleX = startX + (endX - startX) / 2
+  // 画连线
+  drawLine(canvas,`
+    M ${startX + 12} ${startY} 
+    L ${middleX - 20} ${startY} 
+    Q ${middleX} ${startY} ${middleX} ${startY + 20}
+    L ${middleX} ${endY - 20}
+    Q ${middleX} ${endY} ${middleX + 20} ${endY}
+    L ${endX - 4} ${endY}
+  `)
+}
+function drawLineRight9 (canvas) {
+  const { startX, startY, endX, endY } = calcCoodinates().sys9
+  drawStartCircle(canvas, startX, startY)
+  drawEndCircle(canvas, endX, endY)
+  let middleX = startX + (endX - startX) / 2
+  // 画连线
+  drawLine(canvas,`
+    M ${startX + 12} ${startY} 
+    L ${middleX - 20} ${startY} 
+    Q ${middleX} ${startY} ${middleX} ${startY + 20}
+    L ${middleX} ${endY - 20}
+    Q ${middleX} ${endY} ${middleX + 20} ${endY}
     L ${endX - 4} ${endY}
   `)
 }
@@ -231,8 +276,12 @@ onMounted(() => {
   drawLineBottom2(canvas)
   drawLineBottom3(canvas)
   drawLineBottom4(canvas)
-  drawLineBottom6(canvas)
-  drawLineBottom7(canvas)
+  drawLineBottom5(canvas)
+
+  drawLineRight6(canvas)
+  drawLineRight7(canvas)
+  drawLineRight8(canvas)
+  drawLineRight9(canvas)
 })
 </script>
 
