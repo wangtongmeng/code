@@ -139,48 +139,7 @@ function drawLine(canvas, path, isActive = false) {
   canvas.add(line)
 }
 
-// 一个拐角的
-function drawLineType1(canvas, startX, startY, endX, endY, bottomOrRight, isActive = false) {
-  let color = isActive ? '#F79595' : '#36B5AC'
-  // 算终点相对于起点的相对位置
-  // 终点相对于起点，在右边还是左边
-  let isRightX = endX - startX > 0
-  // 终点相当于起点，在上面还是下面
-  let isBottomY = endY - startY > 0
-  drawStartCircle(canvas, startX, startY, isActive)
-  drawEndCircle(canvas, endX, endY, bottomOrRight, isActive)
-  // 画连线
-  let path = ''
-  if (isRightX) {
-    if (isBottomY) {
-      // 终点相对于起点，在右下
-    } else {
-      // 终点相对于起点，在右上
-      path = `
-        M ${startX} ${startY - 12} 
-        L ${startX} ${endY + 20} 
-        Q ${startX} ${endY} ${startX + 20} ${endY} 
-        L ${endX - 8} ${endY}
-      `
-    }
-  }
-  if (!isRightX) {
-    if (isBottomY) {
-      // 终点相对于起点，在左下
-      path = `
-        M ${startX - 12} ${startY} 
-        L ${endX + 20} ${startY} 
-        Q ${endX} ${startY} ${endX} ${startY + 20} 
-        L ${endX} ${endY - 8}
-      `
-    } else {
-      // 终点相对于起点，在左上
-    }
-  }
-  const line = new fabric.Path(path)
-  line.set({ stroke: color, fill: 'transparent' })
-  canvas.add(line)
-}
+
 
 function drawLineBottom1(canvas, isActive) {
   const { startX, startY, endX, endY } = calcCoodinates().sys1
