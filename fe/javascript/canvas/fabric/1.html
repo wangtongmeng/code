@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.3.1/fabric.min.js"></script>
+</head>
+<body>
+  <canvas id="canvas" width="400" height="400"></canvas>
+
+  <script>
+    // 创建 Canvas 实例
+    var canvas = new fabric.Canvas('canvas');
+
+    // 定义长路径的坐标点
+    var longPathPoints = [
+      { x: 100, y: 200 },
+      { x: 200, y: 100 },
+      { x: 300, y: 200 },
+      { x: 200, y: 300 }
+    ];
+
+    // 创建长路径对象
+    var longPath = new fabric.Path('M 100 200 Q 200 100 300 200 Q 200 300 100 200', {
+      fill: 'none',
+      stroke: 'black',
+      objectCaching: false
+    });
+
+    // 将长路径对象添加到 Canvas
+    canvas.add(longPath);
+
+    // 计算长路径的总长度
+    var longPathLength = calculatePathLength(longPath);
+
+    // 定义短路径的坐标点
+    var shortPathPoints = [
+      { x: 120, y: 180 },
+      { x: 180, y: 120 },
+      { x: 220, y: 180 },
+      { x: 180, y: 220 }
+    ];
+
+    // 创建短路径对象
+    var shortPath = new fabric.Path('M 120 180 Q 180 120 220 180 Q 180 220 120 180', {
+      fill: 'none',
+      stroke: 'red',
+      objectCaching: false
+    });
+
+    // 将短路径对象添加到 Canvas
+    canvas.add(shortPath);
+
+    // 初始化动画参数
+    var currentOffset = 0;
+    var animationDuration = 2000; // 动画持续时间（毫秒）
+    var animationInterval = 16; // 动画帧间隔时间（毫秒）
+
+    // 定义动画函数
+    function animate() {
+      // 计算当前帧的偏移量
+      var targetOffset = currentOffset + (animationInterval / animationDuration) * longPathLength;
+
+      // 如果超过了路径的总长度，则减去路径的总长度以实现循环效果
+      if (targetOffset > longPathLength) {
+        targetOffset -= longPathLength;
+      }
+
+      // 根据当前偏移量计算新的短路径
+      var animatedPath = calculateAnimatedPath(shortPathPoints, longPathPoints, targetOffset);
+      var animatedPathObject = new fabric.Path(animatedPath, {
+        fill: 'none',
+        stroke: 'red',
+        objectCaching: false
+      });
+
+      // 更新 Canvas 上的短路径对象
+      canvas.clear().add(longPath).add(animatedPathObject);
+
+      // 更新当前偏移量
+      currentOffset = targetOffset;
+
+      // 继续下一帧动画
+      setTimeout(animate, animationInterval);
+    }
+
+    // 开始动画
+    setTimeout(animate, animationInterval);
+
+    // 计算在长路径上根据偏移量得到的新短路径
+    function calculateAnimatedPath(shortPathPoints, longPathPoints, offset) {
+      var path = "M ";
+      var length = longPathPoints.length;
+
+      for (var i = 0; i < length; i++) {
+        var pointIndex = (i + offset) % length;
+        var point = longPathPoints[pointIndex];
+        var x = point.x + shortPathPoints[i].x - shortPathPoints[0].x;
+        var y = point.y + shortPathPoints[i].y - shortPathPoints[0].y;
+        path += x + " " + y + " ";
+      }
+
+      return path;
+    }
+
+    // 计算路径的长度
+    function calculatePathLength(path) {
+      var totalLength = 0;
+      var pathSegments = path.path;
+
+      for (var i = 0; i < pathSegments.length; i++) {
+        var segment = pathSegments[i];
+        var command = segment[0];
+
+        switch (command) {
+          case 'M': // 移动到指定点
+            break;
+          case 'L': // 从当前点画直线到指定点
+            var x1 = segment[1];
+            var y1 = segment[2];
+            var x2 = segment[3];
+            var y2 = segment[4];
+            var length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+            totalLength += length;
+            break;
+          case 'Q': // 从当前点画二次贝塞尔曲线到指定点
+            var x1 = segment[1];
+            var y1 = segment[2];
+            var x2 = segment[3];
+            var y2 = segment[4];
+            var x3 = segment[5];
+            var y3 = segment[6];
+            var length = quadraticBezierLength(x1, y1, x2, y2, x3, y3);
+            totalLength += length;
+            break;
+          // 其他路径命令，比如C、Z等，可以根据需要继续添加相应的处理逻辑
+        }
+      }
+
+      return totalLength;
+    }
+
+    // 计算二次贝塞尔曲线段的长度
+    function quadraticBezierLength(x1, y1, x2, y2, x3, y3) {
+      var t = 0.5; // 将贝塞尔曲线分成多个线段，取每个线段中点的长度之和作为近似长度
+      var length = 0;
+
+      for (var i = 0; i < t; i += 0.01) {
+        var x = Math.pow(1 - i, 2) * x1 + 2 * (1 - i) * i * x2 + Math.pow(i, 2) * x3;
+        var y = Math.pow(1 - i, 2) * y1 + 2 * (1 - i) * i * y2 + Math.pow(i, 2) * y3;
+        var xNext = Math.pow(1 - (i + 0.01), 2) * x1 + 2 * (1 - (i + 0.01)) * (i + 0.01) * x2 + Math.pow(i + 0.01, 2) * x3;
+        var yNext = Math.pow(1 - (i + 0.01), 2) * y1 + 2 * (1 - (i + 0.01)) * (i + 0.01) * y2 + Math.pow(i + 0.01, 2) * y3;
+        var segmentLength = Math.sqrt(Math.pow(xNext - x, 2) + Math.pow(yNext - y, 2));
+        length += segmentLength;
+      }
+
+      return length;
+    }
+  </script>
+</body>
+</html>
