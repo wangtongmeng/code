@@ -1,9 +1,10 @@
 <template>
   <div>
-    <path-animate />
+    <!-- <path-animate /> -->
     <!-- <clip-path-test /> -->
     <!-- <clip-path-test1 /> -->
     <!-- <svg-base /> -->
+    <svg-path />
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import PathAnimate from './views/PathAnimate.vue'
 import clipPathTest from './views/base/clipPathTest.vue'
 import clipPathTest1 from './views/base/clipPathTest1.vue'
 import svgBase from './views/base/svgBase.vue'
+import svgPath from './views/base/svgPath.vue'
 </script>
 
 <style lang="scss" scoped>
