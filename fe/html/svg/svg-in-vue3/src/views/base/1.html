@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #curvedPath {
+      stroke-width: 3;
+    }
+  </style>
+</head>
+<body>
+  <svg width="200" height="200">
+    <defs>
+      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#ff0000" />
+        <stop offset="100%" stop-color="#0000ff" />
+      </linearGradient>
+    </defs>
+    <path id="curvedPath" d="M 50,150 Q 100,50 150,150" fill="none" />
+  </svg>
+
+  <script>
+    var path = document.getElementById('curvedPath');
+    var pathLength = path.getTotalLength();
+    var gradient = document.getElementById('gradient');
+    gradient.setAttribute('x2', pathLength);
+
+    var dashOffset = 0;
+    var dashArray = [pathLength * 0.1, pathLength * 0.9]; // 实线部分占10%，空白部分占90%
+
+    function animatePath() {
+      dashOffset -= 1;
+      if (dashOffset < -pathLength) {
+        dashOffset = 0;
+      }
+      path.style.strokeDasharray = dashArray.join(' ');
+      path.style.strokeDashoffset = dashOffset;
+      requestAnimationFrame(animatePath);
+    }
+
+    animatePath();
+  </script>
+</body>
+</html>
