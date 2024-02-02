@@ -1,3 +1,4 @@
+// 路由中间件，看中间件部分
 // 一个是应用级别的路径 app.get('/')
 // 一个是通过路由实例 router.get('/')
 
@@ -21,6 +22,7 @@ app.all('/xx', (req, res) => {
 // })
 
 // 获取路由动态参数
+// '/user/:id' '/user/:id/video/:videoId' 通过req.params.xxx获取
 // app.get('/user/:id', (req, res) => {
 //   console.log(req.params.id);
 //   res.send(req.params.id)
