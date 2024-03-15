@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+// import { RouterLink, RouterView } from 'vue-router'
+// import SetupVsOptions from './views/SetupVsOptions.vue'
+import ManyStore from './views/ManyStore/index.vue'
 </script>
 
 <template>
-  <header>
+  <ManyStore />
+  <!-- <SetupVsOptions /> -->
+  <!-- <header>
     <div class="wrapper">
       <nav>
         <RouterLink to="/">Home</RouterLink>
@@ -12,8 +16,7 @@ import { RouterLink, RouterView } from 'vue-router'
     </div>
   </header>
 
-  <RouterView />
+  <RouterView /> -->
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
