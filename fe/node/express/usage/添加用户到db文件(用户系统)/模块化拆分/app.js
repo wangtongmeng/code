@@ -1,3 +1,6 @@
+// 1. 添加用户信息
+// 2. 修改用户信息
+// 3. 封装db方法
 const fs = require('fs')
 const express = require('express')
 const { promisify } = require('util')
@@ -34,6 +37,7 @@ app.get('/', async function (req, res) {
   }
 })
 
+// 1. 添加用户信息
 app.post('/', async function (req, res) {
   let body = req.body
   if (!body) {
@@ -59,6 +63,7 @@ app.post('/', async function (req, res) {
   }
 })
 
+// 2. 修改用户信息
 app.put('/:id', async (req, res) => {
   try {
     let userInfo = await db.getDb()

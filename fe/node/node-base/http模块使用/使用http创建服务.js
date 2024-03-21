@@ -26,7 +26,7 @@ server.on('request', function(req, res) {
 
   // 3.读取外部html文件并返回
   // fs.readFile('./index.html', 'utf-8', function(err, data) {
-  //   // 因为在html文件中，有文件的格式生命，所以不需要再通过header设置返回内容格式了
+  //   // 因为在html文件中，有文件的格式声明，所以不需要再通过header设置返回内容格式了
   //   res.write(data)
   //   res.end()
   // })

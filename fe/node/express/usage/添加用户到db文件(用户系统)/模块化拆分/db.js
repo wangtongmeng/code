@@ -1,3 +1,5 @@
+// 3. 封装db方法
+
 // 封装一个数据读取的模块
 const fs = require('fs')
 const express = require('express')

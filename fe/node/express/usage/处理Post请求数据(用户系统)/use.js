@@ -1,3 +1,8 @@
+// 1.处理post请求，请求体格式是'content-type'是 'application/x-www-form-urlencoded'的格式
+// 2.处理post请求，请求体格式是content-type是application/json的格式
+// 3. 获取用户信息，读取文件并返回users信息
+// 4. 添加用户信息
+
 const fs = require('fs')
 const express = require('express')
 const { promisify } = require('util')
@@ -5,7 +10,9 @@ const readFile = promisify(fs.readFile) // 把回调式api转成promise式api
 const writeFile = promisify(fs.writeFile)
 
 const app = express()
+// 1.
 app.use(express.urlencoded()) // 处理post请求，请求体格式是'content-type'是 'application/x-www-form-urlencoded'的格式
+// 2.
 app.use(express.json()) // 处理post请求，请求体格式是content-type是application/json的格式
 
 
@@ -22,6 +29,7 @@ app.use(express.json()) // 处理post请求，请求体格式是content-type是a
 //   })
 // })
 
+// 3.
 app.get('/', async function (req, res) {
   try {
     let back = await readFile('./db.json', 'utf8')
@@ -33,6 +41,7 @@ app.get('/', async function (req, res) {
   }
 })
 
+// 4.
 app.post('/', async function (req, res) {
   let body = req.body
   if (!body) {
