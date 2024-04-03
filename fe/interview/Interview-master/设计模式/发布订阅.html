@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body></body>
+<script>
+  class Event {
+    constructor() {
+      this.clientList = [];
+    }
+
+    listen(key, fn) {
+      if (!this.clientList[key]) {
+        this.clientList[key] = [];
+      }
+      this.clientList[key].push(fn);
+    }
+
+    trigger() {
+      // eg: trigger('lakers', 'warrior', 'fail'); 那key就是lakers
+      // shift会改变arguments长度, 下面apply的时候参数就是( 'warrior', 'fail')了
+      var key = Array.prototype.shift.call(arguments);
+      var fns = this.clientList[key];
+
+      for (let i = 0; i < fns.length; i++) {
+        fns[i].apply(this, arguments);
+      }
+    }
+  }
+
+  class NbaRes extends Event {
+    constructor() {
+      super();
+    }
+  }
+
+  var dailyNbaRes = new NbaRes();
+
+  dailyNbaRes.listen('lakers', (opponent, res) => {
+    console.log(`lakers vs ${opponent}: ${res}`);
+  })
+
+  dailyNbaRes.listen('warriors', (opponent, res) => {
+    console.log(`warriors vs ${opponent}: ${res}`);
+  })
+
+  dailyNbaRes.trigger('lakers', 'boston', 'fail');
+
+  dailyNbaRes.trigger('warriors', 'suns', 'fail');
+
+</script>
+
+</html>

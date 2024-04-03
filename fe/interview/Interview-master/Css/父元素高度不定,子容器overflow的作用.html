@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .father {
+      width: 500px;
+      max-height: 300px;
+      background-color: aquamarine;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .father .header,
+    .father .footer {
+      flex-shrink: 0;
+      width: 100%;
+      height: 50px;
+      background-color: cornflowerblue;
+    }
+
+    .father .son {
+      width: 200px;
+      background-color: blueviolet;
+      margin: 10px 0;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      /* overflow:auto;的作用 */
+      overflow: auto;
+    }
+
+    .son .item {
+      width: 100px;
+      height: 100px;
+      background-color: rgb(151, 145, 142);
+    }
+
+    .son .item:not(first-child) {
+      margin-top: 10px;
+    }
+
+    .con {
+      width: 100px;
+      flex-grow: 1;
+      overflow: auto;
+      background-color: darkgreen;
+    }
+
+    .con .text {
+      height: 500px;
+      width: 50px;
+      background-color: darkred;
+      border: 1px dashed black;
+    }
+  </style>
+</head>
+
+<body>
+  父元素高度不定max-height，父元素display: flex;
+  子元素flex-grow配合overflow:hidden;明确一个高度
+  子元素当容器，子元素内部display: flex,有孙子元素过大时，子元素overflow:auto
+  <div class="father">
+    <div class="header"></div>
+    <div class="son">
+      <div class="item"></div>
+      <div class="con">
+        <div class="text"></div>
+      </div>
+      <div class="item"></div>
+    </div>
+    <div class="footer"></div>
+  </div>
+</body>
+
+</html>

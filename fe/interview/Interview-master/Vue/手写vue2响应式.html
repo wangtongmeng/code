@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>基础版本，遍历加defineProperty</title>
+</head>
+<body>
+    <h3>手写Vue响应式，并不真正更新视图</h3>
+    <h3>控制台输出"更新视图"</h3>
+    <h3>非常关键，涵盖的面试点巨多</h3>
+
+    <script>
+        const data = {
+            name: 'zlj',
+            age: 18,
+            coder: {
+                hometown: 'shandong'
+            },
+            colors: ['red', 'green', 'yellow']
+        }
+
+        // 复习原型相关知识，const a = new Array();
+        // 对象具有属性__proto__，可称为隐式原型，一个对象的隐式原型指向父构造函数的原型，a.__proto__ === Array.prototype
+        // 这也保证了实例能够访问在构造函数原型中定义的属性和方法, 也就是原型链上的方法
+        // 一个对象有自己特有的属性—prototype，a.prototype是undefined
+        // prototype.constructor指向构造函数本身，Array.prototype.constructor === Array
+        const oldArraryProto = Array.prototype;
+        const newArrayProto = Object.create(oldArraryProto);
+        console.log(newArrayProto.__proto__ === oldArraryProto); // true
+
+        // 重写数组方法
+        ['push', 'pop', 'shift', 'unshift', 'splice'].forEach(methodName => {
+            newArrayProto[methodName] = function (params) {
+                console.log('数组方法=>更新视图'); // 添加更新视图方法!!!
+                oldArraryProto[methodName].call(this, ...arguments); // 也能执行数组里原本的功能
+            }
+        });
+
+        // 将data变成响应式数据
+        // observer即是观察者，遍历data为每个值加上defineProperty，遇见对象之后继续observer
+        observer(data);
+
+        function observer(target) {
+            if (typeof target !== 'object' || typeof target === null) {
+                return target;
+            }
+            if (Array.isArray(target)) {
+                target.__proto__ = newArrayProto;
+            }
+            for (let key in target) {
+                // 只遍历了一层，所以不会监听到coder.hometown的改变
+                defineReactive(target, key, target[key]);
+            }
+        }
+
+        function defineReactive(target, key, value) {
+            // 进行深度的观察! 每遇到对象都会去给对象里面的值遍历defineProperty
+            observer(value); // 这里是value
+            Object.defineProperty(target, key, {
+                get() {
+                    return value;
+                },
+                set(newValue) {
+                    // data.age = {number: 18},这样新增的值也会被监听起来
+                    observer(newValue);
+                    if (newValue !== value) {
+                        value = newValue;
+                        console.log('更新视图', key, newValue);
+                    }
+                }
+            });
+        }
+
+        data.colors[0] = 'orange'; // 有console能监听到
+        // 此处需要说一下！！！
+        // vue监听不到 通过数组下标和数组长度更新数组 的改变，因为性能问题
+        // 对于在原有数组上的修改读取没有问题，push和pop是操作尾部的，O(1)复杂度，问题不大。
+        // 但'shift', 'unshift', 'splice', 'sort', 'reverse'
+        // 这些大概率会触发数组索引的移动或变动，触发很多次的get和set。
+        data.colors.push('purple');
+        data.name = 123;
+
+        // defineProperty监听不到属性的增删所以要用Vue的方法
+        delete data.age;    // 没console，使用Vue.delete才行
+        data.newOne = 666;  // 没console，使用Vue.set才行，也就是$set，set时会判断target上有没有这个key，没有的话defineReactive(ob.value, key, val);
+
+        // Vue3 proxy的好处
+        // 1.可以直接监听数组从变化
+        // 2.监听对象本身，不需要对子对象继续observer
+        // 3.直接实现对象属性的增加和删除
+    </script>
+</body>
+</html>

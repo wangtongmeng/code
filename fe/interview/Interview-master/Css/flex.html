@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <style>
+        .father {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border: 1px solid green;
+        }
+        .son {
+            height: 70px;
+            width: 300px;
+            border: 1px solid red;
+            margin-left: 10px;
+        }
+        .father div:last-child {
+            background-color: hotpink;
+            flex-grow: 1;
+            flex-shrink: 0;
+            align-self: flex-end;
+            flex-basis: 100px;
+        }
+        .father div:nth-child(2) {
+            background-color: khaki;
+            flex-grow: 1;
+        }
+    </style> -->
+    <style>
+        .father {
+            height: 210px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid black;
+        }
+        .father div {
+            height: 70px;
+            width: 20%;
+            border: 1px solid red;
+            box-sizing: border-box;
+        }
+        div:first-child {
+            align-self: flex-start;
+        }
+        div:nth-child(2) {
+            /*flex:1代表 => flex: 1 1 0;*/
+            flex: 1;
+        }
+        div:last-child {
+            align-self: flex-end;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="father">
+        <div class="son">1</div>
+        <div class="son">2</div>
+        <div class="son">3</div>
+    </div>
+</body>
+</html>

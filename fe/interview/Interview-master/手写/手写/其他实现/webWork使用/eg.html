@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./work.js"></script>
+  <script>
+
+    // 在主线程代码 JavaScript 代码中，我们可以创建一个 Web worker 实例，然后通过消息传递与他进行通信：
+
+    const worker = new Worker("worker.js");
+
+    // 发送消息到 Web Worker
+    worker.postMessage(42);
+
+    // 监听从 Web Worker 返回的消息
+    worker.addEventListener("message", (event) => {
+      console.log("接收到 web worker 返回的信息:", event.data);
+      worker.terminate();
+    });
+  </script>
+</head>
+
+<body>
+
+  <div>
+    Web Worker 是一种在浏览器中运行 JavaScript 代码的机制，它允许您在后台线程中执行一些任务，而不会阻塞主线程。
+    主线程通常用于处理用户界面的交互和渲染，而 Web Worker可以用于执行一些耗时的计算、网络请求、数据处理等任务，以提高应用的性能和响应速度。
+    它的主要特点是能进行并行计算，他允许在后台同时运行多个线程，这些线程可以并行执行任务。这使得可以同时处理多个耗时的操作，而不会阻塞用户界面。
+  </div>
+</body>
+
+</html>

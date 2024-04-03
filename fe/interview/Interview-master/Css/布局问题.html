@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .father {
+        display: flex;
+        align-items: stretch;
+        width: 400px;
+        background-color: pink;
+        border: 1px solid red;
+    }
+
+    .left {
+        /* align-self: stretch可以把左侧高度也拉满 */
+        width: 50%;
+        background-color: blue;
+    }
+
+    .right {
+        width: 50%;
+        background-color: green;
+        height: 500px;
+    }
+</style>
+
+<body>
+    <div class="father">
+        <div class="left">left</div>
+        <div class="right">
+            三列布局，定位的时候 ，如果根据三列最高的一列定义 父元素的高度？
+        </div>
+    </div>
+</body>
+
+</html>
