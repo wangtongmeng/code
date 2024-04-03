@@ -9,3 +9,9 @@
 - `filename: 'bundle.[contenthash:8].js'` 其中 `h` 小写，不能大写
 
 也可以直接下载讲师的 webpack5-demo 源码，把配置文件删掉，自己重写练习。
+
+多入口，entry output plugin 都要改
+
+处理 jsx vue
+- https://www.babeljs.cn/docs/babel-preset-react
+- https://www.npmjs.com/package/vue-loader

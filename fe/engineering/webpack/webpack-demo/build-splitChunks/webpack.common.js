@@ -34,7 +34,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.join(srcPath, 'other.html'),
             filename: 'other.html',
-            chunks: ['other', 'common']  // 考虑代码分割
+            chunks: ['other',  'common']  // 考虑代码分割
         })
     ]
 }
