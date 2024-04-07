@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>有序 vs 无序</title>
+</head>
+<body>
+    <p>有序 vs 无序</p>
+
+    <p class="container" style="color: red;" id="p1">
+        <img alt="xxx" src="xx.png"/>
+        <span>123</span>
+    </p>
+
+    <script>
+        // vdom 虚拟 dom - 模拟真实的 DOM 结构
+        const p = {
+            tag: 'p',
+            props: { // 无序
+                id: 'p1',
+                className: 'container',
+                style: 'color: red',
+            },
+            children: [ // 有序
+                {
+                    tag: 'img',
+                    props: { alt: 'xxx', src: 'xx.png' }
+                },
+                {
+                    tag: 'span',
+                    children: ['123']
+                },
+            ]
+        }
+
+        // js - object 无序，Array 有序
+    </script>
+</body>
+</html>

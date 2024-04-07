@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array reduce</title>
+</head>
+<body>
+    <h1>Array reduce</h1>
+
+    <script>
+        // // 传统
+        // function sum(arr) {
+        //     let res = 0 // 需要新定义一个变量
+        //     arr.forEach(n => res = res + n)
+        //     return res
+        // }
+
+        // const arr = [10, 20, 30, 40, 50]
+        // // const res = arr.reduce((sum, curVal, index, arr) => {
+        // //     // console.log('reduce function ....')
+        // //     // console.log('sum', sum)
+        // //     // console.log('curVal', curVal)
+        // //     // console.log('index', index)
+        // //     // console.log('arr', arr)
+
+        // //     return sum + curVal // 返回值，会作为下一次执行时的第一个参数 sum 的值
+        // // }, 0)
+        // const res = arr.reduce((sum, curVal) => sum + curVal, 0)
+        // console.log('res', res)
+
+
+        // // 计数
+        // const arr = [10, 20, 30, 40, 50, 10, 20, 30, 20]
+        // const n = 30
+        // const count = arr.reduce((count, val) => {
+        //     return val === n ? count + 1 : count
+        // }, 0)
+        // console.log('count', count)
+
+        // 输出字符串
+        const arr = [
+            { name: '张三', age: '20' },
+            { name: '李四', age: '21' },
+            { name: '小明', age: '22' },
+        ]
+        // const str = arr.map(item => {
+        //     return `${item.name} - ${item.age}`
+        // }).join('\n')
+        // console.log(str)
+        const str = arr.reduce((s, item) => {
+            return `${s}${item.name} - ${item.age}\n`
+        }, '')
+        console.log(str)
+
+    </script>
+</body>
+</html>

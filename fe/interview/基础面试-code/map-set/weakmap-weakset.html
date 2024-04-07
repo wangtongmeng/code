@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeakMap WeakSet</title>
+</head>
+<body>
+    <h1>WeakMap WeakSet</h1>
+
+    <script>
+        // WeakMap 弱引用，防止内存泄漏
+        // const wMap = new WeakMap()
+        // function fn() {
+        //     const obj = { name: '双越' }
+        //     wMap.set(obj, 'name info') // 只能用对象作为 key
+        // }
+        // fn()
+        // 没有 forEach size ，只能 has delete add
+        // gc 垃圾清理不一定是及时的
+
+        // // WeakMap 场景
+        // const userInfo = { name: '双越' }
+        // const cityInfo = { city: '北京' }
+        // userInfo.city = cityInfo
+        // wMap.set(userInfo, cityInfo) // 建立一种关联关系，而且两者保持独立，而且**不影响彼此的销毁逻辑**
+        // wMap.get(userInfo)
+
+        // WeakSet 弱引用，防止内存泄漏，只能用对象作为 value 
+        // 没有 forEach size ，只能 has delete add
+        const wSet = new WeakSet()
+        // const set = new Set()
+        function fn() {
+            const obj = { name: '双越' }
+            wSet.add(obj)
+            // set.add(obj)
+        }
+        fn()
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map</title>
+</head>
+<body>
+    <h1>Map</h1>
+
+    <script>
+
+        // const obj = {
+        //     key1: 'hello',
+        //     key2: 100,
+        //     key3: { x:100 }
+        // }
+
+        // const m = new Map([
+        //     ['key1', 'hello'],
+        //     ['key2', 100],
+        //     ['key3',  { x: 100 }]
+        // ])
+        // m.set('name', '双越老师')
+        // // m.set('key1', 'hello world')
+        // m.delete('key2')
+        // m.has('key3')
+        // m.forEach((value, key) => console.log(key, value))
+        // m.size
+
+        // // Map 以任意类型为 key
+        // const o = { name: 'xxx' }
+        // m.set(o, 'object key')
+        // function fn() {}
+        // m.set(fn, 'fn key')
+
+        // obj1 , obj2
+        // obj1.xxx = obj2
+        // m.set(obj1, obj2) // 关联，但是没有引用关系，保持独立
+        // m.get(obj1) // obj2
+
+        // // object 无序
+        // const obj = {  2: 20, 3: 30, 1: 10 }
+        // console.log(Object.keys(obj))
+
+        // Map 有序的，但是还很快
+
+        // object 有多块？
+        const obj = {}
+        for (let i = 0; i < 1000 * 10000; i++) {
+            obj[i + ''] = i
+        }
+        console.time('obj find')
+        obj['5000000']
+        console.timeEnd('obj find')
+        console.time('obj delete')
+        delete obj['5000000']
+        console.timeEnd('obj delete')
+
+        // Map 有多块
+        const m = new Map()
+        for (let i = 0; i < 1000 * 10000; i++) {
+            m.set(i + '', i)
+        }
+        console.time('map find')
+        m.has('5000000')
+        console.timeEnd('map find')
+        console.time('map delete')
+        m.delete('5000000')
+        console.timeEnd('map delete')
+
+    </script>
+</body>
+</html>
