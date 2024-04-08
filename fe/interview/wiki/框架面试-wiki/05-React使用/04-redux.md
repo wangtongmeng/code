@@ -15,6 +15,11 @@ redux 一般用于大型项目的数据管理。
 
 redux 数据流和 redux-thunk 数据流
 
+redux 数据流:
+- dispatch(action)
+- reducer -> newState
+- subscribe 触发通知
+
 ## react-redux
 
 - Provider connect

@@ -76,9 +76,9 @@ class 组件有如下问题
 
 `LifeCycles.js` 代码演示
 
-- 模拟 ComponentDidMount
-- 模拟 ComponentDidUpdate
-- 模拟 ComponentWillUnMount
+- 模拟 ComponentDidMount - useEffect 依赖 []
+- 模拟 ComponentDidUpdate - useEffect 无依赖，或者依赖具体项[a, b]
+- 模拟 ComponentWillUnMount - useEffect 中返回一个函数
 
 effect 实现的是**副作用**，解释一下这个词
 
@@ -93,6 +93,14 @@ effect 实现的是**副作用**，解释一下这个词
 - 而用 effect Hook 一步就可以解决问题
 - 所以这里的 “模拟 ComponentWillUnMount” 和 class 组件的 WillUnMount 不一样
 
+useEffect 中返回函数 fn
+- useEffce 依赖 []，组件销毁时执行 fn，等于 WillUnMount
+- useEffect 无依赖或依赖 [a, b]，组件更新时执行 fn
+- 即，下一次执行 useEffect 之前，就会执行 fn，无论更新或卸载
+
 ## 小结
 
 有了 state ，有了最基本的 3 个生命周期，日常见的功能也就都能做了
+- 函数组件更适合 React 组件，但需要 Hooks 增强功能
+- useState 可实现 state 和 setState
+- useEffect 可模拟组件主要的生命周期

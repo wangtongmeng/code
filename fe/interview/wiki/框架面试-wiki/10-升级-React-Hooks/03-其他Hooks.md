@@ -41,7 +41,7 @@ useReducer 和 redux 不同
 
 在 useMemo 的基础上继续，如果是函数传递给子组件，怎么办？
 
-- useMemo 封装数据
-- useCallback 封装函数
+- useMemo 缓存数据
+- useCallback 缓存函数
 
 参考 `UseCallbackDemo.js` 代码演示
