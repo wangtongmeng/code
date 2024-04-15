@@ -2,10 +2,10 @@
 
 
 # if 
-# age = 20
-# if age >= 18:
-#   print('age is', age)
-#   print('adult')
+age = 20
+if age >= 18:
+  print('age is', age)
+  print('adult')
 
 # if else
 # age = 3
@@ -34,9 +34,9 @@
 
 
 # input 结合 if 判断
-s = input('birth: ')
-birth = int(s)
-if birth < 2000:
-  print('00前')
-else:
-  print('00后')
+# s = input('birth: ')
+# birth = int(s)
+# if birth < 2000:
+#   print('00前')
+# else:
+#   print('00后')
