@@ -9,6 +9,8 @@
       :defaultColDef="defaultColDef"
       :autoGroupColumnDef="autoGroupColumnDef"
       :rowData="rowData"
+      rowGroupPanelShow="always"
+      groupLockGroupColumns="1"
     ></ag-grid-vue>
   </div>
 </template>
