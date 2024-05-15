@@ -10,21 +10,21 @@
  * @param {number} target
  * @return {number[]}
  */
-var twoSum = function(nums, target) {
- let map = {}
- for (let i = 0; i < nums.length; i++) {
-    let n = nums[i]
-    let last = target - n
-    if (map[last] != null) {
-      return [map[last], i]
+var twoSum = function (nums, target) {
+  let map = {}; // 存储遍历过的元素和target的差值，value为index
+  for (let i = 0; i < nums.length; i++) {
+    let n = nums[i];
+    let last = target - n;
+    //
+    if (map[n] != null) {
+      return [map[n], i];
     } else {
-      map[n] = i
+      map[last] = i;
     }
- }
- return []
+  }
+  return [];
 };
 // @lc code=end
-
 
 // let map = {}
 // for (let i = 0; i < nums.length; i++) {
@@ -37,4 +37,3 @@ var twoSum = function(nums, target) {
 //   }
 // }
 // return []
-

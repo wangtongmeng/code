@@ -9,27 +9,33 @@
  * @param {string} s
  * @return {boolean}
  */
-var isValid = function(s) {
- let map = {
-  "(": ")",
-  "{": "}",
-  "[": "]"
- }
- let stack = []
- for (let letter of s) {
-  if (map[letter]) {
-    stack.push(map[letter])
-  } else {
-    let last = stack.pop()
-    if (last !== letter) {
-      return false
+var isValid = function (s) {
+  let map = {
+    "(": ")",
+    "{": "}",
+    "[": "]",
+  };
+  let stack = [];
+
+  for (let i = 0; i < s.length; i++) {
+    let n = s[i];
+    if (map[n]) {
+      // 如果是左括号，则入栈
+      // 存入对应的右括号
+      stack.push(map[n]);
+    } else {
+      // 说明是右括号
+      let last = stack.pop();
+      if (last === n) {
+        continue;
+      } else {
+        return false;
+      }
     }
   }
- }
- return stack.length === 0
+  return stack.length === 0;
 };
 // @lc code=end
-
 
 // if (s.length % 2 !== 0) {
 //   return false;
@@ -55,4 +61,3 @@ var isValid = function(s) {
 //   }
 // }
 // return stack.length === 0
-
