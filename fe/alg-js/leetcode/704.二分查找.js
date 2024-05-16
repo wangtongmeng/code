@@ -10,23 +10,25 @@
  * @param {number} target
  * @return {number}
  */
-var search = function(nums, target) {
-  let left = 0, right = nums.length - 1
-  while (left <= right) {
-    let middle = Math.floor( (left + right) / 2)
-    if (nums[middle] === target) {
-      return middle
-    } else if (nums[middle] > target) {
-      right = middle - 1
+var search = function (nums, target) {
+  let leftIndex = 0;
+  let rightIndex = nums.length - 1;
+  // 二分查找，左闭右闭，自闭右开
+  // 这里使用左闭右闭
+  while (leftIndex <= rightIndex) {
+    let middleIndex = Math.floor((leftIndex + rightIndex) / 2);
+    if (nums[middleIndex] === target) {
+      return middleIndex;
+    } else if (nums[middleIndex] > target) {
+      rightIndex = middleIndex - 1; // 关键
     } else {
-      left = middle + 1
+      leftIndex = middleIndex + 1;
     }
   }
-  return -1
 
+  return -1;
 };
 // @lc code=end
-
 
 // let leftIndex = 0
 //   let rightIndex = nums.length - 1

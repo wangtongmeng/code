@@ -10,21 +10,21 @@
  * @param {number} val
  * @return {number}
  */
-var removeElement = function(nums, val) {
-  let left = 0, right = 0;
+var removeElement = function (nums, val) {
+  let left = 0,
+    right = 0;
   while (right < nums.length) {
     if (nums[right] !== val) {
-      nums[left] = nums[right]
-      left++
-      right++
+      nums[left] = nums[right];
+      left++;
+      right++;
     } else {
-      right++
+      right++;
     }
   }
-  return left
+  return left;
 };
 // @lc code=end
-
 
 // // 1.暴力破解法 两层for循环
 //   // 2.双指针
