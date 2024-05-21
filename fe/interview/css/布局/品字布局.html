@@ -5,8 +5,58 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    /* 基本样式 */
+    div {
+      width: 100px;
+      height: 100px;
+      font-style: 40px;
+      line-height: 100px;
+      color: #fff;
+      text-align: center;
+    }
+    .div1 {
+      background-color:  red;
+    }
+    .div2 {
+      background-color: green;
+    }
+    .div3 {
+      background-color: blue;
+    }
+
+    /* 1.float + margin */
+    /* .div1 {
+      margin: 0 auto;
+    }
+    .div2 {
+      float: left;
+      margin-left: 50%;
+    }
+    .div3 {
+      float: left;
+      margin-left: -200px;
+    } */
+
+
+
+    /* 2.inline-block */
+    .div1 {
+      margin: 0 auto;
+    }
+    .div2 {
+      display: inline-block;
+      margin-left: 50%;
+    }
+    .div3 {
+      display: inline-block;
+      margin-left: -200px;
+    }
+  </style>
 </head>
 <body>
-  
+  <div class="div1">1</div>
+  <div class="div2">2</div>
+  <div class="div3">3</div>
 </body>
 </html>
