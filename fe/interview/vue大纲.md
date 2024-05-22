@@ -1,0 +1,44 @@
+## vue
+- v-if 和 v-show 的区别
+- 为何 v-for 中要用 `key`
+- 描述 vue 组件生命周期（以及有父子组件，两者的生命周期）
+- 组件间如何通讯
+- 响应式原理
+- 组件渲染和更新的过程
+- 双向数据绑定 v-model 的原理
+- 说一下对 MVVM 的理解
+- computed 和 method 的区别？
+- 为何组件 data 必须是一个函数？
+- ajax 请求应该放在哪个生命周期？
+- 如何将父组件的所有 props 传递给子组件？—— $props
+- 如何自己实现一个 v-model ？
+- 多组件有相同的逻辑，如何抽离？
+- 何时需要使用异步组件？
+- 何时需要使用 keep-alive
+- 何时需要使用 beforeDestroy ？
+- 什么是作用域插槽？为何需要它
+- vuex 的 action 和 mutation 有何区别？
+- vue-router 路由模式有几种？ —— 三种 "hash" | "history" | "abstract" ？？？
+- 如何配置 vue-router 异步加载？
+- 场景题：用虚拟 DOM 描述一个 html 结构
+- vue 如何监听 data 变化？
+- vue 如何监听数组变化？
+- 响应式原理
+- 简述 diff 算法过程
+- diff 算法时间复杂度是多少
+- vue 为何是异步渲染？
+- nextTick 有何作用？
+- vue-router 如何实现路由变化？
+- vue 性能优化
+- Vue3.0 比 Vue2.x 的优势 —— 即，设计初衷
+- Vue3.0 生命周期
+- 你如何看待 Composition API 和 Options API
+- 如何理解 `ref` `toRef` `toRefs`
+- Vue3.0 有哪些重要的新功能
+- Composition API 如何实现代码逻辑复用
+- Vue3.0 如何实现响应式？
+- watch 和 watchEffect 的区别
+- setup 中如何获取组件实例？
+- Vue3.0 为什么这么快？
+- Vite 是什么？
+- 和 React Hooks 对比

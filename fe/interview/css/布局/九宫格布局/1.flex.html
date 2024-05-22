@@ -19,8 +19,10 @@
       height: 100px;
       display: flex;
       flex-wrap: wrap;
+      border: 1px solid red;
     }
     li {
+      /* 不需要设置高度，换行后正好是三行，flex会均分高度 */
       width: 30%;
       margin-right: 5%;
       margin-bottom: 5%;
@@ -32,6 +34,7 @@
     li:nth-child(n+7) {
       margin-bottom: 0%;
     }
+
   </style>
 </head>
 <body>
