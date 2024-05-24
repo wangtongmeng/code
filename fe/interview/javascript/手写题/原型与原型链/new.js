@@ -12,20 +12,21 @@
 // }
 
 function myNew(fn, ...args) {
-  const _this = Object.create(fn.prototype)
-  const result = fn.call(_this, ...args)
-  if ((result !== null && typeof result === 'object') || typeof result === 'function') {
-    return result
+  const _this = Object.create(fn.prototype);
+  const result = fn.call(_this, ...args);
+  if (
+    (result !== null && typeof result === "object") ||
+    typeof result === "function"
+  ) {
+    return result;
   }
-  return _this
+  return _this;
 }
 
-function fn1(a,b) {
-  this.a=a
-  this.b=b
+function fn1(a, b) {
+  this.a = a;
+  this.b = b;
 }
-const obj = myNew(fn1, 1, 2)
-
-
+const obj = myNew(fn1, 1, 2);
 
 console.log(obj.__proto__ === fn1.prototype); // true
