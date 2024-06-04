@@ -9,7 +9,7 @@
 import { toRaw } from "vue";
 
 const props = defineProps({});
-console.log("props", toRaw(props.params.node.group));
+console.log("props", toRaw(props.params.node.group), toRaw(props.params));
 const buttonClicked = () => {
   console.log("click");
 };
