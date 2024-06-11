@@ -11,18 +11,15 @@
  * @return {number}
  */
 var removeElement = function (nums, val) {
-  let left = 0,
-    right = 0;
-  while (right < nums.length) {
-    if (nums[right] !== val) {
-      nums[left] = nums[right];
-      left++;
-      right++;
-    } else {
-      right++;
+  let slowIndex = 0;
+  for (let fastIndex = 0; fastIndex < nums.length; fastIndex++) {
+    let curVal = nums[fastIndex];
+    if (curVal !== val) {
+      nums[slowIndex] = nums[fastIndex];
+      slowIndex++;
     }
   }
-  return left;
+  return slowIndex;
 };
 // @lc code=end
 
