@@ -6,7 +6,7 @@ function Child({ userInfo }) {
     // re-render: 只恢复初始化的 state 值，不会再重新设置新的值
     //            只能用 setName 修改
     const [ name, setName ] = useState(userInfo.name)
-
+    
     return <div>
         <p>Child, props name: {userInfo.name}</p>
         <p>Child, state name: {name}</p>

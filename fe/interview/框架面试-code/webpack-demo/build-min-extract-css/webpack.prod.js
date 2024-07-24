@@ -4,7 +4,7 @@ const { smart } = require('webpack-merge')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserJSPlugin = require('terser-webpack-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin') // webpack5使用  css-minimizer-webpack-plugin
 const webpackCommonConf = require('./webpack.common.js')
 const { srcPath, distPath } = require('./paths')
 

@@ -1,15 +1,15 @@
 import React from 'react'
-// import BaseUse from './components/baseUse'
-// import AdvancedUse from './components/advancedUse'
+import BaseUse from './components/baseUse'
+import AdvancedUse from './components/advancedUse'
 import ReduxUse from './components/reduxUse'
-// import TodoList from './components/TodoLIst'
+import TodoList from './components/TodoLIst'
 
 function App() {
   return (
     <div>
-      {/* <BaseUse/> */}
+      <BaseUse/>
       {/* <AdvancedUse/> */}
-      <ReduxUse/>
+      {/* <ReduxUse/> */}
       {/* <TodoList/> */}
     </div>
   );
