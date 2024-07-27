@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>双飞翼布局</title>
+    <style type="text/css">
+        body {
+            min-width: 550px;
+        }
+        .col {
+            /* 4. 设置子元素浮动 */
+            float: left;
+        }
+
+        #main {
+            /* 2.设置 main元素的宽度是100%，左右元素宽度固定 */
+            width: 100%;
+            height: 200px;
+            background-color: #ccc;
+        }
+        #main-wrap {
+            /* 3. 设置 main-wrap 的左右 margin，给左右栏内容留白（双飞翼是 margin 留白，圣杯布局是 padding 留白） */
+            margin: 0 190px 0 190px;
+        }
+
+        #left {
+            width: 190px;
+            height: 200px;
+            background-color: #0000FF;
+            /* 5. 使left元素向上移动到相同位置，即左栏位置 */
+            margin-left: -100%;
+        }
+        #right {
+            width: 190px;
+            height: 200px;
+            background-color: #FF0000;
+            /* 6. 使right元素左移至右栏位置 */
+            margin-left: -190px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 1.main在前面保证优先渲染，注意内部多一个 main-wrap 元素，负责 margin 留白 -->
+    <div id="main" class="col">
+        <div id="main-wrap">
+            this is main
+        </div>
+    </div>
+    <div id="left" class="col">
+        this is left
+    </div>
+    <div id="right" class="col">
+        this is right
+    </div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>圣杯布局</title>
+    <style type="text/css">
+        body {
+            min-width: 550px;
+        }
+        #header {
+            text-align: center;
+            background-color: #f1f1f1;
+        }
+
+        #container {
+            /* 5. 设置 container padding，为两侧元素预留位置 */
+            padding-left: 200px;
+            padding-right: 150px;
+        }
+        #container .column {
+            /* 3. 子元素浮动 */
+            float: left;
+        }
+
+        #center {
+            background-color: #ccc;
+            /* 2. 设置 center宽度为100%，两侧元素宽度固定 */
+            width: 100%;
+        }
+        #left {
+            position: relative;
+            background-color: yellow;
+            width: 200px;
+            /* 6. 设置 margin-left: -100%，让元素上移一行到同样为止 */
+            margin-left: -100%;
+            /* 7. 设置 position:relative；right: 200px，让元素相对于自身向左移动200px */
+            right: 200px;
+        }
+        #right {
+            background-color: red;
+            width: 150px;
+            /* 8. margin-right等于自身宽度，相当于自身没有宽度了，也就不用float到下一行了，正好占据右边栏了 */
+            margin-right: -150px;
+        }
+
+        #footer {
+            text-align: center;
+            background-color: #f1f1f1;
+        }
+        /* 4.清除container浮动，使footer不会上移 */
+        /* 手写 clearfix */
+        .clearfix:after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">this is header</div>
+    <div id="container" class="clearfix">
+        <!-- 1. center元素排前面，保证优先渲染 -->
+        <div id="center" class="column">this is center</div>
+        <div id="left" class="column">this is left</div>
+        <div id="right" class="column">this is right</div>
+    </div>
+    <div id="footer">this is footer</div>
+</body>
+</html>

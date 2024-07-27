@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>line-height 继承问题</title>
+    <!-- 如下代码， p 标签的行高将会是多少？ 答案：20 * 2 = 40px -->
+    <style type="text/css">
+        body {
+            font-size: 20px;
+            /* 如果是百分比，子元素并不会直接继承，而是算完数值 20 * 2 = 40px，再继承  */
+            line-height: 200%;
+
+            /* 数值，则子元素直接继承 line-height: 数值 */
+            /* line-height: 50px; */
+
+            /* 小数，则子元素直接继承，等于子元素的font-size * 小数背书 = 16 * 1.5 = 24px */
+            /* line-height: 1.5; */
+        }
+        p {
+            background-color: #ccc;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <p>这是一行文字</p>
+</body>
+</html>

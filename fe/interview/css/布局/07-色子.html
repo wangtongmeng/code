@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>flex 画骰子</title>
+    <style type="text/css">
+        .box {
+            width: 200px;
+            height: 200px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            /* 2.设置box元素flex，并两端对齐 */
+            display: flex;
+            justify-content: space-between;
+        }
+        .item {
+            display: block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #666;
+        }
+        .item:nth-child(2) {
+            /* 3. 设置第二个子元素，交叉轴居中 */
+            align-self: center;
+        }
+        .item:nth-child(3) {
+            /* 4. 设置第三个子元素，交叉轴距底部 */
+            align-self: flex-end;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 1. box元素内三个子元素 -->
+    <div class="box">
+        <span class="item"></span>
+        <span class="item"></span>
+        <span class="item"></span>
+    </div>
+</body>
+</html>
