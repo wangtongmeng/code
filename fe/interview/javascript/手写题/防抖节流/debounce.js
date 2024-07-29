@@ -1,36 +1,32 @@
 // 手写防抖函数
 
-
-function debounce(fn, wait) {
-  let timer = null
+function debounce(fn, delay) {
+  let timer = null;
   // 利用闭包
   return function () {
-    let context = this, args = arguments
-
     if (timer) {
-      clearTimeout(timer)
-      timer = null
+      clearTimeout(timer);
     }
     timer = setTimeout(() => {
-      fn.apply(context, args)
-    }, wait)
-  }
+      fn.apply(this, arguments);
+      timer = null;
+    }, delay);
+  };
 }
-
 
 function test() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       console.log(111);
-      resolve()
+      resolve();
     }, 2000);
-  })
+  });
 }
 
-const deboundFn = debounce(test, 1000)
-deboundFn()
-deboundFn()
-deboundFn()
+const deboundFn = debounce(test, 1000);
+deboundFn();
+deboundFn();
+deboundFn();
 setTimeout(() => {
-  deboundFn()
+  deboundFn();
 }, 1010);

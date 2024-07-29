@@ -1,12 +1,14 @@
 // 节流函数
-function throttle(fn, delay) {
-  let lastTime = Date.now()
-  return function() {
-    let context = this, args = arguments, curTime = Date.now()
-    if (curTime - lastTime >= delay) {
-      lastTime = curTime
-      fn.apply(context, args)
+function throttle(fn, delay = 100) {
+  let timer = null
+  return function () {
+    if (timer) {
+      return
     }
+    timer = setTimeout(() => {
+      fn.apply(this, arguments)
+      timer = null
+    }, delay)
   }
 }
 
