@@ -1,38 +1,38 @@
 <template>
-    <p>{{loves.eat}} - {{list[2]}}</p>
+  <p>{{ loves.eat }} - {{ list[2] }}</p>
 </template>
 
 <script>
-import { ref, toRef, toRefs, reactive } from 'vue'
+import { ref, toRef, toRefs, reactive } from "vue";
 
 function test() {
-    const obj = reactive({
-      id: '1',
-      gender: "男",
-      loves: {
-        eat: "apple",
-        sleep: "now"
-      },
-      list: ["a","mm","c","d"]
-    })
+  const obj = reactive({
+    id: "1",
+    gender: "男",
+    loves: {
+      eat: "apple",
+      sleep: "now",
+    },
+    list: ["a", "mm", "c", "d"],
+  });
 
-    return toRefs(obj)
+  return toRefs(obj);
 }
 
 export default {
-    name: 'ToRefsForDeepObj',
-    setup() {
-        const { loves, list } = test()
+  name: "ToRefsForDeepObj",
+  setup() {
+    const { loves, list } = test();
 
-        setTimeout(() => {
-            loves.value.eat = 'banana'
-            list.value[2] = 'xxx'
-        }, 1500)
+    setTimeout(() => {
+      loves.value.eat = "banana";
+      list.value[2] = "xxx";
+    }, 1500);
 
-        return {
-            loves,
-            list
-        }
-    }
-}
+    return {
+      loves,
+      list,
+    };
+  },
+};
 </script>
