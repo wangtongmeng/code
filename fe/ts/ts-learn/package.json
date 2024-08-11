@@ -12,9 +12,15 @@
   "license": "ISC",
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "@types/jquery": "^3.5.30",
+    "@types/node": "^22.2.0",
     "rollup": "^4.5.0",
     "rollup-plugin-typescript2": "^0.36.0",
     "typescript": "^5.2.2"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "jquery": "^3.7.1",
+    "vue": "^3.4.37"
+  }
 }
