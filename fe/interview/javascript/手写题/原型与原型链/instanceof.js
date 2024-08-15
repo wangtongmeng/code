@@ -1,4 +1,9 @@
 function myInstanceOf(left, right) {
+  if (left === null) return false; // null undefined
+  const type = typeof left;
+  if (type !== "object" && type !== "function") {
+    return false; // 值类型
+  }
   let proto = Object.getPrototypeOf(left);
   let prototype = right.prototype;
   while (true) {
@@ -10,3 +15,4 @@ function myInstanceOf(left, right) {
 
 console.log(myInstanceOf(function fn1() {}, Object)); // true
 console.log(myInstanceOf(function fn1() {}, Array)); // false
+console.log(myInstanceOf("abc", String)); // false

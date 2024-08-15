@@ -30,3 +30,25 @@ function fn1(a, b) {
 const obj = myNew(fn1, 1, 2);
 
 console.log(obj.__proto__ === fn1.prototype); // true
+
+// class Foo {
+//   // 属性
+//   name;
+//   city;
+//   n;
+
+//   constructor(name, n) {
+//     this.name = name;
+//     this.city = "北京";
+//     this.n = n;
+//   }
+
+//   getName() {
+//     return this.name;
+//   }
+// }
+
+// // const f = new Foo('lisi', 100)
+// const f = myNew(Foo, "lisi", 100);
+// console.info(f);
+// console.info(f.getName());
