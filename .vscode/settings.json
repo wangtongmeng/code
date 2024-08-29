@@ -62,5 +62,8 @@
   "editor.tabSize": 2,
   "svg.preview.background": "editor",
   "editor.formatOnSave": true,
-  "liveServer.settings.port": 5524 // 为了使用 prettier 美化非 js ts 类型文件
+  "liveServer.settings.port": 5524,
+  "cSpell.words": [
+    "Nuxt"
+  ] // 为了使用 prettier 美化非 js ts 类型文件
 }
