@@ -1,4 +1,4 @@
-/* @import '_variables.css';
+@import '_variables.css';
 
 @tailwind base;
 @tailwind components;
@@ -7,4 +7,4 @@
 a {
   text-decoration: none;
   color: var(--link-color);
-} */
+}
