@@ -1,6 +1,8 @@
 <template>
   <div class="p-5">
     <div v-if="pending">加载中...</div>
+    <!-- 添加error显示 -->
+    <div v-else-if="error">{{ (error as NuxtError).data.message }}</div>
     <div v-else>
       <h1 class="text-2xl">{{ data?.title }}</h1>
       <div v-html="data?.content"></div>
@@ -13,10 +15,18 @@
   </div>
 </template>
 <script setup lang="ts">
+import { NuxtError } from "#app";
 const router = useRouter();
 const route = useRoute();
 const fetchPost = () => $fetch(`/api/detail/${route.params.id}`);
-const { data, pending } = await useAsyncData(fetchPost);
+const { data, pending, error } = await useAsyncData(fetchPost);
+
+const errorMsg = computed(() => error.value as NuxtError);
+watchEffect(() => {
+  if (unref(error)) {
+    showError(errorMsg.value);
+  }
+});
 
 // 增加评论相关逻辑，注意登录状态的获取和使用
 const value = useState("comment", () => "");
