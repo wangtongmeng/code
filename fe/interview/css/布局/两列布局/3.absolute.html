@@ -5,19 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
-    /* 利用 absolute，父元素相对定位，左边元素宽度固定，并绝对定位，右边元素margin-left */
     .outer {
-      display: relative;
+      position: relative;
       height: 100px;
     }
     .left {
       width: 200px;
       height: 100px;
-      background-color: aqua;
+      background-color: greenyellow;
     }
     .right {
       position: absolute;
@@ -26,13 +21,16 @@
       bottom: 0;
       left: 200px;
       background-color: blueviolet;
+      overflow: hidden;
+      overflow-y: auto;
+      word-wrap: break-word;
     }
   </style>
 </head>
 <body>
   <div class="outer">
-    <div class="left"></div>
-    <div class="right"></div>
+    <div class="left">left</div>
+    <div class="right">sadkfljal;ksejfal;wkjegl;wkejglwkaegl;awngesadkfljal;ksejfal;wkjegl;wkejglwkaegl;awngesadkfljal;ksejfal;wkjegl;wkejglwkaegl;awngesadkfljal;ksejfal;wkjegl;wkejglwkaegl;awngesadkfljal;ksejfal;wkjegl;wkejglwkaegl;awnge</div>
   </div>
 </body>
 </html>

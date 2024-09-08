@@ -11,18 +11,21 @@
     }
     .left {
       width: 200px;
-      background-color: aqua;
+      flex-shrink: 0;
+      background-color: greenyellow;
     }
     .right {
       flex: 1;
       background-color: blueviolet;
+      overflow: hidden;
+      word-wrap: break-word;
     }
   </style>
 </head>
 <body>
   <div class="outer">
-    <div class="left"></div>
-    <div class="right"></div>
+    <div class="left">left</div>
+    <div class="right">sadkfljal;ksejfal;wkjegl;wkejglwkaegl;awngesadkfljal;ksejfal;wkjegl;wkejglwkaegl;awngesadkfljal;ksejfal;wkjegl;wkejglwkaegl;awngesadkfljal;ksejfal;wkjegl;wkejglwkaegl;awngesadkfljal;ksejfal;wkjegl;wkejglwkaegl;awnge</div>
   </div>
 </body>
 </html>

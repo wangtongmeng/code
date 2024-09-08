@@ -3,30 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>九宫格布局</title>
+  <title>Document</title>
   <style>
     * {
       margin: 0;
-      padding: 0;
+      padding:0;
     }
     li {
       list-style: none;
     }
-    /* 通过table */
+
     ul {
       width: 100px;
       height: 100px;
       display: table;
+      /* 间隙 */
+      border-spacing: 5px; 
     }
     li {
       display: table-row;
     }
+
     div {
       width: 30%;
       height: 30%;
       display: table-cell;
       background-color: aqua;
     }
+  
   </style>
 </head>
 <body>
@@ -37,14 +41,14 @@
       <div>3</div>
     </li>
     <li>
-      <div>1</div>
-      <div>2</div>
-      <div>3</div>
+      <div>4</div>
+      <div>5</div>
+      <div>6</div>
     </li>
     <li>
-      <div>1</div>
-      <div>2</div>
-      <div>3</div>
+      <div>7</div>
+      <div>8</div>
+      <div>9</div>
     </li>
   </ul>
 </body>
