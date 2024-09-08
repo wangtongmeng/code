@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/axios@0.24.0/dist/axios.min.js"></script>
+</head>
+<body>
+    <script>
+        async function query() {
+            const res = await axios.get('/api/person/find', {
+                params: {
+                    name: '光',
+                    age: 20
+                }
+            });
+            console.log(res);            
+        }
+        query();
+   </script>
+</body>
+</html>
