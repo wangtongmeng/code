@@ -64,6 +64,7 @@
   "editor.formatOnSave": true,
   "liveServer.settings.port": 5524,
   "cSpell.words": [
-    "Nuxt"
+    "Nuxt",
+    "vhead"
   ] // 为了使用 prettier 美化非 js ts 类型文件
 }
