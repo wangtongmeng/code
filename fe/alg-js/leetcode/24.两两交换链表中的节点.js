@@ -17,22 +17,25 @@
  * @return {ListNode}
  */
 var swapPairs = function (head) {
-  let vhead = new ListNode(0, head);
-  let cur = vhead,
-    temp = null;
+  let vhead = new ListNode(0, head)
+  let cur = vhead
   while (cur.next && cur.next.next) {
-    let pre = cur.next;
-    let after = cur.next.next;
-    temp = after.next;
+    let pre = cur.next
+    let after = cur.next.next
+    let temp = after.next
+    cur.next = after
+    after.next = pre
+    pre.next = temp
 
-    cur.next = after;
-    after.next = pre;
-    pre.next = temp;
-
-    cur = pre;
+    cur = pre
   }
-  return vhead.next;
+
+  return vhead.next
 };
+
+// @lc code=end
+
+
 
 // var swapPairs = function (head) {
 //   let vhead = new ListNode(0, head);
@@ -49,7 +52,6 @@ var swapPairs = function (head) {
 //   }
 //   return vhead.next;
 // };
-// @lc code=end
 
 //  // 创建一个虚拟头结点
 //  let vhead = new ListNode(0, head)
