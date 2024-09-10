@@ -1,13 +1,21 @@
 import {
+  BeforeApplicationShutdown,
   Injectable,
   OnApplicationBootstrap,
+  OnModuleDestroy,
   OnModuleInit,
 } from '@nestjs/common';
 import { CreateDddDto } from './dto/create-ddd.dto';
 import { UpdateDddDto } from './dto/update-ddd.dto';
 
 @Injectable()
-export class DddService implements OnModuleInit, OnApplicationBootstrap {
+export class DddService
+  implements
+    OnModuleInit,
+    OnApplicationBootstrap,
+    OnModuleDestroy,
+    BeforeApplicationShutdown
+{
   create(createDddDto: CreateDddDto) {
     return 'This action adds a new ddd';
   }
@@ -33,5 +41,11 @@ export class DddService implements OnModuleInit, OnApplicationBootstrap {
   }
   onApplicationBootstrap() {
     console.log('DddService onApplicationBootstrap');
+  }
+  onModuleDestroy() {
+    console.log('DddService OnModuleDestroy');
+  }
+  beforeApplicationShutdown(signal: string) {
+    console.log('DddService BeforeApplicationShutdown', signal);
   }
 }

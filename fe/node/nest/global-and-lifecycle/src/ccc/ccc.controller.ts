@@ -8,19 +8,34 @@ import {
   Delete,
   OnModuleInit,
   OnApplicationBootstrap,
+  OnModuleDestroy,
+  BeforeApplicationShutdown,
 } from '@nestjs/common';
 import { CccService } from './ccc.service';
 import { CreateCccDto } from './dto/create-ccc.dto';
 import { UpdateCccDto } from './dto/update-ccc.dto';
 
 @Controller('ccc')
-export class CccController implements OnModuleInit, OnApplicationBootstrap {
+export class CccController
+  implements
+    OnModuleInit,
+    OnApplicationBootstrap,
+    OnModuleDestroy,
+    BeforeApplicationShutdown
+{
   constructor(private readonly cccService: CccService) {}
   onModuleInit() {
     console.log('CccController OnModuleInit');
   }
   onApplicationBootstrap() {
     console.log('CccController OnApplicationBootstrap');
+  }
+
+  onModuleDestroy() {
+    console.log('CccController OnModuleDestroy');
+  }
+  beforeApplicationShutdown(signal: string) {
+    console.log('CccController BeforeApplicationShutdown', signal);
   }
 
   @Post()

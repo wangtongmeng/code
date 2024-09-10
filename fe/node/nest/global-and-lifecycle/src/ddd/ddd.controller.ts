@@ -8,13 +8,21 @@ import {
   Delete,
   OnModuleInit,
   OnApplicationBootstrap,
+  OnModuleDestroy,
+  BeforeApplicationShutdown,
 } from '@nestjs/common';
 import { DddService } from './ddd.service';
 import { CreateDddDto } from './dto/create-ddd.dto';
 import { UpdateDddDto } from './dto/update-ddd.dto';
 
 @Controller('ddd')
-export class DddController implements OnModuleInit, OnApplicationBootstrap {
+export class DddController
+  implements
+    OnModuleInit,
+    OnApplicationBootstrap,
+    OnModuleDestroy,
+    BeforeApplicationShutdown
+{
   constructor(private readonly dddService: DddService) {}
 
   onModuleInit() {
@@ -22,6 +30,13 @@ export class DddController implements OnModuleInit, OnApplicationBootstrap {
   }
   onApplicationBootstrap() {
     console.log('DddController OnApplicationBootstrap');
+  }
+
+  onModuleDestroy() {
+    console.log('DddController OnModuleDestroy');
+  }
+  beforeApplicationShutdown(signal: string) {
+    console.log('DddController BeforeApplicationShutdown', signal);
   }
 
   @Post()
