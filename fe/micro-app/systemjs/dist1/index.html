@@ -70,6 +70,7 @@
         let lastRegister;
         class SystemJs {
             import(id) { // 这个id原则上可以是一个第三方路径cdn
+                debugger
                 return Promise.resolve(processScripts()).then(() => {
                     // 1）去当前路径查找 对应的资源 index.js
                     const lastSepIndex = location.href.lastIndexOf('/');
