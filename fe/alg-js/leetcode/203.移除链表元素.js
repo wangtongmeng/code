@@ -17,20 +17,19 @@
  * @param {number} val
  * @return {ListNode}
  */
-var removeElements = function(head, val) {
-  let vhead = new ListNode(0, head)
-  let cur = vhead
+var removeElements = function (head, val) {
+  let vhead = new ListNode(0, head);
+  let cur = vhead;
   while (cur.next) {
     if (cur.next.val === val) {
-      cur.next = cur.next.next
-      continue
+      cur.next = cur.next.next;
+    } else {
+      cur = cur.next;
     }
-    cur = cur.next
   }
-  return vhead.next
+  return vhead.next;
 };
 // @lc code=end
-
 
 // // 虚拟头节点的方式
 // const vhead = new ListNode(0, head)
@@ -43,4 +42,3 @@ var removeElements = function(head, val) {
 //   cur = cur.next
 // }
 // return vhead.next
-

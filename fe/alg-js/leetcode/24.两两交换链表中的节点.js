@@ -17,25 +17,23 @@
  * @return {ListNode}
  */
 var swapPairs = function (head) {
-  let vhead = new ListNode(0, head)
-  let cur = vhead
+  let vhead = new ListNode(0, head);
+  let cur = vhead;
   while (cur.next && cur.next.next) {
-    let pre = cur.next
-    let after = cur.next.next
-    let temp = after.next
-    cur.next = after
-    after.next = pre
-    pre.next = temp
+    let pre = cur.next;
+    let after = cur.next.next;
+    let temp = after.next;
 
-    cur = pre
+    cur.next = after;
+    after.next = pre;
+    pre.next = temp;
+
+    cur = pre;
   }
-
-  return vhead.next
+  return vhead.next;
 };
 
 // @lc code=end
-
-
 
 // var swapPairs = function (head) {
 //   let vhead = new ListNode(0, head);

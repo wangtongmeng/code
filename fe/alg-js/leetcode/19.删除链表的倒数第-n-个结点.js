@@ -17,34 +17,21 @@
  * @param {number} n
  * @return {ListNode}
  */
-var removeNthFromEnd = function(head, n) {
-  let vhead = new ListNode(0, head)
-  let  slow = fast = vhead
-  while (n > 0) {
-    fast = fast.next
-    n--
+var removeNthFromEnd = function (head, n) {
+  let vhead = new ListNode(0, head);
+  let slow = (fast = vhead);
+  while (n-- > 0) {
+    fast = fast.next;
   }
   while (fast.next) {
-    slow = slow.next
-    fast = fast.next
+    slow = slow.next;
+    fast = fast.next;
   }
-  slow.next = slow.next.next
-  return vhead.next
-}; 
+  console.log(slow.val);
+  slow.next = slow.next.next;
+  return vhead.next;
+};
 // @lc code=end‘’
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // let vhead = new ListNode(0, head)
 //   let slow = vhead
@@ -63,4 +50,3 @@ var removeNthFromEnd = function(head, n) {
 //   //倒数第n个节点可推断其next节点不为空
 //   slow.next = slow.next.next
 //   return vhead.next
-
