@@ -61,10 +61,19 @@
   //   "editor.formatOnSave": true,
   "editor.tabSize": 2,
   "svg.preview.background": "editor",
-  "editor.formatOnSave": true,
+  // "editor.formatOnSave": true,
   "liveServer.settings.port": 5524,
   "cSpell.words": [
     "Nuxt",
     "vhead"
-  ] // 为了使用 prettier 美化非 js ts 类型文件
+  ], // 为了使用 prettier 美化非 js ts 类型文件
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "always"
+  }
 }
