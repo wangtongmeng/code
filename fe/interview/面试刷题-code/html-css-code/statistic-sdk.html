@@ -14,7 +14,7 @@
 
         class MyStatistic {
             constructor(productId) {
-                this.productId = productId
+                this.productId = productId // 可以用来标记不同产品线的
 
                 this.initPerformance() // 性能统计
                 this.initError() // 错误监控
@@ -55,7 +55,7 @@
                 })
             }
 
-            pv() {
+            pv() { // 交给用户自己做，对于spa应用只是加载一次
                 const href = location.href
                 if (PV_URL_SET.get(href)) return // 不重复发送 pv
 
@@ -81,12 +81,16 @@
 
         // s.event('vip', 'close')
 
+
+        // .error发送错误
+        // 1.
         // try {
         // } catch(ex) {
         //     s.error(ex, {})
         // }
-
+        // 2.
         // Vue
+        // 3.
         // React
 
     </script>
