@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .circle {
+      fill: none;
+      stroke: #7C83FD;
+      stroke-width: 8;
+      stroke-dasharray: 314;
+      stroke-dashoffset:314;
+      stroke-linecap: round;
+
+      transform:rotate(-90deg);
+      transform-origin: center;
+      transform-box:fill-box;
+      transition: all 0.5s;;
+  }
+  .text{
+      font-size: 20px;
+  }
+  .percent{
+      font-size: 10px;
+  }
+  </style>
+</head>
+<body>
+  <svg>
+      <circle class="circle" cx="80" cy="80" r="50" transform="rotate(-90 80 80)"></circle>
+      <text x="80" y="85" fill="#6b778c" text-anchor="middle">
+          <tspan class="text">0</tspan><tspan class="percent">%</tspan>
+      </text>
+  </svg>
+
+  <script>
+    // 参考 https://juejin.cn/post/6998078886080675871?searchId=2025011017004571088F4CA5989F137D78
+
+    let progressLen=314;
+    const textDom=document.getElementsByClassName('text')[0];
+    const circleDom=document.getElementsByClassName('circle')[0];
+
+    setPercent=(num)=>{
+        if(num>100) return;
+        circleDom.style['stroke-dashoffset']=progressLen-(progressLen/100)*num;
+        textDom.innerHTML=num;
+    }
+
+
+    let i=0;
+    setInterval(()=>{
+        i+=Math.floor(Math.random()*5);
+        if(i>=100)i=100;
+        setPercent(i);
+    },250)
+
+  </script>
+</body>
+</html>
