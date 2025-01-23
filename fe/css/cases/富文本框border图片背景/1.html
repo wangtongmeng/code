@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      min-height: 100px;
+      border-image-slice: 127 118 75 309 fill;
+      border-image-repeat: round;
+      border-image-width: 122.401px 113.727px 72.2839px 297.81px;
+      padding: 110.835px 25.0584px 25.0584px;
+      border-image-source: url(https://tieba-ares.cdn.bcebos.com/mis/2022-9/1663741971904/40842a510cae.png)
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <textarea id="text" class="text"></textarea>
+  </div>
+  <script>
+    const el = document.querySelector('.text');
+    el.addEventListener('input', function() {
+      console.log(111);
+      
+      el.style.height = 'auto'; // 重置高度
+      el.style.height = el.scrollHeight + 'px'; // 设置新的高度
+    });
+  </script>
+</body>
+</html>

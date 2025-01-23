@@ -64,6 +64,26 @@
       }
 
     });
+    // 删
+    // - 指定位置内容 this.quill.deleteText(0, 3);
+    // - 所有内容 this.quill.deleteText(0, this.quill.getLength());
+    // - 选中内容 const { index, length } = this.quill.getSelection(); this.quill.deleteText(index, length);
+
+    // 查
+    // - 指定位置内容 this.quill.getText(0, 6);
+    // - 全部内容 this.quill.getText();
+    // - 选中内容 const { index, length } = this.quill.getSelection(); this.quill.getText(index, length);
+    // 内容长度
+    //  - 内容长度 const length = this.quill.getText().length; 等价于 const length = this.quill.getLength();
+    //  - 选中文本的长度 const length = this.quill.getSelection().length;
+
+    // 增
+    // 插入文本(纯文本、带格式的文本)
+    // 
+
+
+
+
   </script>
 </body>
 
