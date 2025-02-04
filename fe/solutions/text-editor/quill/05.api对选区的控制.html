@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.bubble.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.core.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.js"></script>
+  <style>
+    section {
+      margin: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div style="width: 100px;height: 100px;background-color: aqua;"></div>
+  <div id="toolbar"></div>
+  <div id="editor">
+  </div>
+  <section>
+    <button id="init1">初始化数据</button>
+  </section>
+  <section>
+    <button id="clear1">清空</button>
+  </section>
+  增
+  <section>
+    设置选区和光标位置
+    <button id="insert1">设置光标位置，不选中文本</button>
+    <button id="insert2">选中文本</button>
+  </section>
+  改
+  <section>
+  </section>
+  删
+  <section>
+  </section>
+  查
+  <section>
+    <button id="get1">查询选区信息</button>
+    <button id="get2">查询文本相对定位位置</button>
+  </section>
+  <div>
+
+  </div>
+  <script>
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: '平等表达，友善交流',
+      modules: {
+        toolbar:
+          [
+            // 默认的
+            [{ header: [1, 2, 3, false] }],
+            ['bold', 'italic', 'underline', 'link'],
+            [{ list: 'ordered' }, { list: 'bullet' }],
+            ['clean'],
+            ['image']
+          ],
+      }
+    });
+
+
+    // 初始化数据
+    init1.addEventListener('click', () => {
+      quill.setContents([
+        { insert: 'Hello', attributes:{bold:true} },
+        { insert: '\n' },
+        { insert: 'World!', attributes: {link: 'orld!'} },
+        { insert: 'Quill' },
+      ]);
+    });
+
+    // 清空 
+    clear1.addEventListener('click', () => {
+      quill.setText('');
+    });
+
+
+    insert1.addEventListener('click', () => {
+      quill.setSelection(10) // // 将光标定位到第10个字符后面
+    })
+    insert2.addEventListener('click', () => {
+      quill.setSelection(0, 10)
+    })
+
+    get1.addEventListener('click', () => {
+      console.log(quill.getSelection()) // {index: 0, length: 5}
+      // 如果只有光标，没有选择任何内容，则返回的length为0。 {index: 5, length: 0}
+      // 如果编辑器没有光标，则返回null
+    })
+    get2.addEventListener('click', () => {
+      const bounds = quill.getBounds(0, 3)
+      console.log(bounds);
+      
+    })
+
+  </script>
+</body>
+
+</html>

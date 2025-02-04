@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.bubble.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.core.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.js"></script>
+  <style>
+    section {
+      margin: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="toolbar"></div>
+  <div id="editor">
+  </div>
+  <section>
+    <button id="init1">初始化数据</button>
+  </section>
+  <section>
+    <button id="clear1">清空</button>
+  </section>
+  增
+  <section>
+    <button id="insert1">设置选中文本的格式</button>
+    <button id="insert2">设置第10-20个字符为粉色</button>
+    <button id="insert3">设置第一行为有序列表</button>
+  </section>
+  改
+  <section>
+  </section>
+  删
+  <section>
+    <button id="del1">清除指定位置格式</button>
+    <button id="del2">清除全部文本的格式</button>
+    <button id="del3">清除选中文本的格式</button>
+  </section>
+  查
+  <section>
+    <button id="get1">获取单一格式</button>
+    <button id="get2">获取 Delta 格式</button>
+  </section>
+  <div>
+
+  </div>
+  <script>
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: '平等表达，友善交流',
+      modules: {
+        toolbar:
+          [
+            // 默认的
+            [{ header: [1, 2, 3, false] }],
+            ['bold', 'italic', 'underline', 'link'],
+            [{ list: 'ordered' }, { list: 'bullet' }],
+            ['clean'],
+            ['image']
+          ],
+      }
+    });
+
+
+    // 初始化数据
+    init1.addEventListener('click', () => {
+      quill.setContents([
+        { insert: 'Hello', attributes:{bold:true} },
+        { insert: '\n' },
+        { insert: 'World!', attributes: {link: 'orld!'} },
+        { insert: 'Quill' },
+      ]);
+    });
+
+    // 清空 
+    clear1.addEventListener('click', () => {
+      quill.setText('');
+    });
+
+
+
+
+    insert1.addEventListener('click', () => {
+      quill.format('color', 'pink'); // 设置选中文本为粉色
+    })
+    insert2.addEventListener('click', () => {
+      quill.formatText(10, 10, 'color', 'pink'); // 设置第10-20个字符为粉色
+    })
+    insert3.addEventListener('click', () => {
+      quill.formatLine(0, 1, 'list', 'ordered');
+    })
+
+    del1.addEventListener('click', () => {
+      qill.removeFormat(0, 60)
+    })
+    del2.addEventListener('click', () => {
+      quill.removeFormat(0, quill.getLength())
+    })
+    del3.addEventListener('click', () => {
+      const {index, length} = quill.getSelection();
+      quill.removeFormat(index, length)
+    })
+
+    get1.addEventListener('click', () => {
+      const {index, length} = quill.getSelection();
+      const format = quill.getFormat(index, length);
+      console.log(format)
+      // 粗体 { bold: true }
+      // 超链接 { link: "https://juejin.cn/post/6976023288753586184" }
+    })
+    get2.addEventListener('click', () => {
+      const {index, length} = quill.getSelection();
+      const contents = quill.getContents(index, length);
+      console.log(contents);
+      
+    })
+
+  </script>
+</body>
+
+</html>

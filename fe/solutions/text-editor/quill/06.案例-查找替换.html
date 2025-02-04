@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.bubble.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.core.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.js"></script>
+  <style>
+    section {
+      margin: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div style="width: 100px;height: 100px;background-color: aqua;"></div>
+  <div id="toolbar"></div>
+  <div id="editor">
+  </div>
+  <section>
+    <button id="init1">初始化数据</button>
+  </section>
+  <section>
+    <button id="clear1">清空</button>
+  </section>
+  <section>
+    <input id="searchInput" />
+    <button id="search">查找</button>
+    <button id="replace">替换</button>
+  </section>
+  <div>
+
+  </div>
+  <script>
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: '平等表达，友善交流',
+      modules: {
+        toolbar:
+          [
+            // 默认的
+            [{ header: [1, 2, 3, false] }],
+            ['bold', 'italic', 'underline', 'link'],
+            [{ list: 'ordered' }, { list: 'bullet' }],
+            ['clean'],
+            ['image']
+          ],
+      }
+    });
+
+
+    // 初始化数据
+    init1.addEventListener('click', () => {
+      quill.setContents([
+        { insert: 'Quill', attributes: { bold: true } },
+        { insert: '\n' },
+        { insert: 'is', attributes: { link: 'orld!' } },
+        { insert: 'good' },
+        { insert: 'Quill' },
+      ]);
+    });
+
+    // 清空 
+    clear1.addEventListener('click', () => {
+      quill.setText('');
+    });
+    let inputValue = ''
+    searchInput.addEventListener('input', (e) => {
+      inputValue = e.target.value
+    })
+
+
+    search.addEventListener('click', () => {
+      const length = inputValue.length
+      if (!length) return;
+
+
+      // 匹配目标文本的正则
+      const reg = new RegExp(inputValue, 'g');
+
+      let match;
+      while ((match = reg.exec(quill.getText())) !== null) {
+        // 目标文本在文档中的位置
+        const index = match.index;
+        // 高亮
+        quill.formatText(index, length, 'background', '#ef0fff')
+      }
+
+    })
+
+    replace.addEventListener('click', () => {
+      const length = inputValue.length
+      if (!length) return;
+
+
+      // 匹配目标文本的正则
+      const reg = new RegExp(inputValue, 'g');
+
+      let match;
+      while ((match = reg.exec(quill.getText())) !== null) {
+        // 目标文本在文档中的位置
+        const index = match.index;
+        // 替换
+        quill.deleteText(index, length);
+        quill.insertText(index, 'QuillJS', 'link', 'https://quilljs.com/');
+      }
+    })
+
+
+  </script>
+</body>
+
+</html>

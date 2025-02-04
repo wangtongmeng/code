@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.bubble.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.core.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.js"></script>
+  <style>
+    section {
+      margin: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="toolbar"></div>
+  <div id="editor">
+  </div>
+  <section>
+    <button id="init1">初始化数据</button>
+  </section>
+  <section>
+    <button id="clear1">清空</button>
+  </section>
+  增
+  <section>
+    <button id="insert1">插入纯文本</button>
+    <button id="insert2">插入带格式的文本</button>
+    <button id="insert3">插入嵌入内容</button>
+    <button id="insert4">替换现有文本-setText 设置纯文本</button>
+    <button id="insert5">setContents 设置带格式的文本</button>
+  </section>
+  改
+  <section>
+    <button id="set1">选中quill添加链接 不使用updateContents</button>
+    <button id="set2">选中quill添加链接 使用updateContents</button>
+  </section>
+  删
+  <section>
+    <button id="del1">删除指定内容</button>
+    <button id="del2">删除选中内容</button>
+    <button id="del3">删除所有内容</button>
+  </section>
+  查
+  <section>
+    <button id="get1">获取指定位置内容</button>
+    <button id="get2">获取所有内容</button>
+    <button id="get3">获取选中内容</button>
+    <button id="get4">获取所有内容长度</button>
+    <button id="get5">获取选中内容长度</button>
+  </section>
+  <div>
+
+  </div>
+  <script>
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: '平等表达，友善交流',
+      modules: {
+        toolbar:
+          [
+            // 默认的
+            [{ header: [1, 2, 3, false] }],
+            ['bold', 'italic', 'underline', 'link'],
+            [{ list: 'ordered' }, { list: 'bullet' }],
+            ['clean'],
+            ['image']
+          ],
+      }
+    });
+
+    quill.on('text-change', function (delta, oldDelta, source) {
+      if (source === 'api') {
+        const images = quill.root.getElementsByTagName('img');
+        // 设置图片大小
+        for (let img of images) {
+          img.style.maxWidth = '100px';
+          img.style.height = 'auto';
+        }
+      }
+    });
+
+    // 初始化数据
+    init1.addEventListener('click', () => {
+      quill.setContents([
+        { insert: 'Hello' },
+        { insert: '\n' },
+        { insert: 'World!' },
+        { insert: 'Quill' },
+      ]);
+    });
+
+    // 清空 
+    clear1.addEventListener('click', () => {
+      quill.setText('');
+    });
+
+
+    // 插入纯文本
+    insert1.addEventListener('click', () => {
+      quill.insertText(quill.getLength() - 1, 'Hello World!')
+    });
+    // 插入带格式的文本
+    insert2.addEventListener('click', () => {
+      quill.insertText(quill.getLength() - 1, 'Quill', 'link', 'https://quilljs.com/')
+    });
+    // 插入嵌入内容
+    insert3.addEventListener('click', () => {
+      quill.insertEmbed(quill.getLength() - 1, 'image', 'http://gips1.baidu.com/it/u=3874647369,3220417986&fm=3028&app=3028&f=JPEG&fmt=auto');
+    });
+    insert4.addEventListener('click', () => {
+      quill.setText('hello wolrd')
+      // quill.setText(''); // 清空
+    })
+    // 用 delta 数据替换现有内容
+    insert5.addEventListener('click', () => {
+      quill.setContents([
+        { insert: { text: 'hello' } }
+      ]);
+    })
+    // quill.setContents([
+    //   { insert: { text: 'hello' } }
+    // ]);
+
+
+    // 选中quill添加链接 不使用updateContents
+    set1.addEventListener('click', () => {
+      const { index, length } = quill.getSelection();
+      quill.deleteText(index, length);
+      quill.insertText(index, 'QuillJS', 'link', 'https://quilljs.com/');
+    })
+    // 选中quill添加链接 使用updateContents
+    set2.addEventListener('click', () => {
+      const { index, length } = quill.getSelection();
+      quill.updateContents([
+        { retain: index },
+        { delete: length },
+        { insert: 'QuillJS', attributes: { link: 'https://quilljs.com/' } }
+      ]);
+    })
+
+
+    del1.addEventListener('click', () => {
+      quill.deleteText(0, 3);
+    })
+    del2.addEventListener('click', () => {
+      const { index, length } = quill.getSelection();
+      quill.deleteText(index, length);
+    })
+    del3.addEventListener('click', () => {
+      quill.deleteText(0, quill.getLength());
+      // quill.setText(''); 
+    })
+
+    get1.addEventListener('click', () => {
+      console.log(quill.getText(0, 3)); // 没效果，拿到的是全部内容
+      
+    })
+    get2.addEventListener('click', () => {
+      console.log(quill.getText());
+      
+    })
+    get3.addEventListener('click', () => {
+      const { index, length } = quill.getSelection();
+      console.log(quill.getText(index, length));
+      
+    })
+    get4.addEventListener('click', () => {
+      console.log(quill.getText().length);
+      console.log(quill.getLength());
+    })
+    get5.addEventListener('click', () => {
+      console.log(quill.getSelection().length);
+    })
+  </script>
+</body>
+
+</html>
