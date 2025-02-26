@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.bubble.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.core.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.js"></script>
+</head>
+
+<body>
+  <div id="toolbar"></div>
+  <div id="editor"></div>
+  <div id="ql-counter"></div>
+  <div>
+
+  </div>
+  <script>
+    debugger
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: '平等表达，友善交流',
+      modules: {
+        toolbar: [
+          ['bold', 'italic'],
+          ['link', 'image']
+        ],
+      }
+    });
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

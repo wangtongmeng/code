@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.snow.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.js"></script>
+</head>
+<body>
+  <div id="editor"></div>
+  <script>
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: '请输入...',
+      modules: {
+        toolbar: ['bold', 'link']
+      }
+    });
+    quill.on('text-change', function(delta, oldDelta, source) {
+      console.log('text-change', JSON.stringify(delta));
+    });
+    // 增
+    quill.setText('Hello World!');
+    // 改 World! 加粗
+    quill.setSelection(6, 6);
+    const { index, length } = quill.getSelection();
+    quill.formatText(index, length, 'bold', true);
+    // 删除空格+World!
+    quill.deleteText(5, 7);
+    // 光标在最后
+    quill.setSelection(quill.getLength() - 1);
+
+
+    quill.setContents([
+      { insert: 'Hello World!' }
+    ]);
+    quill.updateContents([
+      { retain: 6 },
+      { retain: 6, attributes: { bold: true } }
+    ]);
+    quill.updateContents([
+      { retain: 5 },
+      { delete: 7 },
+    ]);
+    quill.setSelection(quill.getLength() - 1)
+
+    
+
+  </script>
+</body>
+</html>

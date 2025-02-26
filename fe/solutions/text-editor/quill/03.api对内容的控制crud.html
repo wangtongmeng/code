@@ -75,6 +75,7 @@
     });
 
     quill.on('text-change', function (delta, oldDelta, source) {
+      console.log('text-change', JSON.stringify(delta), JSON.stringify(oldDelta), source);
       if (source === 'api') {
         const images = quill.root.getElementsByTagName('img');
         // 设置图片大小
