@@ -1,0 +1,1 @@
+export interface Res {list: {w: number, h: number}[], totalCount: number}
