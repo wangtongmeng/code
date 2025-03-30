@@ -19,24 +19,37 @@
 
 <body>
   <div id="toolbar"></div>
-    <div id="editor"></div>
+  <div id="editor"></div>
   <script>
 
-    class Counter {
-      constructor(quill, options) {
-        this.quill = quill;
-        this.container = quill.addContainer('ql-counter');
-        this.renderCounter();
-        quill.on(Quill.events.TEXT_CHANGE, this.renderCounter);
+    // const Inline = Quill.import('blots/inline');
+    const Embed = Quill.import('blots/embed');
+
+    class LinkBlot extends Embed {
+    static blotName = 'link1';
+    static tagName = 'a';
+
+    static create(value) {
+      let node = super.create();
+      console.log(node)
+      if (value) {
+        node.setAttribute('href', value.url);
+        node.setAttribute('target', '_blank');
+        node.innerText = value.text || 'Link';  // 假设我们还有一个文本属性
       }
-      renderCounter = () => {
-        const text = this.quill.getText(); // 获取编辑器中的纯文本内容
-        const char = text.replace(/\s/g, ''); // 使用正则表达式将空白字符去掉
-        this.container.innerHTML = `当前字数：${char.length}`;
-      }
+      return node;
     }
 
-    Quill.register('modules/counter', Counter);
+    static formats(node) {
+      return { url: node.getAttribute('href') };
+    }
+
+    static value(node) {
+      return { url: node.getAttribute('href'), text: node.innerText };
+    }
+  };
+
+    Quill.register(LinkBlot);
 
     const quill = new Quill('#editor', {
       theme: 'snow',
@@ -46,11 +59,16 @@
           ['bold', 'italic'],
           ['link', 'image']
         ],
-        counter: true
       }
     });
 
-
+// 插入链接
+setTimeout(() => {
+  quill.insertEmbed(1, 'link1', {
+    url: 'https://www.baidu.com',
+    text: 'Baidu'
+  });
+}, 1000);
 
 
 

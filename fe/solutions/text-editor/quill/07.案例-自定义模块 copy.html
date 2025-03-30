@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.bubble.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.core.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.js"></script>
+  <style>
+    section {
+      margin: 5px;
+    }
+  </style>
+</head>
+
+<body>
+    <div id="editor"></div>
+    <section id="counter"></section>
+  <script>
+
+    class Counter {
+      constructor(quill, options) {
+        this.quill = quill;
+        this.container = quill.addContainer('ql-counter');
+        // this.container = document.querySelector('#counter');
+        this.renderCounter();
+        quill.on(Quill.events.TEXT_CHANGE, this.renderCounter);
+      }
+      renderCounter = () => {
+        const text = this.quill.getText(); // 获取编辑器中的纯文本内容
+        const char = text.replace(/\s/g, ''); // 使用正则表达式将空白字符去掉
+        this.container.innerHTML = `当前字数：${char.length}`;
+      }
+    }
+
+    Quill.register('modules/counter', Counter);
+
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: '平等表达，友善交流',
+      modules: {
+        toolbar: [
+          ['bold', 'italic'],
+          ['link', 'image']
+        ],
+        counter: true
+      }
+    });
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

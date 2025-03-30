@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.bubble.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.core.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+  <style>
+    section {
+      margin: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="editor"></div>
+  <button id="customLink">插入自定义链接</button>
+  <script>
+    const Embed = Quill.import('blots/embed');
+    class LinkBlot extends Embed {
+      static blotName = 'custom-link';
+      static tagName = 'a';
+
+      static create(value) {
+        let node = super.create();
+        if (value) {
+          console.log('value', value)
+          node.setAttribute('href', value.url);
+          node.setAttribute('target', '_blank');
+          node.innerText = value.text || 'Link';
+        }
+        return node;
+      }
+
+      static value(node) {
+        return {
+          url: node.getAttribute('href'),
+          text: node.innerText,
+        };
+      }
+    };
+
+
+    Quill.register(LinkBlot);
+
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: '请输入',
+      modules: {
+        toolbar: ['bold', 'link'],
+      }
+    });
+
+
+    customLink.onclick = () => {
+      // 获取光标位置，从光标处插入，否则插入到末尾
+      const range = quill.getSelection();
+      const index = range ? range.index : quill.getLength() - 1;
+      // 插入自定义链接
+      quill.insertEmbed(
+        index,
+        'custom-link',
+        { url: 'https://www.baidu.com', text: '百度' }
+      )
+      // 光标定位到插入的链接后面
+      quill.setSelection(index + 1);
+    };
+
+    quill.on('text-change', (delta, oldDelta, source) => {
+      console.log(delta);
+    });
+
+    customLink.onclick = () => {
+      // 获取光标位置，从光标处插入，否则插入到末尾
+      const range = quill.getSelection();
+      const index = range ? range.index : quill.getLength() - 1;
+      quill.updateContents([
+        {retain: index},
+        {
+          insert: {
+            'custom-link': {
+              url: 'https://www.baidu.com',
+              text: '百度'
+            }
+          }
+        },
+        {retain: quill.getLength() - index - 1}
+      ])
+
+      // 光标定位到插入的链接后面
+      quill.setSelection(index + 1);
+    }
+
+  </script>
+</body>
+
+</html>

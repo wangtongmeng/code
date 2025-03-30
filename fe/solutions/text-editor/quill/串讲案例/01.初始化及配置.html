@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+</head>
+<body>
+  <div id="editor"></div>
+  <script>
+    var quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: '请输入...',
+      modules: {
+        toolbar: ['bold', 'link']
+      }
+    });
+
+    // 监听内容变化
+    quill.on('text-change', function(delta, oldDelta, source) {
+      console.log(delta, oldDelta, source);
+    });
+    // 监听选区变化
+    quill.on('selection-change', function(range, oldRange, source) {
+      console.log('selection', range, oldRange, source);
+    });
+    // 监听编辑器初始化完成
+    quill.on('editor-change', function(eventName, ...args) {
+      // 判断是否是选区变化
+      if (eventName === 'selection-change') {
+        console.log('editor-change selection', ...args);
+      }
+    });
+  //   quill.setContents([
+  //   {
+  //     insert: "Hello ",
+  //     attributes: { bold: true }  // 内联加粗
+  //   },
+  //   {
+  //     insert: "World",
+  //     attributes: { italic: true }  // 内联斜体
+  //   },
+  //   {
+  //     insert: "\n",
+  //     attributes: { block: { type: 'paragraph' } }  // 块级段落
+  //   }
+  // ])
+
+  const editor = document.querySelector('#editor .ql-editor');
+  editor.addEventListener('compositionstart', function(val) {
+      console.log('中文输入开始', val);
+  });
+  editor.addEventListener('compositionupdate', function(val) {
+      console.log('中文输入更新', val);
+  });
+  editor.addEventListener('compositionend', function(val) {
+      console.log('中文输入结束', val);
+  });
+  </script>
+</body>
+</html>

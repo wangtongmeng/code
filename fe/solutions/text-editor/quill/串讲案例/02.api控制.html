@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+</head>
+<body>
+  <div id="editor"></div>
+  <button id="cursorFocus">聚焦</button>
+  <button id="cursorToStart">光标移动到开头</button>
+  <button id="cursorToEnd">光标移动到结尾</button>
+  <button id="cursorSelect">选中Hello</button>
+  <script>
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: '请输入...',
+      modules: {
+        toolbar: ['bold', 'link']
+      }
+    });
+    quill.on('text-change', function(delta, oldDelta, source) {
+      console.log('delta', JSON.stringify(delta, null, 2));
+      console.log('oldDelta', JSON.stringify(oldDelta, null, 2));
+    });
+    quill.on('selection-change', function(range){
+      console.log('range', range);
+    });
+    // 增
+    quill.setText('Hello World!');
+    // 改 World! 加粗
+    quill.setSelection(6, 6);
+    const { index, length } = quill.getSelection();
+    quill.formatText(index, length, {bold: true});
+
+    // // 删除空格+World!
+    quill.deleteText(5, 7);
+    // // 光标与选取控制
+    // cursorFocus.onclick = () => quill.focus();
+    // cursorToStart.onclick = () => quill.setSelection(0);
+    // cursorToEnd.onclick = () => quill.setSelection(quill.getLength() - 1);
+    // cursorSelect.onclick = () => quill.setSelection(0, 5);
+
+
+    // quill.setContents([
+    //   { insert: 'Hello World!' }
+    // ]);
+    // quill.updateContents([
+    //   { retain: 6 },
+    //   { retain: 6, attributes: { bold: true } }
+    // ]);
+    // quill.updateContents([
+    //   { retain: 5 },
+    //   { delete: 7 },
+    // ]);
+
+    
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.bubble.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.core.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+  <style>
+    section {
+      margin: 5px;
+    }
+  </style>
+</head>
+
+<body>
+    <div id="editor"></div>
+  <script>
+
+    // 1.创建模块类
+    class Counter {
+      constructor(quill, options) {
+        // 4.添加模块逻辑
+        this.quill = quill;
+        this.container = quill.addContainer('ql-counter');
+        this.renderCounter();
+        quill.on(Quill.events.TEXT_CHANGE, this.renderCounter);
+      }
+      renderCounter = () => {
+        const text = this.quill.getText(); // 获取编辑器中的纯文本内容
+        const char = text.replace(/\s/g, ''); // 使用正则表达式将空白字符去掉
+        this.container.innerHTML = `当前字数：${char.length}`;
+      }
+    }
+
+    // 2.注册模块
+    Quill.register('modules/counter', Counter);
+
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: '请输入',
+      modules: {
+        toolbar: ['bold', 'link'],
+        counter: true // 3.配置模块参数
+      }
+    });
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>
