@@ -1,0 +1,20 @@
+<template>
+  <div class="{{kebabCase name}}-page">
+    <h1>{{pascalCase name}} Page</h1>
+    <{{pascalCase name}}Component />
+  </div>
+</template>
+
+<script>
+import {{pascalCase name}}Component from './components/{{pascalCase name}}Component.vue';
+
+export default {
+  name: '{{pascalCase name}}Page',
+  components: {
+    {{pascalCase name}}Component
+  }
+};
+</script>
+
+<style scoped>
+</style>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue生命周期顺序验证</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        const { createApp, ref, onBeforeMount, onMounted, onBeforeUnmount, onUnmounted } = Vue;
+        
+        // 子组件
+        const ChildComponent = {
+            template: `
+                <div>
+                    <h3>子组件</h3>
+                    <button @click="logState">打印当前状态</button>
+                </div>
+            `,
+            setup() {
+                console.log('子组件: setup()');
+                
+                onBeforeMount(() => {
+                    console.log('子组件: onBeforeMount()');
+                });
+                
+                onMounted(() => {
+                    console.log('子组件: onMounted()');
+                });
+                
+                onBeforeUnmount(() => {
+                    console.log('子组件: onBeforeUnmount()');
+                });
+                
+                onUnmounted(() => {
+                    console.log('子组件: onUnmounted()');
+                });
+
+                const logState = () => {
+                    console.log('子组件: 当前状态');
+                };
+                
+                return { logState };
+            }
+        };
+        
+        // 父组件
+        const app = createApp({
+            template: `
+                <div>
+                    <h2>父组件</h2>
+                    <button @click="toggleChild">切换子组件显示</button>
+                    <button @click="logState">打印当前状态</button>
+                    <child-component v-if="showChild" />
+                </div>
+            `,
+            components: {
+                ChildComponent
+            },
+            setup() {
+                const showChild = ref(true);
+                console.log('父组件: setup()');
+                
+                onBeforeMount(() => {
+                    console.log('父组件: onBeforeMount()');
+                });
+                
+                onMounted(() => {
+                    console.log('父组件: onMounted()');
+                });
+                
+                onBeforeUnmount(() => {
+                    console.log('父组件: onBeforeUnmount()');
+                });
+                
+                onUnmounted(() => {
+                    console.log('父组件: onUnmounted()');
+                });
+                
+                const toggleChild = () => {
+                    console.log('---------------------');
+                    console.log('点击切换子组件显示');
+                    showChild.value = !showChild.value;
+                };
+
+                const logState = () => {
+                    console.log('父组件: 当前状态');
+                };
+                
+                return { showChild, toggleChild, logState };
+            }
+        });
+        
+        console.log('开始挂载应用');
+        app.mount('#app');
+    </script>
+</body>
+</html>

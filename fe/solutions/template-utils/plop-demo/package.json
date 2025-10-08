@@ -1,0 +1,15 @@
+{
+  "name": "plop-demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "plop": "plop"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "plop": "^4.0.2"
+  }
+}

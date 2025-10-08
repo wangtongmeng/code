@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue卸载顺序验证</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        const { createApp, ref, onBeforeUnmount, onUnmounted } = Vue;
+        
+        // 子组件
+        const ChildComponent = {
+            template: `<div>子组件内容</div>`,
+            setup() {
+                console.log('子组件: setup()');
+                
+                onBeforeUnmount(() => {
+                    console.log('子组件: onBeforeUnmount() - 开始卸载前');
+                });
+                
+                onUnmounted(() => {
+                    console.log('子组件: onUnmounted() - 已完成卸载');
+                });
+            }
+        };
+        
+        // 父组件
+        const app = createApp({
+            template: `
+                <div>
+                    <h2>父组件</h2>
+                    <button @click="toggleChild">{{ showChild ? '卸载子组件' : '挂载子组件' }}</button>
+                    <button @click="unmountApp">卸载整个应用</button>
+                    <child-component v-if="showChild" />
+                </div>
+            `,
+            components: { ChildComponent },
+            setup() {
+                const showChild = ref(true);
+                console.log('父组件: setup()');
+                
+                onBeforeUnmount(() => {
+                    console.log('父组件: onBeforeUnmount() - 开始卸载前');
+                });
+                
+                onUnmounted(() => {
+                    console.log('父组件: onUnmounted() - 已完成卸载');
+                });
+                
+                const toggleChild = () => {
+                    console.log('\n===== 操作开始 =====');
+                    showChild.value = !showChild.value;
+                };
+
+                const unmountApp = () => {
+                    console.log('\n===== 卸载整个应用 =====');
+                    app.unmount();
+                };
+                
+                return { showChild, toggleChild, unmountApp };
+            }
+        });
+        
+        console.log('===== 初始挂载阶段 =====');
+        const vm = app.mount('#app');
+    </script>
+</body>
+</html>

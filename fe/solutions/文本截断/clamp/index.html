@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Clamp.js Example</title>
+    <style>
+        body {
+            font-size: 20px;
+        }
+        .box {
+            line-height: 1.5em;
+            overflow: hidden;
+            position: relative;
+        }
+        .ellipsis {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            background: white;
+            padding-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="clampBox">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis<a href="#">@xxx</a>xxx fsddsf<a href="#">dddd是对方的身份</a>
+    </div>
+    <script>
+        function clampText(box, lineCount) {
+            // 更精确的行高计算
+            let tempDiv = document.createElement('div');
+            tempDiv.style.fontSize = getComputedStyle(box).fontSize;
+            tempDiv.style.lineHeight = getComputedStyle(box).lineHeight;
+            tempDiv.style.fontFamily = getComputedStyle(box).fontFamily;
+            tempDiv.style.padding = getComputedStyle(box).padding;
+            tempDiv.style.margin = getComputedStyle(box).margin;
+            tempDiv.textContent = 'A';
+            document.body.appendChild(tempDiv);
+            
+            let singleLineHeight = tempDiv.offsetHeight;
+            document.body.removeChild(tempDiv);
+            
+            let maxHeight = singleLineHeight * lineCount;
+            
+            if (box.scrollHeight <= maxHeight) return;
+            
+            // 克隆原始节点用于处理
+            let clone = box.cloneNode(true);
+            clone.style.visibility = 'hidden';
+            clone.style.position = 'absolute';
+            clone.style.width = getComputedStyle(box).width;
+            document.body.appendChild(clone);
+            
+            // 递归截断函数
+            function truncateNode(node, remainingChars) {
+                if (remainingChars <= 0) return 0;
+                
+                for (let child of node.childNodes) {
+                    if (child.nodeType === Node.TEXT_NODE) {
+                        let text = child.textContent;
+                        if (text.length > remainingChars) {
+                            child.textContent = text.slice(0, remainingChars);
+                            return 0;
+                        }
+                        remainingChars -= text.length;
+                    } else if (child.nodeType === Node.ELEMENT_NODE) {
+                        remainingChars = truncateNode(child, remainingChars);
+                        if (remainingChars <= 0) break;
+                    }
+                }
+                return remainingChars;
+            }
+            
+            // 二分查找确定最大字符数
+            let low = 0;
+            let high = box.textContent.length;
+            let mid;
+            let bestClone = null;
+            
+            while (low <= high) {
+                mid = Math.floor((low + high) / 2);
+                let tempClone = clone.cloneNode(true);
+                truncateNode(tempClone, mid);
+                
+                // 确保宽度一致
+                tempClone.style.width = getComputedStyle(box).width;
+                
+                if (tempClone.scrollHeight <= maxHeight) {
+                    bestClone = tempClone;
+                    low = mid + 1;
+                } else {
+                    high = mid - 1;
+                }
+                
+                clone.parentNode.replaceChild(tempClone, clone);
+                clone = tempClone;
+            }
+            
+            // 应用最佳结果
+            if (bestClone) {
+                box.innerHTML = bestClone.innerHTML;
+            }
+            
+            // 添加省略号
+            let ellipsis = document.createElement('span');
+            ellipsis.className = 'ellipsis';
+            ellipsis.textContent = '...全文';
+            box.appendChild(ellipsis);
+            
+            document.body.removeChild(clone);
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            let box = document.getElementById('clampBox');
+            clampText(box, 3);
+        });
+    </script>
+</body>
+</html>
