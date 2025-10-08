@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.bubble.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.core.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.js"></script>
+</head>
+<body>
+  <div id="toolbar"></div>
+  <div id="editor">
+  </div>
+  <button id="btn">获取</button>
+  <script>
+  // getSemanticHTML：获取编辑器内容的HTML表示。此方法可用于在其他应用程序中导出编辑器内容。length参数默认为剩余文档的长度。
+  // Methods: getSemanticHTML(index: number = 0, length: number = remaining): string
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: '平等表达，友善交流',
+      modules: {
+        toolbar:true,
+      }
+    });
+    // 1.输入 abcd
+    btn.addEventListener('click', () => {
+      console.log(quill.getSemanticHTML(0, 10)); // abcd
+    });
+  </script>
+</body>
+
+</html>

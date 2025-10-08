@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.bubble.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.core.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.js"></script>
+</head>
+<body>
+  <div id="toolbar"></div>
+  <div id="editor">
+  </div>
+  <button id="btn">获取</button>
+  <script>
+  // getContents：获取编辑器的内容，包括格式化数据，由一个 Delta 对象表示。
+  // Methods：getContents(index: number = 0, length: number = remaining): Delta
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: '平等表达，友善交流',
+      modules: {
+        toolbar:true,
+      }
+    });
+    // 1.输入 abcd
+    btn.addEventListener('click', () => {
+      const delta = quill.getContents();
+      console.log(JSON.stringify(delta)); // {"ops":[{"insert":"abcd\n"}]}
+    });
+  </script>
+</body>
+
+</html>

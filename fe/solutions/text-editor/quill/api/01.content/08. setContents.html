@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.bubble.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.core.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.js"></script>
+</head>
+<body>
+  <div id="toolbar"></div>
+  <div id="editor">
+  </div>
+  <button id="btn">插入文本</button>
+  <script>
+  // setContents：用给定的内容覆盖编辑器。内容应以换行符结尾。返回表示更改的Delta。如果给定的Delta没有无效操作，这将与给定的Delta相同。源可以是“用户”，“api”或“silent”。当编辑器被禁用时，源为“用户
+  // Methods: 
+  // setContents(delta: Delta, source: string = 'api'): Delta
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: '平等表达，友善交流',
+      modules: {
+        toolbar:true,
+      }
+    });
+    btn.onclick = () => {
+      quill.setContents([
+        { insert: 'Hello ' },
+        { insert: 'World!', attributes: { bold: true } },
+        { insert: '\n' }, // 不写也会自动加上
+      ]);
+      console.log(quill.getContents());
+      
+    };
+  </script>
+</body>
+
+</html>

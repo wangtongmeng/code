@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.bubble.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.core.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.js"></script>
+</head>
+<body>
+  <div id="toolbar"></div>
+  <div id="editor">
+  </div>
+  <button id="btn">获取</button>
+  <script>
+  // insertEmbed：将嵌入内容插入编辑器，返回表示更改的Delta。源可能是“用户”，“api”或“silent”。当编辑器被禁用时，源为“用户”的调用将被忽略。
+  // Methods: insertEmbed(index: number, type: string, value: any, source: string = 'api'): Delta
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: '平等表达，友善交流',
+      modules: {
+        toolbar:true,
+      }
+    });
+    btn.addEventListener('click', () => {
+      const change = quill.insertEmbed(10, 'image', 'https://quilljs.com/images/cloud.png');
+      console.log(JSON.stringify(change)); // {"ops":[{"retain":1},{"insert":{"image":"https://quilljs.com/images/cloud.png"}},{"insert":"\n"}]}
+    });
+  </script>
+</body>
+
+</html>

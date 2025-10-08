@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.bubble.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.core.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.js"></script>
+</head>
+<body>
+  <div id="toolbar"></div>
+  <div id="editor">
+  </div>
+  <button id="deleteButton">删除</button>
+  <script>
+  // deleteText(index: number, length: number, source: string = 'api'): Delta
+  // 返回的是一个 Delta 对象， 这个对象描述了要删除的文本的起始位置和长度。
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: '平等表达，友善交流',
+      modules: {
+        toolbar:true,
+      }
+    });
+    // 1.输入 abcd
+    document.querySelector('#deleteButton').addEventListener('click', () => {
+      // 2.点击删除按钮
+      let delteDeltaChange = quill.deleteText(1, 2);
+      console.log(JSON.stringify(delteDeltaChange)); // {"ops":[{"retain":1},{"delete":2}]}
+      
+    });
+  </script>
+</body>
+
+</html>

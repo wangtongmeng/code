@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.bubble.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.core.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.js"></script>
+</head>
+<body>
+  <div id="toolbar"></div>
+  <div id="editor">
+  </div>
+  <button id="btn">插入文本</button>
+  <button id="btn1">插入文本带样式</button>
+  <script>
+  // insertText：在编辑器中插入文本，可以选择指定格式或多种格式。返回一个表示更改的Delta。源可以是“user”，“api”或“silent”。当编辑器被禁用时，源为“user”的调用将被忽略。
+  // Methods: 
+  // insertText(index: number, text: string, source: string = 'api'): Delta
+  // insertText(index: number, text: string, format: string, value: any, source: string = 'api'): Delta
+  // insertText(index: number, text: string, formats: { [name: string]: any }, source: string = 'api'): Delta
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: '平等表达，友善交流',
+      modules: {
+        toolbar:true,
+      }
+    });
+    btn.addEventListener('click', () => {
+      quill.insertText(0, 'Hello', 'bold', true);
+    });
+    btn1.onclick = () => {
+      quill.insertText(5, 'Quill', {
+        color: '#ffff00',
+        italic: true,
+      });
+    };
+  </script>
+</body>
+
+</html>

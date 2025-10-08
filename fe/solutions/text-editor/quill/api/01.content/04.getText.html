@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.bubble.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.core.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.js"></script>
+</head>
+<body>
+  <div id="toolbar"></div>
+  <div id="editor">
+  </div>
+  <button id="btn">获取</button>
+  <script>
+  // getText: 检索编辑器的内容字符串。非字符串内容将被省略，因此返回的字符串长度可能短于通过getLength返回的编辑器长度。即使Quill为空，编辑器中仍然有一行空白，因此在这种情况下，getText将返回'\n'。
+  // Methods: getText(index: number = 0, length: number = remaining): string
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: '平等表达，友善交流',
+      modules: {
+        toolbar:true,
+      }
+    });
+    // 1.输入 abcd
+    btn.addEventListener('click', () => {
+      console.log(quill.getText(0, 4)); // abcd
+    });
+  </script>
+</body>
+
+</html>

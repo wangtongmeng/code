@@ -54,7 +54,9 @@
               shiftKey: true,
               handler: function (range, context) {
                 // 获取当前光标所在文本的格式
-                const format = this.quill.getFormat(range);
+                console.log('range',range) // {index: 2, length: 3}
+                const format = this.quill.getFormat(range); 
+                console.log('format',format) // 
                 // 增加/取消删除线
                 this.quill.format('strike', !format.strike);
               }
