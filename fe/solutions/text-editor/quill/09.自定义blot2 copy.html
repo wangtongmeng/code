@@ -20,6 +20,7 @@
 <body>
   <div id="toolbar"></div>
   <div id="editor"></div>
+  <button id="btn">插入</button>
   <script>
 
     // const Inline = Quill.import('blots/inline');
@@ -63,12 +64,14 @@
     });
 
 // 插入链接
-setTimeout(() => {
-  quill.insertEmbed(1, 'link1', {
+btn.onclick = () => {
+  quill.focus();
+  const range = quill.getSelection();
+  quill.insertEmbed(range.index, 'link1', {
     url: 'https://www.baidu.com',
     text: 'Baidu'
   });
-}, 1000);
+};
 
 
 

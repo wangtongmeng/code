@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.bubble.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.core.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.js"></script>
+    <style>
+    section {
+      margin: 5px;
+    }
+    </style>
+</head>
+
+<body>
+  <div id="toolbar"></div>
+  <div id="editor"></div>
+  <button id="btn">插入</button>
+  <script>
+
+    let index = 0;
+
+    const Embed = Quill.import('formats/image');
+    class CustomBlot extends Embed {
+      static blotName = 'customBlot';
+      static tagName = 'span';
+      static className = 'custom-blot';
+      constructor(scroll,node) {
+        
+        super(scroll, node);
+      }
+      
+      static create(value) {
+        const node = super.create(value);
+        // 不可编辑
+        node.setAttribute('contenteditable', 'false');
+        console.log('node', node, value);
+        // 找到node子元素span，设置span内容
+        let content = `测试${index++}`
+        node.innerHTML =  content;
+        node.setAttribute('data-value', content);
+
+
+        
+        return node;
+      }
+
+      // 长度计算
+
+      static value(node) {
+        console.log('value', node);
+        
+        return {
+          value: node.getAttribute('data-value'),
+        };
+      }
+
+    };
+
+    CustomBlot.blotName = 'customBlot';
+    Quill.register(CustomBlot);
+
+    document.getElementById('btn').addEventListener('click', () => {
+      quill.focus();
+      const range = quill.getSelection();
+      quill.insertEmbed(range.index, 'customBlot', {}, 'user');
+      quill.setSelection(range.index + 1, 0);
+    });
+
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: '平等表达，友善交流',
+      modules: {
+        toolbar: [
+          ['bold', 'italic'],
+          ['link', 'image']
+        ],
+      }
+    });
+
+
+    const cursorDeal = () => {
+      const range = quill.getSelection();
+      if (!range) return;
+      
+      const sel = window.getSelection();
+      if (!sel.rangeCount) return;
+      
+      const domRange = sel.getRangeAt(0);
+      const cursorX = domRange.getBoundingClientRect().left;
+      console.log('光标位置:', cursorX);
+      
+      
+      // 获取所有自定义Blot的DOM节点
+      const customBlots = document.querySelectorAll('.custom-blot');
+      let correctedIndex = range.index;
+      
+      customBlots.forEach(dom => {
+        const blotRect = dom.getBoundingClientRect();
+        // 检查光标是否在该Blot的右边缘(5px容差范围内)
+        console.log('Blot位置:', blotRect.right);
+        if (cursorX >= blotRect.right - 5 && cursorX <= blotRect.right + 5) {
+          console.log('光标在Blot右边缘');
+          let curBlot = Quill.find(dom)
+          const blotIndex = quill.getIndex(curBlot);
+          correctedIndex = blotIndex + 1;
+          console.log('正确索引', correctedIndex);
+          
+        }
+      });
+      
+      // 如果校正后的索引与当前不同，则更新选区
+      if (correctedIndex !== range.index) {
+        console.log('校正后的索引:', correctedIndex);
+        
+        quill.setSelection(correctedIndex, 0);
+      }
+    }
+
+    // 监听选区变化
+    quill.on('selection-change', (range, oldRange, source) => {
+      console.log('selection-change', range);
+      
+      // cursorDeal();
+    });
+
+    // 去监听text-change事件
+    quill.on('text-change', (delta, oldDelta, source) => {
+      console.log('text-change', quill.getContents().ops);
+
+      
+    });
+
+    // 鼠标点击事件监听
+    document.addEventListener('click', (event) => {
+      console.log('点击事件触发');
+      // cursorDeal();
+    });
+
+
+
+
+  </script>
+</body>
+
+</html>

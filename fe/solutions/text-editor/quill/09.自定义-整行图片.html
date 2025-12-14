@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.bubble.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.core.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.js"></script>
+  <style>
+    section {
+      margin: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="toolbar"></div>
+  <div id="editor"></div>
+  <script>
+
+    // const Inline = Quill.import('blots/inline');
+    const Embed = Quill.import('blots/embed');
+    // const ImageBlot  = Quill.import('formats/image');
+
+    class Blot extends Embed {
+    static blotName = 'image1';
+    static tagName = 'div';
+
+    static create(value) {
+      let node = super.create();
+      const img = document.createElement('img');
+      img.src = value.url;
+      node.setAttribute('id1', 'test');
+      node.appendChild(img);
+      
+      // 添加点击事件处理
+      // node.addEventListener('click', function(e) {
+      //   e.stopPropagation();
+      //   const blot = Quill.find(node);
+      //   console.log('点击获取的blot实例:', blot);
+      // });
+      
+      return node;
+    }
+  };
+
+    Quill.register(Blot);
+
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: '平等表达，友善交流',
+      modules: {
+        toolbar: [
+          ['bold', 'italic'],
+          ['link', 'image']
+        ],
+      }
+    });
+
+    // 监听光标是否点击图片blot
+    quill.on('selection-change', (range, oldRange, source) => {
+      if (range) {
+        const [blot] = quill.getLeaf(range.index);
+        console.log('blot', blot);
+        
+        if (blot.domNode.attributes.id1) {
+          console.log('点击了图片');
+        }
+      }
+    });
+
+    // 监听图片点击事件
+    quill.root.addEventListener('click', (e) => {
+      console.log('e.target', e.target.parentNode.parentNode);
+      
+      const blot = Quill.find(e.target.parentNode.parentNode);
+      console.log('通过Quill.find获取的blot实例:', blot);
+      // 让光标focus到blot的下一行首位
+      const index = quill.getIndex(blot)
+      console.log('index', index);
+      quill.setSelection(index + 1, 0);
+    });
+
+// 插入链接
+setTimeout(() => {
+  quill.insertEmbed(1, 'image1', {
+    url: 'http://tiebapic.baidu.com/forum/pic/item/9822720e0cf3d7ca25779461b41fbe096b63a920.jpg?tbpicau=2025-10-30-05_40ca9dedfd1d241f52a83d4c26d61dd1',
+    text: 'Baidu'
+  });
+}, 1000);
+
+
+
+
+
+  </script>
+</body>
+
+</html>

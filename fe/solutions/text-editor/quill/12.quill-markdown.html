@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.bubble.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.core.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-beta.0/dist/quill.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/quilljs-markdown@latest/dist/quilljs-markdown.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/quilljs-markdown@latest/dist/quilljs-markdown-common-style.css"
+    rel="stylesheet">
+  <style>
+    .wrapper {
+      max-height: 400px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      overflow: auto;
+      margin: 20px;
+      padding: 10px;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- <div id="toolbar"></div> -->
+    <div id="editor"></div>
+  </div>
+  <div>
+
+  </div>
+  <script>
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+      var quill = new Quill('#editor', {
+        theme: 'snow',
+        modules: {
+          toolbar: [
+            ['bold', 'italic', 'underline', 'strike'],
+            ['blockquote', 'code-block'],
+            [{ 'header': 1 }, { 'header': 2 }],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            [{ 'script': 'sub' }, { 'script': 'super' }],
+            [{ 'indent': '-1' }, { 'indent': '+1' }],
+            [{ 'direction': 'rtl' }],
+            [{ 'size': ['small', false, 'large', 'huge'] }],
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+            [{ 'color': [] }, { 'background': [] }],
+            [{ 'font': [] }],
+            [{ 'align': [] }],
+            ['clean']
+          ]
+        }
+      });
+      
+      // 初始化markdown支持
+      var markdownOptions = {
+        ignoreTags: [], // 不忽略任何标签
+        tags: {
+          blockquote: {
+            pattern: /^> /gm,
+          },
+          bold: {
+            pattern: /\*\*(.+?)\*\*/g,
+          },
+          italic: {
+            pattern: /\*(.+?)\*/g,
+          },
+          code: {
+            pattern: /`(.+?)`/g,
+          },
+          link: {
+            pattern: /\[([^\]]+)\]\(([^)]+)\)/g,
+          },
+          image: {
+            pattern: /!\[([^\]]*)\]\(([^)]+)\)/g,
+          },
+          header: {
+            pattern: /^#{1,6}\s(.+)$/gm,
+          },
+          list: {
+            pattern: /^[\*\-\+]\s(.+)$/gm,
+          },
+          orderedlist: {
+            pattern: /^\d+\.\s(.+)$/gm,
+          }
+        }
+      };
+      
+      // 确保QuillMarkdown可用
+      if (typeof QuillMarkdown !== 'undefined') {
+        new QuillMarkdown(quill, markdownOptions);
+      } else {
+        console.error('QuillMarkdown is not loaded. Please check the script import.');
+      }
+      
+      // 添加markdown语法示例
+      // setTimeout(() => {
+      //   quill.setText('# Markdown 支持演示\n\n' +
+      //     '## 语法示例\n\n' +
+      //     '**加粗文本** 和 *斜体文本*\n\n' +
+      //     '`代码片段`\n\n' +
+      //     '> 引用块\n\n' +
+      //     '- 无序列表项1\n' +
+      //     '- 无序列表项2\n\n' +
+      //     '1. 有序列表项1\n' +
+      //     '2. 有序列表项2\n\n' +
+      //     '[链接文字](https://example.com)\n\n' +
+      //     '![图片alt](https://via.placeholder.com/150)'
+      //   );
+      // }, 100);
+    });
+
+
+
+
+
+  </script>
+</body>
+
+</html>

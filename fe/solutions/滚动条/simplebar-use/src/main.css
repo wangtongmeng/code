@@ -1,0 +1,13 @@
+.os-scrollbar {
+  /* 对应滚动条宽度 4px */
+  --os-size: 8px;
+  transition: width 0.2s, height 0.2s;
+
+  --os-handle-bg: #DEDFE0;
+  --os-handle-bg-hover: #DEDFE0;
+  --os-handle-bg-active: #DEDFE0;
+}
+.os-scrollbar:hover {
+  /* 对应滚动条宽度 8px */
+  --os-size: 12px;
+}
