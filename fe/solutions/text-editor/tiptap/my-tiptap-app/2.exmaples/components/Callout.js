@@ -11,8 +11,8 @@ export const Callout = Node.create({
 
   addAttributes() {
     return {
-      calloutType: {
-        default: 'info', // 默认类型是 'info'
+      'callouttype': {
+        default: 'info', // 默认类型是 'info',
       },
     };
   },
@@ -20,6 +20,8 @@ export const Callout = Node.create({
   renderHTML({ HTMLAttributes }) {
     // 最简版本：只渲染一个 div 标签
     // 0 表示子内容的插入位置
+    console.log('HTMLAttributes', HTMLAttributes);
+    
     return ['div', mergeAttributes(HTMLAttributes, { 'data-type': 'callout' }), 0];
   },
   parseHTML() {
@@ -27,7 +29,8 @@ export const Callout = Node.create({
       {
         tag: 'div[data-type="callout"]', // 匹配带有特定属性的 div 标签
         getAttrs: (element) => ({
-          calloutType: element.getAttribute('callouttype'),
+          
+          callouttype: element.getAttribute('callouttype'),
         }),
       },
     ];

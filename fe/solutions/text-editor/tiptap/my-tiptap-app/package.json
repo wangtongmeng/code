@@ -24,6 +24,7 @@
     "@tiptap/extension-paragraph": "^3.13.0",
     "@tiptap/extension-placeholder": "^3.13.0",
     "@tiptap/extension-text": "^3.13.0",
+    "@tiptap/extensions": "^3.14.0",
     "@tiptap/react": "^3.13.0",
     "@tiptap/starter-kit": "^3.13.0",
     "highlight.js": "^11.11.1",

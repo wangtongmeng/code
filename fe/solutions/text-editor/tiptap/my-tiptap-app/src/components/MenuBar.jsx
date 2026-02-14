@@ -1,4 +1,3 @@
-// src/components/MenuBar.jsx
 import React, { useCallback } from 'react';
 import { useCurrentEditor } from '@tiptap/react';
 
@@ -29,34 +28,6 @@ const MenuBar = () => {
   };
 
 
-  // 通过 URL 添加图片
-  const addImage = () => {
-    const url = window.prompt('请输入图片地址：');
-    if (url) {
-      editor.chain().focus().setImage({ src: url }).run();
-    }
-  };
-
-  // 通过文件上传添加图片
-  const uploadImage = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        editor.chain().focus().setImage({ src: e.target.result }).run();
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-
-  const addCodeBlock = () => {
-    editor.chain().focus().toggleCodeBlock().run();
-  };
-
-  const setLanguage = (language) => {
-    editor.chain().focus().updateAttributes('codeBlock', { language }).run();
-  };
 
   return (
     <div className="menu-bar">
@@ -204,51 +175,6 @@ const MenuBar = () => {
         title="添加链接"
       >
         🔗 链接
-      </button>
-      {/* 插入图片 */}
-      <div className="menu-bar">
-        <button onClick={addImage}>
-          🖼️ 插入图片（URL）
-        </button>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={uploadImage}
-          style={{ display: 'none' }}
-          id="image-upload"
-        />
-        <label htmlFor="image-upload" className="upload-button">
-          📁 上传图片
-        </label>
-      </div>
-      {/* 代码块  */}
-      <div className="menu-bar">
-        <button
-          onClick={addCodeBlock}
-          className={editor.isActive('codeBlock') ? 'is-active' : ''}
-        >
-          💻 代码块
-        </button>
-
-        {editor.isActive('codeBlock') && (
-          <select onChange={(e) => setLanguage(e.target.value)}>
-            <option value="javascript">JavaScript</option>
-            <option value="css">CSS</option>
-          </select>
-        )}
-      </div>
-      <button
-        onClick={() => editor.commands.toggleCallout({ calloutType: 'warning' })}
-        className={editor.isActive('callout', { calloutType: 'warning' }) ? 'is-active' : ''}
-      >
-        ⚠️ 警告框
-      </button>
-
-      <button
-        onClick={() => editor.commands.toggleCallout({ calloutType: 'info' })}
-        className={editor.isActive('callout', { calloutType: 'info' }) ? 'is-active' : ''}
-      >
-        ℹ️ 提示框
       </button>
         {/* 文字高亮 */}
         <button
