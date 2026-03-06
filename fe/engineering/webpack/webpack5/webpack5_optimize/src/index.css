@@ -1,0 +1,13 @@
+body {
+    background-color: green;
+    color: red;
+}
+
+#root {
+    color: red;
+}
+
+/* 没用到的css */
+#other {
+    color: green;
+}
