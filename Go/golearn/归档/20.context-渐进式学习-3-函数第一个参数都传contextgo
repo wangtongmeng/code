@@ -1,0 +1,47 @@
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+// 如何能主动退出监控程序，
+// 用channel来控制退出，父goroutine给子goroutine发取消、超时、传值等消息，就是context
+var wg sync.WaitGroup
+
+func cpuInfo(stop chan struct{}) { // 1. 参数传递channel
+	defer wg.Done()
+	for {
+		select {
+		case <-stop:
+			fmt.Println("退出cpu监控")
+			return
+		default:
+			time.Sleep(2 * time.Second)
+			fmt.Println("cpu info")
+		}
+	}
+}
+
+func main() {
+	var stop = make(chan struct{}) // 2.移动stop channel声明
+
+	// 有一个goroutine监控cpu信息
+	wg.Add(1)
+	go cpuInfo(stop) // 3.传入channel
+	time.Sleep(6 * time.Second)
+	stop <- struct{}{}
+	wg.Wait()
+	fmt.Println("监控完成")
+}
+
+/*
+cpu info
+cpu info
+cpu info
+退出cpu监控
+监控完成
+
+
+*/

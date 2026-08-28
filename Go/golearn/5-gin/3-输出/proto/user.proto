@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option go_package = ".;proto";
+
+message Teacher {
+  string name = 1;
+  repeated string course = 2;
+}
+
+// proto目录下执行 protoc -I . user.proto --go_out=plugins=grpc:. 生成go文件

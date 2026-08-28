@@ -1,0 +1,10 @@
+- 路由分组
+- 路径参数 ShouldBindUri
+- method
+  - get
+  - post 
+  - get post混合
+  - json、protoBuf 输出
+  - 表单验证
+  - 中间件 return -> c.abort()
+  - gin返回html模板
